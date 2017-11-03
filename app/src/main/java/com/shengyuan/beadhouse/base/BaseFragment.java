@@ -3,10 +3,13 @@ package com.shengyuan.beadhouse.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.shengyuan.beadhouse.BHApplication;
@@ -31,7 +34,7 @@ import rx.schedulers.Schedulers;
  * Created by dell on 2017/10/30.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseFragment extends Fragment {
 
     protected RelativeLayout loadingLay;
     protected RelativeLayout errorLay;
@@ -41,10 +44,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private RelativeLayout.LayoutParams mParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
-    /**
-     * 是否设置状态栏颜色
-     */
-    protected boolean isSetStatusColor = true;
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         if (isSetStatusColor) {
             // 设置状态栏颜色
-            Tools.setStatusColor(this, ContextCompat.getColor(BaseActivity.this, R.color.title_color));
+            Tools.setStatusColor(this, ContextCompat.getColor(BaseFragment.this, R.color.title_color));
         }
 
         baseTitle = (BaseTitleView) findViewById(R.id.base_activity_title_view);
@@ -61,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         emptyLay = (RelativeLayout) findViewById(R.id.base_activity_empty_lay);
         contentLay = (RelativeLayout) findViewById(R.id.base_activity_content_lay);
 
-        contentLay.addView(View.inflate(BaseActivity.this, getLayoutId(), null), mParams);
+        contentLay.addView(View.inflate(BaseFragment.this, getLayoutId(), null), mParams);
         initView();
     }
 
