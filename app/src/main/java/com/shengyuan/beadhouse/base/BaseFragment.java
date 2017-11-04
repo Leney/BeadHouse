@@ -4,8 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.R;
-import com.shengyuan.beadhouse.gui.view.BaseTitleView;
 import com.shengyuan.beadhouse.util.NetUtil;
-import com.shengyuan.beadhouse.util.Tools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,43 +31,34 @@ import rx.schedulers.Schedulers;
  */
 
 public abstract class BaseFragment extends Fragment {
-
     protected RelativeLayout loadingLay;
     protected RelativeLayout errorLay;
     protected RelativeLayout emptyLay;
     protected RelativeLayout contentLay;
-    protected BaseTitleView baseTitle;
-
     private RelativeLayout.LayoutParams mParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View rootView = inflater.inflate(R.layout.fragment_base,container,false);
+        loadingLay = rootView.findViewById(R.id.base_fragment_loading_lay);
+        errorLay = rootView.findViewById(R.id.base_fragment_error_lay);
+        emptyLay = rootView.findViewById(R.id.base_fragment_empty_lay);
+        contentLay = rootView.findViewById(R.id.base_fragment_content_lay);
+        contentLay.addView(View.inflate(getActivity(), getLayoutId(), null), mParams);
+        initView(rootView);
+        return rootView;
     }
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        if (isSetStatusColor) {
-            // 设置状态栏颜色
-            Tools.setStatusColor(this, ContextCompat.getColor(BaseFragment.this, R.color.title_color));
-        }
-
-        baseTitle = (BaseTitleView) findViewById(R.id.base_activity_title_view);
-        loadingLay = (RelativeLayout) findViewById(R.id.base_activity_loading_lay);
-        errorLay = (RelativeLayout) findViewById(R.id.base_activity_error_lay);
-        emptyLay = (RelativeLayout) findViewById(R.id.base_activity_empty_lay);
-        contentLay = (RelativeLayout) findViewById(R.id.base_activity_content_lay);
-
-        contentLay.addView(View.inflate(BaseFragment.this, getLayoutId(), null), mParams);
-        initView();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     protected abstract int getLayoutId();
 
-    protected abstract void initView();
+    protected abstract void initView(View rootView);
 
     /**
      * 加载网络数据

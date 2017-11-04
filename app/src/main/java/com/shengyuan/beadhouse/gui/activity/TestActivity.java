@@ -6,9 +6,6 @@ import android.view.View;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by dell on 2017/11/2.
  */
@@ -28,10 +25,11 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.test_get_request_btn:
-                Map<String,Object> map = new HashMap<>();
-                map.put("skuIds","J_954086");
-                map.put("type",1);
-                loadNetDataGet("testTag",map);
+//                Map<String,Object> map = new HashMap<>();
+//                map.put("skuIds","J_954086");
+//                map.put("type",1);
+//                loadNetDataGet("testTag",map);
+                RegisterActivity.startActivity(TestActivity.this);
                 break;
         }
     }

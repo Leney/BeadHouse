@@ -35,6 +35,7 @@
     <dimen name="space_50">50.0dip</dimen>
     <dimen name="space_48">48.0dip</dimen>
     <dimen name="space_46">46.0dip</dimen>
+    <dimen name="space_43">43.0dip</dimen>
     <dimen name="space_44">44.0dip</dimen>
     <dimen name="space_52">52.0dip</dimen>
     <dimen name="space_40">40.0dip</dimen>
@@ -42,6 +43,7 @@
     <dimen name="space_37">37.0dip</dimen>
     <dimen name="space_32">32.0dip</dimen>
     <dimen name="space_30">30.0dip</dimen>
+    <dimen name="space_29">29.0dip</dimen>
     <dimen name="space_27">27.0dip</dimen>
     <dimen name="space_26">26.0dip</dimen>
     <dimen name="space_25">25.0dip</dimen>
