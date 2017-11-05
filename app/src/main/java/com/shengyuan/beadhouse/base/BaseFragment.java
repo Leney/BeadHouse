@@ -37,16 +37,16 @@ public abstract class BaseFragment extends Fragment {
     protected RelativeLayout contentLay;
     private RelativeLayout.LayoutParams mParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 
+    private View rootView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_base,container,false);
+        rootView = inflater.inflate(R.layout.fragment_base,container,false);
         loadingLay = rootView.findViewById(R.id.base_fragment_loading_lay);
         errorLay = rootView.findViewById(R.id.base_fragment_error_lay);
         emptyLay = rootView.findViewById(R.id.base_fragment_empty_lay);
         contentLay = rootView.findViewById(R.id.base_fragment_content_lay);
         contentLay.addView(View.inflate(getActivity(), getLayoutId(), null), mParams);
-        initView(rootView);
         return rootView;
     }
 
@@ -54,6 +54,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initView(rootView);
     }
 
     protected abstract int getLayoutId();

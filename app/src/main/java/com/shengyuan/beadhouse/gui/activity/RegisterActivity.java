@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.gui.view.CountDownTextView;
@@ -53,13 +52,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // 只有在输入到11位的时候才能获取验证码
-                Logger.i("s.length-------->>"+s.length());
                 if (s.length() == 11) {
-                    Logger.i("设置获取短信验证码颜色！！");
                     getCodeBtn.setTextColor(ContextCompat.getColor(RegisterActivity.this,R.color.main_color));
                     getCodeBtn.setSelected(true);
                 } else {
-                    Logger.i("短信验证码selected------->>>" + getCodeBtn.isSelected());
                     if (getCodeBtn.isSelected()) {
                         getCodeBtn.setTextColor(ContextCompat.getColor(RegisterActivity.this,R.color.text_555555));
                     }
@@ -84,14 +80,37 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.register_get_msg_code_btn:
                 // 获取验证码
-                if (getCodeBtn.isSelected()) {
-                    getCodeBtn.start(60);
-                } else {
-                    Toast.makeText(this, getResources().getString(R.string.input_right_phone_num), Toast.LENGTH_SHORT).show();
+                if (!getCodeBtn.isSelected()) {
+                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.input_right_phone_num), Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                getCodeBtn.start(60);
+                // TODO 获取验证码
+
                 break;
             case R.id.register_register_btn:
                 // 注册
+                String phone = accountInput.getText().toString();
+                if(phone.isEmpty()){
+                    Toast.makeText(this, getResources().getString(R.string.input_num_hint), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(phone.length() < 11){
+                    Toast.makeText(this, getResources().getString(R.string.input_right_phone), Toast.LENGTH_SHORT).show();
+                   return;
+                }
+                String code = codeInput.getText().toString();
+                if(code.isEmpty()){
+                    Toast.makeText(this, getResources().getString(R.string.input_msg_code), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String pwd = pwdInput.getText().toString();
+                if(pwd.isEmpty()){
+                    Toast.makeText(this, getResources().getString(R.string.input_pwd_hint), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // TODO 请求网络注册
                 break;
         }
     }
@@ -103,6 +122,5 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onCountDownDone() {
         // 倒计时完成
-        Logger.i("倒计时完成！！！");
     }
 }

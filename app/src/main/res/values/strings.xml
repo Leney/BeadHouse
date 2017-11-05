@@ -7,4 +7,11 @@
     <string name="input_pwd_hint">请设置您的密码</string>
     <string name="register">注册</string>
     <string name="input_right_phone_num">请输入正确的手机号</string>
+    <string name="please_input_phone_hint">请输入手机号</string>
+    <string name="please_input_pwd_hint">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="login_now">立即登录</string>
+    <string name="login_by_pwd">密码登录</string>
+    <string name="login_by_code">免密登录</string>
+    <string name="input_right_phone">请输入11位手机号码</string>
 </resources>

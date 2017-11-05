@@ -29,7 +29,10 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 //                map.put("skuIds","J_954086");
 //                map.put("type",1);
 //                loadNetDataGet("testTag",map);
-                RegisterActivity.startActivity(TestActivity.this);
+
+
+//                RegisterActivity.startActivity(TestActivity.this);
+                LoginActivity.startActivity(TestActivity.this);
                 break;
         }
     }

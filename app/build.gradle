@@ -32,4 +32,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     // 日志库
     compile 'com.orhanobut:logger:2.1.1'
+    // 结合ViewPager使用的顶部指示器
+    //    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:design:26.0.0-alpha1'
 }

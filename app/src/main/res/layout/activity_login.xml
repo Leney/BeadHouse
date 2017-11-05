@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+        android design library提供的TabLayout控件
+        tabIndicatorColor：菜单下方移动的横线的颜色
+        tabSelectedTextColor ：菜单被选中之后的颜色
+        tabTextColor : 菜单正常的颜色
+        app:tabTextAppearance : 添加样式，这里加了样式主要是为了在文字前面加一个图所用，就是把textAllCaps设置成false
+    -->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/login_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_39"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/main_color"
+        app:tabSelectedTextColor="@color/main_color"
+        app:tabTextColor="@color/text_555555"
+        app:tabMode="fixed"/>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/login_tab_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

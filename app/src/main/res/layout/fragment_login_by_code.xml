@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingLeft="@dimen/space_17"
+    android:paddingRight="@dimen/space_17">
+
+    <!-- 输入手机号码部分-->
+
+    <!-- 验证码-->
+    <EditText
+        android:id="@+id/login_by_code_msg_code_input"
+        style="@style/EditStyle"
+        android:hint="@string/input_msg_code"
+        app:layout_constraintTop_toBottomOf="@id/login_by_code_input_account_lay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/space_15"/>
+
+    <TextView
+        android:id="@+id/login_by_code_login_btn"
+        style="@style/ButtonStyle"
+        android:layout_marginLeft="@dimen/space_37"
+        android:layout_marginRight="@dimen/space_37"
+        android:layout_marginTop="@dimen/space_44"
+        android:text="@string/login_now"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_by_code_msg_code_input" />
+
+    <LinearLayout
+        android:id="@+id/login_by_code_input_account_lay"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="@dimen/space_44"
+        android:background="@drawable/shape_edit_input_bg"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 手机号码-->
+        <EditText
+            android:id="@+id/login_by_code_account_input"
+            style="@style/EditStyle"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/input_num_hint"
+            android:inputType="phone"
+            android:digits="0123456789"
+            android:maxLength="11"
+            android:maxLines="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/space_8"
+            android:layout_marginTop="@dimen/space_8"
+            android:background="@color/split_line" />
+        <!--获取验证码-->
+        <com.shengyuan.beadhouse.gui.view.CountDownTextView
+            android:id="@+id/login_by_code_get_code_btn"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:gravity="center"
+            android:text="@string/get_code"
+            android:textColor="@color/text_555555" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
