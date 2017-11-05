@@ -43,7 +43,7 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
                 }
                 String pwd = pwdInput.getText().toString();
                 if(pwd.isEmpty()){
-                    Toast.makeText(getActivity(), getResources().getString(R.string.input_pwd_hint), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.please_input_pwd_hint), Toast.LENGTH_SHORT).show();
                     return;
                 }
 

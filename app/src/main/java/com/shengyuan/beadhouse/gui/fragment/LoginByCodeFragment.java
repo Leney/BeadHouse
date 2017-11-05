@@ -33,6 +33,7 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
         accountInput = rootView.findViewById(R.id.login_by_code_account_input);
         codeInput = rootView.findViewById(R.id.login_by_code_msg_code_input);
         getCodeBtn = rootView.findViewById(R.id.login_by_code_get_code_btn);
+        getCodeBtn.setOnClickListener(this);
         rootView.findViewById(R.id.login_by_code_login_btn).setOnClickListener(this);
 
 

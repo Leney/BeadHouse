@@ -9,28 +9,6 @@
     android:paddingRight="@dimen/space_17">
 
     <!-- 输入手机号码部分-->
-
-    <!-- 验证码-->
-    <EditText
-        android:id="@+id/login_by_code_msg_code_input"
-        style="@style/EditStyle"
-        android:hint="@string/input_msg_code"
-        app:layout_constraintTop_toBottomOf="@id/login_by_code_input_account_lay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="@dimen/space_15"/>
-
-    <TextView
-        android:id="@+id/login_by_code_login_btn"
-        style="@style/ButtonStyle"
-        android:layout_marginLeft="@dimen/space_37"
-        android:layout_marginRight="@dimen/space_37"
-        android:layout_marginTop="@dimen/space_44"
-        android:text="@string/login_now"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_by_code_msg_code_input" />
-
     <LinearLayout
         android:id="@+id/login_by_code_input_account_lay"
         android:layout_width="0dp"
@@ -52,10 +30,7 @@
             android:inputType="phone"
             android:digits="0123456789"
             android:maxLength="11"
-            android:maxLines="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:maxLines="1"/>
 
         <View
             android:layout_width="0.5dp"
@@ -73,4 +48,25 @@
             android:text="@string/get_code"
             android:textColor="@color/text_555555" />
     </LinearLayout>
+
+    <!-- 验证码-->
+    <EditText
+        android:id="@+id/login_by_code_msg_code_input"
+        style="@style/EditStyle"
+        android:hint="@string/input_msg_code"
+        app:layout_constraintTop_toBottomOf="@id/login_by_code_input_account_lay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/space_15"/>
+
+    <TextView
+        android:id="@+id/login_by_code_login_btn"
+        style="@style/ButtonStyle"
+        android:layout_marginLeft="@dimen/space_37"
+        android:layout_marginRight="@dimen/space_37"
+        android:layout_marginTop="@dimen/space_44"
+        android:text="@string/login_now"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_by_code_msg_code_input" />
 </android.support.constraint.ConstraintLayout>
