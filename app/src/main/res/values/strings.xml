@@ -5,6 +5,7 @@
     <string name="input_msg_code">请输入短信验证码</string>
     <string name="input_num_hint">请输入您的手机号</string>
     <string name="input_pwd_hint">请设置您的密码</string>
+    <string name="input_set_new_pwd">请输入您的新密码</string>
     <string name="register">注册</string>
     <string name="input_right_phone_num">请输入正确的手机号</string>
     <string name="please_input_phone_hint">请输入手机号</string>
@@ -14,4 +15,10 @@
     <string name="login_by_pwd">密码登录</string>
     <string name="login_by_code">免密登录</string>
     <string name="input_right_phone">请输入11位手机号码</string>
+    <string name="commit">提交</string>
+    <string name="input_new_pwd">请输入新密码</string>
+    <string name="find_back_pwd">找回密码</string>
+    <string name="set_new_pwd">设置新密码</string>
+    <string name="confirm_new_pwd">确认新密码</string>
+    <string name="different_new_pwd">您两次输入的密码不一致</string>
 </resources>

@@ -32,6 +32,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!-- 找回密码获取验证码界面-->
+        <activity
+            android:name=".gui.activity.FindBackPwdGetCodeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <!-- 设置新密码界面-->
+        <activity
+            android:name=".gui.activity.SetNewPwdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
     </application>
 
 </manifest>

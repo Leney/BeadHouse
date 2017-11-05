@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/space_17"
+    android:paddingRight="@dimen/space_17">
+
+    <!-- 手机号码-->
+    <EditText
+        android:id="@+id/find_pwd_account_input"
+        style="@style/EditStyle"
+        android:layout_marginTop="@dimen/space_44"
+        android:digits="0123456789"
+        android:hint="@string/input_num_hint"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 输入手机号码部分-->
+    <LinearLayout
+        android:id="@+id/find_pwd_code_lay"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_44"
+        android:layout_marginTop="@dimen/space_15"
+        android:background="@drawable/shape_edit_input_bg"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/find_pwd_account_input">
+
+        <!-- 验证码-->
+        <EditText
+            android:id="@+id/find_pwd_code_input"
+            style="@style/EditStyle"
+            android:layout_weight="1"
+            android:hint="@string/input_msg_code"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_by_code_input_account_lay" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/space_8"
+            android:layout_marginTop="@dimen/space_8"
+            android:background="@color/split_line" />
+        <!--获取验证码-->
+        <com.shengyuan.beadhouse.gui.view.CountDownTextView
+            android:id="@+id/find_pwd_get_code_btn"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:gravity="center"
+            android:text="@string/get_code"
+            android:textColor="@color/text_555555" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/find_pwd_commit_btn"
+        style="@style/ButtonStyle"
+        android:layout_marginEnd="@dimen/space_37"
+        android:layout_marginLeft="@dimen/space_37"
+        android:layout_marginRight="@dimen/space_37"
+        android:layout_marginStart="@dimen/space_37"
+        android:layout_marginTop="@dimen/space_44"
+        android:text="@string/commit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/find_pwd_code_lay" />
+</android.support.constraint.ConstraintLayout>
