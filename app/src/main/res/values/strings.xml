@@ -21,4 +21,8 @@
     <string name="set_new_pwd">设置新密码</string>
     <string name="confirm_new_pwd">确认新密码</string>
     <string name="different_new_pwd">您两次输入的密码不一致</string>
+    <string name="tab1">关爱老人</string>
+    <string name="tab2">照护计划</string>
+    <string name="tab3">我的</string>
+    <string name="again_sure_exit">再按一次退出程序</string>
 </resources>

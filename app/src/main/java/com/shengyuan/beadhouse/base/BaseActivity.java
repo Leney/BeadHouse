@@ -9,11 +9,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.githang.statusbar.StatusBarCompat;
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.gui.view.BaseTitleView;
 import com.shengyuan.beadhouse.util.NetUtil;
-import com.shengyuan.beadhouse.util.Tools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         if (isSetStatusColor) {
             // 设置状态栏颜色
-            Tools.setStatusColor(this, ContextCompat.getColor(BaseActivity.this, R.color.title_color));
+//            Tools.setStatusColor(this, ContextCompat.getColor(BaseActivity.this, R.color.title_color));
+            StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.title_color));
         }
 
         baseTitle = (BaseTitleView) findViewById(R.id.base_activity_title_view);

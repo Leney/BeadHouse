@@ -72,4 +72,5 @@
     <dimen name="space_1">1.0dip</dimen>
 
     <dimen name="base_title_height">53dp</dimen>
+    <dimen name="split_line_height">0.5dp</dimen>
 </resources>
