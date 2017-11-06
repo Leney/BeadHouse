@@ -27,4 +27,7 @@
     <string name="again_sure_exit">再按一次退出程序</string>
     <string name="load_error">加载失败点击重试</string>
     <string name="no_data">暂无数据</string>
+    <string name="elderly_info">老人资料卡</string>
+    <string name="care_all_view">照护服务总揽</string>
+    <string name="care_elderly_list">关注老人列表</string>
 </resources>
