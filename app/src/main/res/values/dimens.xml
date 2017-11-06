@@ -14,6 +14,7 @@
     <dimen name="text_size_12">12.0sp</dimen>
     <dimen name="text_size_10">10.0sp</dimen>
 
+    <dimen name="space_442">442.0dip</dimen>
     <dimen name="space_200">200.0dip</dimen>
     <dimen name="space_180">180.0dip</dimen>
     <dimen name="space_160">160.0dip</dimen>
