@@ -18,6 +18,6 @@ public class CareElderlyFragment extends BaseFragment {
 
     @Override
     protected void initView(View rootView) {
-        showCenterView();
+//        showCenterView();
     }
 }

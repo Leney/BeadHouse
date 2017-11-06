@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_bg_color"
-    android:orientation="vertical">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@color/main_bg_color"
+                                             android:orientation="vertical">
 
     <com.shengyuan.beadhouse.gui.view.BaseTitleView
         android:id="@+id/base_activity_title_view"
@@ -12,7 +12,7 @@
         android:layout_height="@dimen/base_title_height"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- 正在加载视图-->
     <RelativeLayout
@@ -22,7 +22,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view" />
+        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view">
+
+        <ProgressBar
+            style="@style/myProgressBarStyleLarge"
+            android:layout_width="@dimen/space_30"
+            android:layout_height="@dimen/space_30"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDuration="900"
+            android:indeterminateOnly="true"/>
+    </RelativeLayout>
 
     <!-- 加载失败视图-->
     <RelativeLayout
@@ -32,7 +43,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view" />
+        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="@dimen/space_5"
+            android:drawableTop="@mipmap/ic_page_error"
+            android:text="@string/load_error"/>
+    </RelativeLayout>
 
     <!-- 无数据视图-->
     <RelativeLayout
@@ -42,7 +62,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view" />
+        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableTop="@mipmap/ic_no_data"
+            android:drawablePadding="@dimen/space_5"
+            android:text="@string/no_data"/>
+    </RelativeLayout>
 
     <!-- 正常数据填充视图-->
     <RelativeLayout
@@ -52,6 +80,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view" />
+        app:layout_constraintTop_toBottomOf="@id/base_activity_title_view"/>
 
 </android.support.constraint.ConstraintLayout>

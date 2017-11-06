@@ -48,4 +48,13 @@
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
+    <!--正在加载中的loading-->
+    <style name="myProgressBarStyleLarge">
+        <item name="android:indeterminateDrawable">@drawable/progress_bg</item>
+        <item name="android:minWidth">@dimen/space_43</item>
+        <item name="android:maxWidth">@dimen/space_43</item>
+        <item name="android:minHeight">@dimen/space_43</item>
+        <item name="android:maxHeight">@dimen/space_43</item>
+    </style>
+
 </resources>

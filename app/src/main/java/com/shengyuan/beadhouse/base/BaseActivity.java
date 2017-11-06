@@ -63,6 +63,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         contentLay = (RelativeLayout) findViewById(R.id.base_activity_content_lay);
 
         contentLay.addView(View.inflate(BaseActivity.this, getLayoutId(), null), mParams);
+        showLoadingView();
+
         initView();
     }
 

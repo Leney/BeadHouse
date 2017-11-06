@@ -25,4 +25,6 @@
     <string name="tab2">照护计划</string>
     <string name="tab3">我的</string>
     <string name="again_sure_exit">再按一次退出程序</string>
+    <string name="load_error">加载失败点击重试</string>
+    <string name="no_data">暂无数据</string>
 </resources>

@@ -47,6 +47,7 @@ public abstract class BaseFragment extends Fragment {
         emptyLay = rootView.findViewById(R.id.base_fragment_empty_lay);
         contentLay = rootView.findViewById(R.id.base_fragment_content_lay);
         contentLay.addView(View.inflate(getActivity(), getLayoutId(), null), mParams);
+        showLoadingView();
         return rootView;
     }
 
