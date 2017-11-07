@@ -30,4 +30,9 @@
     <string name="elderly_info">老人资料卡</string>
     <string name="care_all_view">照护服务总揽</string>
     <string name="care_elderly_list">关注老人列表</string>
+    <string name="personal_center">个人中心</string>
+    <string name="order_center">订单中心</string>
+    <string name="account_money">老人账户</string>
+    <string name="mine_cards">我的优惠券</string>
+    <string name="system_setting">系统设置</string>
 </resources>
