@@ -35,4 +35,5 @@
     <string name="account_money">老人账户</string>
     <string name="mine_cards">我的优惠券</string>
     <string name="system_setting">系统设置</string>
+    <string name="add_new_old_man">新增老人</string>
 </resources>

@@ -53,7 +53,7 @@ public class CareElderlyFragment extends BaseFragment {
         tabTitleList = new ArrayList<>();
 
         fragmentList.add(new CareServiceViewFragment());
-        fragmentList.add(new LoginByCodeFragment());
+        fragmentList.add(new CareListFragment());
 
         tabTitleList.add(getResources().getString(R.string.care_all_view));
         tabTitleList.add(getResources().getString(R.string.care_elderly_list));
