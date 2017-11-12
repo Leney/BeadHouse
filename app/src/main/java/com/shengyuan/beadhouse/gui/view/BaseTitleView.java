@@ -45,6 +45,7 @@ public class BaseTitleView extends FrameLayout {
         titleName = (TextView) baseTitleView.findViewById(R.id.base_title_name);
         rightImg = (ImageView) baseTitleView.findViewById(R.id.base_title_right_img);
         titleRight = (TextView) baseTitleView.findViewById(R.id.base_title_right);
+        titleRight.setVisibility(GONE);
         // 默认设置左边按钮是销毁当前界面
         leftImg.setOnClickListener(new OnClickListener() {
             @Override

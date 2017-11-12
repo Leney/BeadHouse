@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.PersonalCenterActivity;
 
 /**
  * 照护计划Fragment
@@ -26,6 +27,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         userIcon = rootView.findViewById(R.id.mine_user_icon);
         msgNum = rootView.findViewById(R.id.mine_msg_num);
 
+        userIcon.setOnClickListener(this);
+
         rootView.findViewById(R.id.mine_order_center_lay).setOnClickListener(this);
         rootView.findViewById(R.id.mine_account_money_lay).setOnClickListener(this);
         rootView.findViewById(R.id.mine_card_lay).setOnClickListener(this);
@@ -37,6 +40,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.mine_user_icon:
+                // 头像
+                PersonalCenterActivity.startActivity(getActivity());
+                break;
             case R.id.mine_order_center_lay:
                 // 订单中心
                 break;
