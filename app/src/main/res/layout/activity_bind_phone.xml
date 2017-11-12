@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_bg_color"
+        android:padding="@dimen/space_10"
+        android:text="@string/change_phone_top_tips"
+        android:textColor="@color/des_color"
+        android:textSize="@dimen/text_size_11" />
+
+    <!-- 手机号码-->
+    <EditText
+        android:id="@+id/bind_phone_phone_input"
+        style="@style/EditStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:digits="0123456789"
+        android:hint="@string/input_num_hint"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:maxLines="1"
+        android:paddingBottom="@dimen/space_20"
+        android:paddingLeft="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
+        android:paddingTop="@dimen/space_20" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+
+    <!-- 输入验证码部分-->
+    <LinearLayout
+        android:id="@+id/register_input_code_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/bind_phone_msg_code_input"
+            style="@style/EditStyle"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:hint="@string/input_msg_code"
+            android:paddingLeft="@dimen/space_10"
+            android:paddingRight="@dimen/space_10" />
+
+        <!--获取验证码-->
+        <com.shengyuan.beadhouse.gui.view.CountDownTextView
+            android:id="@+id/bind_phone_get_msg_code_btn"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main_color"
+            android:gravity="center"
+            android:paddingBottom="@dimen/space_5"
+            android:paddingTop="@dimen/space_5"
+            android:text="@string/get_code"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bind_phone_commit_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/space_37"
+        android:layout_marginRight="@dimen/space_37"
+        android:layout_marginTop="@dimen/space_37"
+        android:text="@string/commit" />
+</LinearLayout>

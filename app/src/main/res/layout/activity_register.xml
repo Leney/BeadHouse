@@ -36,7 +36,6 @@
             android:id="@+id/register_msg_code_input"
             style="@style/EditStyle"
             android:layout_weight="1"
-            android:inputType="number"
             android:background="#00000000"
             android:hint="@string/input_msg_code" />
 

@@ -123,4 +123,5 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void onCountDownDone() {
         // 倒计时完成
     }
+
 }
