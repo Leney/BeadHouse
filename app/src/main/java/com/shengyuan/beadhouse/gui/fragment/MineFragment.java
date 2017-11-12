@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.OldManAccountListActivity;
 import com.shengyuan.beadhouse.gui.activity.PersonalCenterActivity;
 
 /**
@@ -49,6 +50,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_account_money_lay:
                 // 老人账户
+                OldManAccountListActivity.startActivity(getActivity());
                 break;
             case R.id.mine_card_lay:
                 // 我的优惠券
