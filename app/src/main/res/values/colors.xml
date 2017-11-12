@@ -13,6 +13,7 @@
     <color name="text_888888">#888888</color>
     <color name="text_999999">#999999</color>
     <color name="yellow_color">#ff9c31</color>
+    <color name="red_color">#ff0000</color>
     <color name="des_color">#aaaaaa</color>
     <!-- ******************基本颜色值*********************** -->
     <color name="white">#FFFFFF</color>

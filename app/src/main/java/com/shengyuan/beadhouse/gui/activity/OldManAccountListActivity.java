@@ -47,6 +47,7 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
         listView = (ListView) findViewById(R.id.old_man_account_list_view);
         adapter = new OldManAccountAdapter(list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
         showCenterView();
     }
 
@@ -56,6 +57,7 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        OldManAccountBean bean = list.get(position);
+        OldManAccountDetailActivity.startActivity(OldManAccountListActivity.this,bean.id,bean.name);
     }
 }

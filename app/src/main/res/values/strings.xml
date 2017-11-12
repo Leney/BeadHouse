@@ -57,4 +57,7 @@
     <string name="man">男</string>
     <string name="woman">女</string>
     <string name="age">岁</string>
+    <string name="de_account">的账户</string>
+    <string name="continue_money">续费</string>
+    <string name="format_valid_date">有效期至：</string>
 </resources>
