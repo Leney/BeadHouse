@@ -50,4 +50,8 @@
     <string name="sex">性别</string>
     <string name="card_num">身份证号码</string>
     <string name="input_true_card_num">请输入真实的身份证号</string>
+    <string name="old_pwd">旧密码</string>
+    <string name="new_pwd">新密码</string>
+    <string name="confirm_modify">确认修改</string>
+    <string name="input_old_pwd">请输入旧密码</string>
 </resources>

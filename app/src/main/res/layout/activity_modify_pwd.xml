@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- 旧密码-->
+    <EditText
+        android:id="@+id/modify_pwd_old_pwd_input"
+        style="@style/EditStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/old_pwd"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingBottom="@dimen/space_18"
+        android:paddingTop="@dimen/space_18" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+    <!-- 新密码-->
+    <EditText
+        android:id="@+id/modify_pwd_new_pwd_input"
+        style="@style/EditStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/new_pwd"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingBottom="@dimen/space_18"
+        android:paddingTop="@dimen/space_18" />
+
+    <TextView
+        android:id="@+id/modify_pwd_confirm_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/space_37"
+        android:layout_marginRight="@dimen/space_37"
+        android:layout_marginTop="@dimen/space_37"
+        android:text="@string/confirm_modify" />
+</LinearLayout>

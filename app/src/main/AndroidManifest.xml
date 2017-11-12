@@ -62,6 +62,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!-- 修改密码界面-->
+        <activity
+            android:name=".gui.activity.ModifyPwdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
     </application>
 
 </manifest>
