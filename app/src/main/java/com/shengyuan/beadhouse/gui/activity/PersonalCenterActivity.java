@@ -64,6 +64,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.personal_modify_true_name_lay:
                 // 真实信息部分
+                TrueInfoActivity.startActivity(PersonalCenterActivity.this);
                 break;
             case R.id.personal_modify_binding_phone_lay:
                 // 更改绑定手机部分

@@ -56,6 +56,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!-- 填写真实信息界面-->
+        <activity
+            android:name=".gui.activity.TrueInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
     </application>
 
 </manifest>

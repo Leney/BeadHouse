@@ -44,4 +44,10 @@
     <string name="care_old_man">关注老人</string>
     <string name="invite_control_man">邀请监护人</string>
     <string name="change_phone_top_tips">更换手机后，将使用新的号码登录</string>
+    <string name="true_info_top_tips">请务必填写真实信息，您的信息我们会严格保密</string>
+    <string name="input_true_name">请输入真实姓名</string>
+    <string name="name">姓名</string>
+    <string name="sex">性别</string>
+    <string name="card_num">身份证号码</string>
+    <string name="input_true_card_num">请输入真实的身份证号</string>
 </resources>
