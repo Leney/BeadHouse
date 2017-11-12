@@ -1,6 +1,7 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by dell on 2017/11/11.
  */
 
-public class CareListFragment extends BaseFragment {
+public class CareListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
     private GridView gridView;
     private CareListAdapter adapter;
     private List<CareListBean> list;
@@ -41,5 +42,14 @@ public class CareListFragment extends BaseFragment {
         adapter = new CareListAdapter(list);
         gridView.setAdapter(adapter);
         showCenterView();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(position == list.size() -1){
+            // 最后一个item "增加老人"
+            return;
+        }
+        // TODO 正常老人详情跳转
     }
 }
