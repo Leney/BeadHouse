@@ -36,4 +36,11 @@
     <string name="mine_cards">我的优惠券</string>
     <string name="system_setting">系统设置</string>
     <string name="add_new_old_man">新增老人</string>
+    <string name="head_icon">头像</string>
+    <string name="account">帐号</string>
+    <string name="true_name">实名信息</string>
+    <string name="binding_phone">绑定手机</string>
+    <string name="modify_pwd">修改密码</string>
+    <string name="care_old_man">关注老人</string>
+    <string name="invite_control_man">邀请监护人</string>
 </resources>

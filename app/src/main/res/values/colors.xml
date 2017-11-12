@@ -9,7 +9,10 @@
     <color name="main_bg_color">#f4f8fd</color>
     <color name="text_333333">#333333</color>
     <color name="text_555555">#555555</color>
+    <color name="text_666666">#666666</color>
     <color name="text_888888">#888888</color>
+    <color name="text_999999">#999999</color>
+    <color name="yellow_color">#ff9c31</color>
     <!-- ******************基本颜色值*********************** -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

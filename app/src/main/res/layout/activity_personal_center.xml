@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--头像-->
+    <LinearLayout
+        android:id="@+id/personal_head_icon_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_9"
+        android:background="@drawable/selector_list_item"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/head_icon"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_13" />
+
+        <ImageView
+            android:id="@+id/personal_center_icon"
+            android:layout_width="@dimen/space_39"
+            android:layout_height="@dimen/space_39"
+            android:src="@mipmap/personal_default_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_9"
+            android:layout_marginStart="@dimen/space_9"
+            android:src="@mipmap/ic_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+
+    <!--帐号-->
+    <LinearLayout
+        android:id="@+id/personal_account_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_list_item"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/account"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_13" />
+
+        <TextView
+            android:id="@+id/personal_center_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="llj5854"
+            android:textColor="@color/text_999999"
+            android:textSize="@dimen/text_size_13" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_9"
+            android:layout_marginStart="@dimen/space_9"
+            android:src="@mipmap/ic_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+
+    <!--实名信息-->
+    <LinearLayout
+        android:id="@+id/personal_modify_true_name_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_list_item"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/true_name"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_13" />
+
+        <TextView
+            android:id="@+id/personal_center_true_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="小小苏"
+            android:textColor="@color/text_999999"
+            android:textSize="@dimen/text_size_13" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_9"
+            android:layout_marginStart="@dimen/space_9"
+            android:src="@mipmap/ic_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+
+    <!--绑定手机/更换手机-->
+    <LinearLayout
+        android:id="@+id/personal_modify_binding_phone_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_10"
+        android:background="@drawable/selector_list_item"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/binding_phone"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_13" />
+
+        <TextView
+            android:id="@+id/personal_center_binding_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="15351515116"
+            android:textColor="@color/text_999999"
+            android:textSize="@dimen/text_size_13" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_9"
+            android:layout_marginStart="@dimen/space_9"
+            android:src="@mipmap/ic_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+
+    <!--修改密码-->
+    <LinearLayout
+        android:id="@+id/personal_modify_pwd_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_list_item"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/modify_pwd"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_13" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_9"
+            android:layout_marginStart="@dimen/space_9"
+            android:src="@mipmap/ic_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/split_line" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_10"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/personal_care_old_man_lay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_22"
+            android:paddingTop="@dimen/space_22">
+
+            <TextView
+                android:id="@+id/personal_care_old_man_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textColor="@color/yellow_color"
+                android:textSize="@dimen/text_size_29" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/care_old_man"
+                android:textColor="@color/text_666666"
+                android:textSize="@dimen/text_size_11" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/split_line_height"
+            android:layout_height="match_parent"
+            android:background="@color/split_line"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout_marginBottom="@dimen/space_10"/>
+
+        <LinearLayout
+            android:id="@+id/personal_invite_control_man_lay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_list_item"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_22"
+            android:paddingTop="@dimen/space_22">
+
+            <TextView
+                android:id="@+id/personal_invite_control_man_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/yellow_color"
+                android:textSize="@dimen/text_size_29" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/invite_control_man"
+                android:textColor="@color/text_666666"
+                android:textSize="@dimen/text_size_11" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
