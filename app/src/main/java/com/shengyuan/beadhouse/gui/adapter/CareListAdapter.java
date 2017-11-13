@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
+import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.model.CareListBean;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class CareListAdapter extends BaseAdapter {
         }else {
             // 不是最后一条数据
             CareListBean bean = (CareListBean) getItem(position);
+            GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
             viewHolder.icon.setImageResource(R.mipmap.head_icon);
             viewHolder.name.setText(bean.name);
         }

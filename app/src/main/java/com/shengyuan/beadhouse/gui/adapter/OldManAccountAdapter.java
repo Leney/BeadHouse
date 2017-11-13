@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
+import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.model.OldManAccountBean;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class OldManAccountAdapter extends BaseAdapter {
         builder.append("  "+bean.age).append(parent.getResources().getString(R.string.age));
         viewHolder.sexAndAge.setText(builder.toString());
         // TODO 还要设置头像
+        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,true);
 
         return convertView;
     }

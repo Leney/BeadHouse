@@ -36,7 +36,7 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
             OldManAccountBean bean = new OldManAccountBean();
             bean.id = i;
             bean.name = "老人名称(" + i + ")";
-            bean.icon = "";
+            bean.icon = "http://up.qqjia.com/z/24/tu29253_9.jpg";
             bean.sex = i % 2 == 0 ? 0 : 1;
             bean.age = 80+i;
             list.add(bean);

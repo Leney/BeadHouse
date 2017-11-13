@@ -31,7 +31,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
         list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             CareListBean bean = new CareListBean();
-            bean.icon = "";
+            bean.icon = "http://img1.imgtn.bdimg.com/it/u=3875968917,2352913688&fm=200&gp=0.jpg";
             bean.name = "名称("+i+")";
             list.add(bean);
         }
