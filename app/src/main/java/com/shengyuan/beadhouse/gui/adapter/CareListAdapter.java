@@ -58,7 +58,6 @@ public class CareListAdapter extends BaseAdapter {
             // 不是最后一条数据
             CareListBean bean = (CareListBean) getItem(position);
             GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
-            viewHolder.icon.setImageResource(R.mipmap.head_icon);
             viewHolder.name.setText(bean.name);
         }
 

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             case R.id.main_tab_2:
                 if (curTab == 1) return;
                 changePage(1);
+                radioGroup.setVisibility(View.INVISIBLE);
                 break;
             case R.id.main_tab_3:
                 if(curTab == 2) return;
