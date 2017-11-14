@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 public class BHApplication extends Application {
     private OkHttpClient okHttpClient;
     private static BHApplication instance;
+    private String token;
 
     public static BHApplication getInstance() {
         return instance;
@@ -39,5 +40,13 @@ public class BHApplication extends Application {
             okHttpClient = new OkHttpClient();
         }
         return okHttpClient;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

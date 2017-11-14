@@ -1,6 +1,8 @@
 package com.shengyuan.beadhouse.util;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 /**
  * Created by ${xingen} on 2017/6/19.
@@ -57,5 +59,19 @@ public class DisplayUtils {
     public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return  (int)(spValue * fontScale + 0.5f);
+    }
+
+    /**
+     * 获取手机大小，px
+     *
+     * @param context
+     * @return
+     */
+    public static DisplayMetrics getPhoneMetrics(Context context) {// 获取手机分辨率
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager manager = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(dm);
+        return dm;
     }
 }
