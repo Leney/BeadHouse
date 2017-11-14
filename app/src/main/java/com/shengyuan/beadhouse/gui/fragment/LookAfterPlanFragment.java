@@ -1,13 +1,28 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
+import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
+import com.ldf.calendar.Utils;
+import com.ldf.calendar.component.CalendarAttr;
+import com.ldf.calendar.component.CalendarViewAdapter;
+import com.ldf.calendar.interf.OnSelectDateListener;
+import com.ldf.calendar.model.CalendarDate;
+import com.ldf.calendar.view.Calendar;
+import com.ldf.calendar.view.MonthPager;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
-import com.shengyuan.beadhouse.gui.view.DateTableView;
+import com.shengyuan.beadhouse.gui.adapter.ExampleAdapter;
+import com.shengyuan.beadhouse.gui.view.CustomDayView;
+import com.shengyuan.beadhouse.gui.view.ThemeDayView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * 照护计划Fragment
@@ -15,114 +30,237 @@ import java.util.List;
  */
 
 public class LookAfterPlanFragment extends BaseFragment {
-    private DateTableView dateTableView;
-    private String dateToday;
-    //现在的年月
-    private String nowYearMonth;
 
-    private List<List<String>> showString = new ArrayList<>();
+    TextView textViewYearDisplay;
+    TextView textViewMonthDisplay;
+//    TextView backToday;
+    CoordinatorLayout content;
+    MonthPager monthPager;
+    RecyclerView rvToDoList;
+//    TextView scrollSwitch;
+//    TextView themeSwitch;
+    TextView nextMonthBtn;
+    TextView lastMonthBtn;
 
-    private String tomorrow;
+    private ArrayList<Calendar> currentCalendars = new ArrayList<>();
+    private CalendarViewAdapter calendarAdapter;
+    private OnSelectDateListener onSelectDateListener;
+    private int mCurrentPage = MonthPager.CURRENT_DAY_INDEX;
+    private Context context;
+    private CalendarDate currentDate;
+    private boolean initiated = false;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_look_after_plan;
     }
 
+
     @Override
     protected void initView(View rootView) {
-        dateTableView = rootView.findViewById(R.id.date_tab);
-        dateTableView.addData("2017-11");
-
-//        init();
+        context = getActivity();
+        content = rootView.findViewById(R.id.content);
+        monthPager = rootView.findViewById(R.id.calendar_view);
+        //此处强行setViewHeight，毕竟你知道你的日历牌的高度
+        monthPager.setViewheight(Utils.dpi2px(context, 270));
+        textViewYearDisplay = rootView.findViewById(R.id.show_year_view);
+        textViewMonthDisplay = rootView.findViewById(R.id.show_month_view);
+//        backToday = rootView.findViewById(R.id.back_today_button);
+//        scrollSwitch = rootView.findViewById(R.id.scroll_switch);
+//        themeSwitch = rootView.findViewById(R.id.theme_switch);
+        nextMonthBtn = rootView.findViewById(R.id.next_month);
+        lastMonthBtn = rootView.findViewById(R.id.last_month);
+        rvToDoList = rootView.findViewById(R.id.list);
+        rvToDoList.setHasFixedSize(true);
+        //这里用线性显示 类似于listview
+        rvToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvToDoList.setAdapter(new ExampleAdapter(getActivity()));
+        initCurrentDate();
+        initCalendarView();
+        initToolbarClickListener();
 
         showCenterView();
     }
 
-    private void init(){
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
-//        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-//        Date date = Calendar.getInstance().getTime();
-//        nowYearMonth = sdf.format(date);
-//        dateToday = sdf2.format(date);
-
-//        try {
-//            showString.add(getGroupShow(dateToday));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//            Logger.e("日期转换字符失败");
+//    /**
+//     * onWindowFocusChanged回调时，将当前月的种子日期修改为今天
+//     *
+//     * @return void
+//     */
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus && !initiated) {
+//            refreshMonthPager();
+//            initiated = true;
 //        }
+//    }
 
-//        Calendar calendar = Calendar.getInstance();
-//        int day = date.getDate();
-//        Logger.e("day----"+day);
-//        calendar.set(Calendar.DAY_OF_MONTH,day+1);
-//        Date date2 = calendar.getTime();
-//        tomorrow = sdf2.format(date2);
-//        Logger.e("tomorrow----"+ tomorrow);
-
-//        dateTableView.addData("2017-10");
+    /**
+     * 初始化对应功能的listener
+     *
+     * @return void
+     */
+    private void initToolbarClickListener() {
+//        backToday.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClickBackToDayBtn();
+//            }
+//        });
+//        scrollSwitch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (calendarAdapter.getCalendarType() == CalendarAttr.CalendayType.WEEK) {
+//                    Utils.scrollTo(content, rvToDoList, monthPager.getViewHeight(), 200);
+//                    calendarAdapter.switchToMonth();
+//                } else {
+//                    Utils.scrollTo(content, rvToDoList, monthPager.getCellHeight(), 200);
+//                    calendarAdapter.switchToWeek(monthPager.getRowIndex());
+//                }
+//            }
+//        });
+//        themeSwitch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                refreshSelectBackground();
+//            }
+//        });
+        nextMonthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                monthPager.setCurrentItem(monthPager.getCurrentPosition() + 1);
+            }
+        });
+        lastMonthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                monthPager.setCurrentItem(monthPager.getCurrentPosition() - 1);
+            }
+        });
     }
 
-//    private DateTableView.ItemClickListener DateTableItemClick = new DateTableView.ItemClickListener() {
-//        @Override
-//        public void clickDate(String clickDate) {
-//            if (clickDate.equals(dateToday)) {
-////                presenter.getEventSchedule(clickDate,true,false);
-//            }  else if (clickDate.equals(dateToday)) {
-////                presenter.getEventSchedule(clickDate,false,true);
-//            } else {
-////                presenter.getEventSchedule(clickDate,false,false);
-//            }
-////            firstRequest = false;
-//            showString.clear();
-//            try {
-//                showString.add(getGroupShow(clickDate));
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//                Logger.e("日期转换字符失败");
-//            }
-//        }
-//    };
+    /**
+     * 初始化currentDate
+     *
+     * @return void
+     */
+    private void initCurrentDate() {
+        currentDate = new CalendarDate();
+        textViewYearDisplay.setText(currentDate.getYear() + "年");
+        textViewMonthDisplay.setText(currentDate.getMonth() + "");
+    }
 
-//    private List<String> getGroupShow(String dateStr) throws ParseException {
-//        List<String> stringList = new ArrayList<>();
-//        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-//        Date date =sdf.parse(dateStr);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(date);
-//
-//        int month = calendar.get(Calendar.MONTH) + 1;
-//        Logger.e("month----"+month);
-//        int day = calendar.get(Calendar.DAY_OF_MONTH);
-//        Logger.e("day----"+day);
-//        int weeknum = calendar.get(Calendar.DAY_OF_WEEK);
-//        String weekDay = weekStr(weeknum);
-//
-//        //几月
-//        stringList.add(String.valueOf(month));
-//        //几日
-//        stringList.add(String.valueOf(day));
-//        //星期几
-//        stringList.add(weekDay);
-//        return stringList;
-//    }
+    /**
+     * 初始化CustomDayView，并作为CalendarViewAdapter的参数传入
+     *
+     * @return void
+     */
+    private void initCalendarView() {
+        initListener();
+        CustomDayView customDayView = new CustomDayView(context, R.layout.custom_day);
+        calendarAdapter = new CalendarViewAdapter(
+                context,
+                onSelectDateListener,
+                CalendarAttr.CalendayType.MONTH,
+                customDayView);
+        initMarkData();
+        initMonthPager();
+    }
 
-//    private String weekStr(int day_of_week) {
-//        if (day_of_week == 1) {
-//            return "星期天";
-//        } else if (day_of_week == 2) {
-//            return "星期一";
-//        } else if (day_of_week == 3) {
-//            return "星期二";
-//        } else if (day_of_week == 4) {
-//            return "星期三";
-//        } else if (day_of_week == 5) {
-//            return "星期四";
-//        } else if (day_of_week == 6) {
-//            return "星期五";
-//        } else if (day_of_week == 7) {
-//            return "星期六";
-//        }
-//        return "";
-//    }
+
+    /**
+     * 初始化标记数据，HashMap的形式，可自定义
+     *
+     * @return void
+     */
+    private void initMarkData() {
+        HashMap<String, String> markData = new HashMap<>();
+        markData.put("2017-8-9", "1");
+        markData.put("2017-7-9", "0");
+        markData.put("2017-6-9", "1");
+        markData.put("2017-6-10", "0");
+        calendarAdapter.setMarkData(markData);
+    }
+
+
+    private void initListener() {
+        onSelectDateListener = new OnSelectDateListener() {
+            @Override
+            public void onSelectDate(CalendarDate date) {
+                refreshClickDate(date);
+            }
+
+            @Override
+            public void onSelectOtherMonth(int offset) {
+                //偏移量 -1表示刷新成上一个月数据 ， 1表示刷新成下一个月数据
+                monthPager.selectOtherMonth(offset);
+            }
+        };
+    }
+
+    private void refreshClickDate(CalendarDate date) {
+        currentDate = date;
+        textViewYearDisplay.setText(date.getYear() + "年");
+        textViewMonthDisplay.setText(date.getMonth() + "");
+    }
+
+
+    /**
+     * 初始化monthPager，MonthPager继承自ViewPager
+     *
+     * @return void
+     */
+    private void initMonthPager() {
+        monthPager.setAdapter(calendarAdapter);
+        monthPager.setCurrentItem(MonthPager.CURRENT_DAY_INDEX);
+        monthPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                position = (float) Math.sqrt(1 - Math.abs(position));
+                page.setAlpha(position);
+            }
+        });
+        monthPager.addOnPageChangeListener(new MonthPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mCurrentPage = position;
+                currentCalendars = calendarAdapter.getPagers();
+                if (currentCalendars.get(position % currentCalendars.size()) instanceof Calendar) {
+                    CalendarDate date = currentCalendars.get(position % currentCalendars.size()).getSeedDate();
+                    currentDate = date;
+                    textViewYearDisplay.setText(date.getYear() + "年");
+                    textViewMonthDisplay.setText(date.getMonth() + "");
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    public void onClickBackToDayBtn() {
+        refreshMonthPager();
+    }
+
+    private void refreshMonthPager() {
+        CalendarDate today = new CalendarDate();
+        calendarAdapter.notifyDataChanged(today);
+        textViewYearDisplay.setText(today.getYear() + "年");
+        textViewMonthDisplay.setText(today.getMonth() + "");
+    }
+
+    private void refreshSelectBackground() {
+        ThemeDayView themeDayView = new ThemeDayView(context, R.layout.custom_day_focus);
+        calendarAdapter.setCustomDayRenderer(themeDayView);
+        calendarAdapter.notifyDataSetChanged();
+        calendarAdapter.notifyDataChanged(new CalendarDate());
+    }
+
+
 }
