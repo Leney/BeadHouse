@@ -60,4 +60,5 @@
     <string name="de_account">的账户</string>
     <string name="continue_money">续费</string>
     <string name="format_valid_date">有效期至：</string>
+    <string name="physiology_date">生理数据</string>
 </resources>

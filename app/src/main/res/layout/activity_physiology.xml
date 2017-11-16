@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ExpandableListView
+        android:id="@+id/physiology_expandable_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:childDivider="@color/split_line"
+        android:divider="@color/transparent"
+        android:dividerHeight="@dimen/split_line_height"
+        android:groupIndicator="@color/transparent" />
+</LinearLayout>
