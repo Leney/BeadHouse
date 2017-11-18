@@ -6,6 +6,7 @@ import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.GuardianActivity;
 import com.shengyuan.beadhouse.gui.activity.PhysiologyDataActivity;
 import com.shengyuan.beadhouse.gui.adapter.ServiceItemAdapter;
 import com.shengyuan.beadhouse.model.CareServiceBean;
@@ -84,6 +85,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                 break;
             case CareServiceBean.TYPE_GUARDIAN:
                 // 监护人
+                GuardianActivity.startActivity(getActivity());
                 break;
         }
     }

@@ -86,6 +86,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!-- 监护人界面-->
+        <activity
+            android:name=".gui.activity.GuardianActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <!-- 弹token过期需登录的界面-->
         <activity
             android:name=".gui.activity.HandleTokenExpiredActivity"

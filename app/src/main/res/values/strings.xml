@@ -61,4 +61,8 @@
     <string name="continue_money">续费</string>
     <string name="format_valid_date">有效期至：</string>
     <string name="physiology_date">生理数据</string>
+    <string name="dis_name">姓名:</string>
+    <string name="dis_relationship">关系:</string>
+    <string name="dis_phone_num">手机号</string>
+    <string name="guardian">监护人</string>
 </resources>
