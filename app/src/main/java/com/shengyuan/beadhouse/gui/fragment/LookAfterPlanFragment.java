@@ -1,7 +1,5 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
-import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,38 +15,51 @@ import com.ldf.calendar.view.Calendar;
 import com.ldf.calendar.view.MonthPager;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
-import com.shengyuan.beadhouse.gui.adapter.ExampleAdapter;
+import com.shengyuan.beadhouse.gui.adapter.ScheduleAdapter;
 import com.shengyuan.beadhouse.gui.view.CustomDayView;
-import com.shengyuan.beadhouse.gui.view.ThemeDayView;
+import com.shengyuan.beadhouse.model.ScheduleBean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 照护计划Fragment
  * Created by dell on 2017/11/5.
  */
 
-public class LookAfterPlanFragment extends BaseFragment {
+public class LookAfterPlanFragment extends BaseFragment implements View.OnClickListener {
 
     TextView textViewYearDisplay;
     TextView textViewMonthDisplay;
-//    TextView backToday;
-    CoordinatorLayout content;
     MonthPager monthPager;
-    RecyclerView rvToDoList;
-//    TextView scrollSwitch;
-//    TextView themeSwitch;
-    TextView nextMonthBtn;
-    TextView lastMonthBtn;
+
 
     private ArrayList<Calendar> currentCalendars = new ArrayList<>();
+    /**
+     * 日期Adapter
+     */
     private CalendarViewAdapter calendarAdapter;
-    private OnSelectDateListener onSelectDateListener;
     private int mCurrentPage = MonthPager.CURRENT_DAY_INDEX;
-    private Context context;
+
+    /**
+     * 当前选中的日期对象
+     */
     private CalendarDate currentDate;
-    private boolean initiated = false;
+
+
+    /**
+     * 每天的日程列表控件
+     */
+    private RecyclerView scheduleRecyclerView;
+    /**
+     * 每天的日程adapter
+     */
+    private ScheduleAdapter scheduleAdapter;
+    /**
+     * 每天的日程数据列表
+     */
+    private List<ScheduleBean> scheduleBeanList;
 
     @Override
     protected int getLayoutId() {
@@ -58,87 +69,41 @@ public class LookAfterPlanFragment extends BaseFragment {
 
     @Override
     protected void initView(View rootView) {
-        context = getActivity();
-        content = rootView.findViewById(R.id.content);
+
+        scheduleBeanList = new ArrayList<>();
+        //默认当天的日程数据
+        for (int i = 0; i < 3; i++) {
+            ScheduleBean bean = new ScheduleBean();
+            bean.id = i;
+            bean.name = "服务名称(" + i + ")";
+            bean.beginTime = "09:20";
+            bean.endTime = "15:30";
+            scheduleBeanList.add(bean);
+        }
+
         monthPager = rootView.findViewById(R.id.calendar_view);
         //此处强行setViewHeight，毕竟你知道你的日历牌的高度
-        monthPager.setViewheight(Utils.dpi2px(context, 270));
+        monthPager.setViewheight(Utils.dpi2px(getActivity(), 270));
         textViewYearDisplay = rootView.findViewById(R.id.show_year_view);
         textViewMonthDisplay = rootView.findViewById(R.id.show_month_view);
-//        backToday = rootView.findViewById(R.id.back_today_button);
-//        scrollSwitch = rootView.findViewById(R.id.scroll_switch);
-//        themeSwitch = rootView.findViewById(R.id.theme_switch);
-        nextMonthBtn = rootView.findViewById(R.id.next_month);
-        lastMonthBtn = rootView.findViewById(R.id.last_month);
-        rvToDoList = rootView.findViewById(R.id.list);
-        rvToDoList.setHasFixedSize(true);
-        //这里用线性显示 类似于listview
-        rvToDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvToDoList.setAdapter(new ExampleAdapter(getActivity()));
+
+        // 下一月按钮
+        rootView.findViewById(R.id.look_after_fragment_next_month).setOnClickListener(this);
+        // 上一月按钮
+        rootView.findViewById(R.id.look_after_fragment_last_month).setOnClickListener(this);
+
+        scheduleRecyclerView = rootView.findViewById(R.id.look_after_fragment_schedule_recycler_view);
+        scheduleRecyclerView.setHasFixedSize(true);
+        scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        scheduleAdapter = new ScheduleAdapter(getActivity(), scheduleBeanList);
+        scheduleRecyclerView.setAdapter(scheduleAdapter);
+
         initCurrentDate();
         initCalendarView();
-        initToolbarClickListener();
 
         showCenterView();
     }
 
-//    /**
-//     * onWindowFocusChanged回调时，将当前月的种子日期修改为今天
-//     *
-//     * @return void
-//     */
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        if (hasFocus && !initiated) {
-//            refreshMonthPager();
-//            initiated = true;
-//        }
-//    }
-
-    /**
-     * 初始化对应功能的listener
-     *
-     * @return void
-     */
-    private void initToolbarClickListener() {
-//        backToday.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onClickBackToDayBtn();
-//            }
-//        });
-//        scrollSwitch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (calendarAdapter.getCalendarType() == CalendarAttr.CalendayType.WEEK) {
-//                    Utils.scrollTo(content, rvToDoList, monthPager.getViewHeight(), 200);
-//                    calendarAdapter.switchToMonth();
-//                } else {
-//                    Utils.scrollTo(content, rvToDoList, monthPager.getCellHeight(), 200);
-//                    calendarAdapter.switchToWeek(monthPager.getRowIndex());
-//                }
-//            }
-//        });
-//        themeSwitch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                refreshSelectBackground();
-//            }
-//        });
-        nextMonthBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                monthPager.setCurrentItem(monthPager.getCurrentPosition() + 1);
-            }
-        });
-        lastMonthBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                monthPager.setCurrentItem(monthPager.getCurrentPosition() - 1);
-            }
-        });
-    }
 
     /**
      * 初始化currentDate
@@ -157,10 +122,9 @@ public class LookAfterPlanFragment extends BaseFragment {
      * @return void
      */
     private void initCalendarView() {
-        initListener();
-        CustomDayView customDayView = new CustomDayView(context, R.layout.custom_day);
+        CustomDayView customDayView = new CustomDayView(getActivity(), R.layout.custom_day);
         calendarAdapter = new CalendarViewAdapter(
-                context,
+                getActivity(),
                 onSelectDateListener,
                 CalendarAttr.CalendayType.MONTH,
                 customDayView);
@@ -184,25 +148,41 @@ public class LookAfterPlanFragment extends BaseFragment {
     }
 
 
-    private void initListener() {
-        onSelectDateListener = new OnSelectDateListener() {
-            @Override
-            public void onSelectDate(CalendarDate date) {
-                refreshClickDate(date);
-            }
+    /**
+     * 日历控件日期选择监听器
+     */
+    private OnSelectDateListener onSelectDateListener = new OnSelectDateListener() {
+        @Override
+        public void onSelectDate(CalendarDate date) {
+            refreshClickDate(date);
+        }
 
-            @Override
-            public void onSelectOtherMonth(int offset) {
-                //偏移量 -1表示刷新成上一个月数据 ， 1表示刷新成下一个月数据
-                monthPager.selectOtherMonth(offset);
-            }
-        };
-    }
+        @Override
+        public void onSelectOtherMonth(int offset) {
+            //偏移量 -1表示刷新成上一个月数据 ， 1表示刷新成下一个月数据
+            monthPager.selectOtherMonth(offset);
+        }
+    };
+
 
     private void refreshClickDate(CalendarDate date) {
         currentDate = date;
         textViewYearDisplay.setText(date.getYear() + "年");
         textViewMonthDisplay.setText(date.getMonth() + "");
+
+        List<ScheduleBean> list = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            ScheduleBean bean = new ScheduleBean();
+            bean.id = i;
+            bean.name = date.getDay() + "号的服务名称(" + i + ")";
+            bean.beginTime = "09:20";
+            bean.endTime = "15:30";
+            list.add(bean);
+        }
+        scheduleBeanList.clear();
+        scheduleBeanList.addAll(list);
+        scheduleAdapter.notifyDataSetChanged();
     }
 
 
@@ -244,23 +224,52 @@ public class LookAfterPlanFragment extends BaseFragment {
         });
     }
 
-    public void onClickBackToDayBtn() {
-        refreshMonthPager();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.look_after_fragment_next_month:
+                // 下一月
+                monthPager.setCurrentItem(monthPager.getCurrentPosition() + 1);
+                break;
+            case R.id.look_after_fragment_last_month:
+                // 上一月
+                monthPager.setCurrentItem(monthPager.getCurrentPosition() - 1);
+                break;
+        }
     }
 
-    private void refreshMonthPager() {
-        CalendarDate today = new CalendarDate();
-        calendarAdapter.notifyDataChanged(today);
-        textViewYearDisplay.setText(today.getYear() + "年");
-        textViewMonthDisplay.setText(today.getMonth() + "");
-    }
 
-    private void refreshSelectBackground() {
-        ThemeDayView themeDayView = new ThemeDayView(context, R.layout.custom_day_focus);
-        calendarAdapter.setCustomDayRenderer(themeDayView);
-        calendarAdapter.notifyDataSetChanged();
-        calendarAdapter.notifyDataChanged(new CalendarDate());
-    }
+    //    /**
+//     * onWindowFocusChanged回调时，将当前月的种子日期修改为今天
+//     *
+//     * @return void
+//     */
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus && !initiated) {
+//            refreshMonthPager();
+//            initiated = true;
+//        }
+//    }
+
+//    private void refreshMonthPager() {
+//        CalendarDate today = new CalendarDate();
+//        calendarAdapter.notifyDataChanged(today);
+//        textViewYearDisplay.setText(today.getYear() + "年");
+//        textViewMonthDisplay.setText(today.getMonth() + "");
+//    }
+
+//    public void onClickBackToDayBtn() {
+//        refreshMonthPager();
+//    }
+
+//    private void refreshSelectBackground() {
+//        ThemeDayView themeDayView = new ThemeDayView(context, R.layout.custom_day_focus);
+//        calendarAdapter.setCustomDayRenderer(themeDayView);
+//        calendarAdapter.notifyDataSetChanged();
+//        calendarAdapter.notifyDataChanged(new CalendarDate());
+//    }
 
 
 }

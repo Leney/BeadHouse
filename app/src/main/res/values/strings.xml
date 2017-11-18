@@ -65,4 +65,5 @@
     <string name="dis_relationship">关系:</string>
     <string name="dis_phone_num">手机号</string>
     <string name="guardian">监护人</string>
+    <string name="click_date_tips">点击日期查看当前项目</string>
 </resources>
