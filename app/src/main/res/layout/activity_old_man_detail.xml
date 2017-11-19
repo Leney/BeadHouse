@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/care_elderly_info_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_color"
+            android:paddingBottom="@dimen/space_36"
+            android:paddingTop="@dimen/space_23">
+
+            <ImageView
+                android:id="@+id/old_man_detail_icon"
+                android:layout_width="77dp"
+                android:layout_height="77dp"
+                android:layout_marginTop="@dimen/space_43"
+                android:src="@mipmap/default_user_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/old_man_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_16"
+                android:text="李大帅 88岁"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/old_man_detail_icon"
+                app:layout_goneMarginTop="@dimen/space_5" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_5"
+                android:layout_marginStart="@dimen/space_5"
+                android:src="@mipmap/man"
+                app:layout_constraintBottom_toBottomOf="@+id/old_man_detail_name"
+                app:layout_constraintLeft_toRightOf="@+id/old_man_detail_name"
+                app:layout_constraintTop_toTopOf="@+id/old_man_detail_name" />
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_10"
+            android:text="@string/contact_info"
+            android:textColor="@color/main_color" />
+
+        <!-- 家庭固话-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/space_15"
+            android:paddingLeft="@dimen/space_10"
+            android:paddingTop="@dimen/space_15">
+
+            <TextView
+                android:id="@+id/old_man_detail_family_phone_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/family_phone"
+                android:textColor="@color/text_999999"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                android:id="@+id/old_man_detail_family_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/old_man_detail_family_phone_tips"
+                android:layout_marginTop="@dimen/space_4"
+                android:text="@string/un_setting"
+                android:textColor="@color/text_333333"
+                android:textSize="@dimen/text_size_13" />
+
+            <ImageView
+                android:id="@+id/old_man_detail_family_phone_call_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/call" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/split_line_height"
+            android:background="@color/split_line" />
+
+        <!-- 移动电话-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/space_15"
+            android:paddingLeft="@dimen/space_10"
+            android:paddingTop="@dimen/space_15">
+
+            <TextView
+                android:id="@+id/old_man_detail_mobile_phone_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mobile_phone"
+                android:textColor="@color/text_999999"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                android:id="@+id/old_man_detail_mobile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/old_man_detail_mobile_phone_tips"
+                android:layout_marginTop="@dimen/space_4"
+                android:text="@string/un_setting"
+                android:textColor="@color/text_333333"
+                android:textSize="@dimen/text_size_13" />
+
+            <ImageView
+                android:id="@+id/old_man_detail_mobile_phone_call_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/call" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_10"
+            android:text="@string/live_address"
+            android:textColor="@color/main_color" />
+
+        <!-- 家庭区位-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/space_15"
+            android:paddingLeft="@dimen/space_10"
+            android:paddingTop="@dimen/space_15">
+
+            <TextView
+                android:id="@+id/old_man_detail_address_range_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address_range"
+                android:textColor="@color/text_999999"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                android:id="@+id/old_man_detail_address_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/old_man_detail_address_range_tips"
+                android:layout_marginTop="@dimen/space_4"
+                android:text="@string/un_setting"
+                android:textColor="@color/text_333333"
+                android:textSize="@dimen/text_size_13" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/split_line_height"
+            android:background="@color/split_line" />
+
+        <!-- 家庭住址-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/space_15"
+            android:paddingLeft="@dimen/space_10"
+            android:paddingTop="@dimen/space_15">
+
+            <TextView
+                android:id="@+id/old_man_detail_address_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/family_address"
+                android:textColor="@color/text_999999"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                android:id="@+id/old_man_detail_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/old_man_detail_address_tips"
+                android:layout_marginTop="@dimen/space_4"
+                android:text="@string/un_setting"
+                android:textColor="@color/text_333333"
+                android:textSize="@dimen/text_size_13" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

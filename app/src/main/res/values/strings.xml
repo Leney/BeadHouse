@@ -66,4 +66,12 @@
     <string name="dis_phone_num">手机号</string>
     <string name="guardian">监护人</string>
     <string name="click_date_tips">点击日期查看当前项目</string>
+    <string name="contact_info">联系方式</string>
+    <string name="family_phone">家庭固话</string>
+    <string name="un_setting">未设置</string>
+    <string name="mobile_phone">移动电话</string>
+    <string name="live_address">居住地</string>
+    <string name="address_range">家庭区位</string>
+    <string name="family_address">家庭住址</string>
+    <string name="old_man_detail">老人资料</string>
 </resources>

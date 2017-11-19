@@ -52,7 +52,7 @@ public class CareListAdapter extends BaseAdapter {
 
         if(position == list.size() - 1){
             // 是最后一条数据
-            viewHolder.icon.setImageResource(R.mipmap.default_user_icon);
+            viewHolder.icon.setImageResource(R.mipmap.add_btn);
             viewHolder.name.setText(parent.getResources().getString(R.string.add_new_old_man));
         }else {
             // 不是最后一条数据

@@ -3,19 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/shape_corner_bg">
 
     <ImageView
         android:id="@+id/care_list_item_icon"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space_118"
-        android:scaleType="fitXY"/>
+        android:layout_height="@dimen/space_118"/>
 
     <TextView
         android:id="@+id/care_list_item_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/space_30"
-        android:background="@drawable/shape_bottom_circle_corner_bg"
+        android:background="@color/main_color"
         android:gravity="center"
         android:text="李大帅"
         android:textColor="@color/white"

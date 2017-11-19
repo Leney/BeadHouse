@@ -6,6 +6,7 @@ import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
 import com.shengyuan.beadhouse.gui.adapter.CareListAdapter;
 import com.shengyuan.beadhouse.model.CareListBean;
 
@@ -39,6 +40,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
 
 
         gridView = rootView.findViewById(R.id.care_list_fragment_grid_view);
+        gridView.setOnItemClickListener(this);
         adapter = new CareListAdapter(list);
         gridView.setAdapter(adapter);
         showCenterView();
@@ -50,6 +52,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
             // 最后一个item "增加老人"
             return;
         }
-        // TODO 正常老人详情跳转
+        // 正常老人详情跳转
+        OldManDetailActivity.startActivity(getActivity(),list.get(position).id);
     }
 }
