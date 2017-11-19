@@ -36,6 +36,11 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
             bean.icon = "http://img1.imgtn.bdimg.com/it/u=3875968917,2352913688&fm=200&gp=0.jpg";
             bean.name = "名称(" + i + ")";
             bean.age = 85 + i;
+            bean.familyPhone = "0755-25689362";
+            bean.mobilePhone = "13589586985";
+            bean.addressRang = "广东省深圳市";
+            bean.address = "龙华区大浪东头村56栋";
+            bean.sex = i % 2;
             list.add(bean);
         }
         list.add(new CareListBean());

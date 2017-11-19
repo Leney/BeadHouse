@@ -2,12 +2,16 @@ package com.shengyuan.beadhouse.gui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.glide.GlideLoader;
+import com.shengyuan.beadhouse.model.CareListBean;
 
 /**
  * 老人资料详情
@@ -16,16 +20,19 @@ import com.shengyuan.beadhouse.base.BaseActivity;
 
 public class OldManDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private TextView familyPhone,mobilePhone;
+    private ImageView icon;
 
-    private TextView addressRang,address;
+    private TextView name;
 
-    private ImageView familyPhoneCall,mobilePhoneCall;
+    private TextView familyPhone, mobilePhone;
 
-    /**
-     * 老人id
-     */
-    private int id;
+    private TextView addressRang, address;
+
+    private ImageView familyPhoneCall, mobilePhoneCall;
+
+    private CareListBean bean;
+
+    private Drawable manDrawable, womanDrawable;
 
     @Override
     protected int getLayoutId() {
@@ -35,13 +42,22 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initView() {
 
-        id = getIntent().getIntExtra("id",-1);
-        if(id < 0){
-            finish();
-            return;
-        }
+//        id = getIntent().getIntExtra("id",-1);
+//        if(id < 0){
+//            finish();
+//            return;
+//        }
+        bean = (CareListBean) getIntent().getSerializableExtra("bean");
 
         baseTitle.setTitleName(getResources().getString(R.string.old_man_detail));
+
+        manDrawable = ContextCompat.getDrawable(OldManDetailActivity.this, R.mipmap.man);
+        manDrawable.setBounds(0, 0, manDrawable.getMinimumWidth(), manDrawable.getMinimumHeight());
+        womanDrawable = ContextCompat.getDrawable(OldManDetailActivity.this, R.mipmap.woman);
+        womanDrawable.setBounds(0, 0, womanDrawable.getMinimumWidth(), womanDrawable.getMinimumHeight());
+
+        icon = (ImageView) findViewById(R.id.old_man_detail_icon);
+        name = (TextView) findViewById(R.id.old_man_detail_name);
 
         familyPhone = (TextView) findViewById(R.id.old_man_detail_family_phone);
         mobilePhone = (TextView) findViewById(R.id.old_man_detail_mobile_phone);
@@ -54,12 +70,24 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
         mobilePhoneCall = (ImageView) findViewById(R.id.old_man_detail_mobile_phone_call_btn);
         mobilePhoneCall.setOnClickListener(this);
 
+        setInfo();
+
         showCenterView();
+    }
+
+    private void setInfo() {
+        GlideLoader.loadNetWorkResource(OldManDetailActivity.this,bean.icon,icon,true);
+        familyPhone.setText(bean.familyPhone.isEmpty() ? getResources().getString(R.string.un_setting) : bean.familyPhone);
+        mobilePhone.setText(bean.mobilePhone.isEmpty() ? getResources().getString(R.string.un_setting) : bean.mobilePhone);
+        addressRang.setText(bean.addressRang.isEmpty() ? getResources().getString(R.string.un_setting) : bean.addressRang);
+        address.setText(bean.address.isEmpty() ? getResources().getString(R.string.un_setting) : bean.address);
+        name.setText(bean.name + " " + bean.age + "岁");
+        name.setCompoundDrawables(null, null, bean.sex == 0 ? manDrawable : womanDrawable, null);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.old_man_detail_family_phone_call_btn:
                 // 家庭固话拨打电话按钮
                 break;
@@ -70,9 +98,9 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-    public static void startActivity(Context context,int id){
-        Intent intent = new Intent(context,OldManDetailActivity.class);
-        intent.putExtra("id",id);
+    public static void startActivity(Context context, CareListBean bean) {
+        Intent intent = new Intent(context, OldManDetailActivity.class);
+        intent.putExtra("bean", bean);
         context.startActivity(intent);
     }
 

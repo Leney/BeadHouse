@@ -109,7 +109,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
             case R.id.care_elderly_info_btn:
                 // 老人资料卡
                 if (curSelectedBean == null) return;
-                OldManDetailActivity.startActivity(getActivity(), curSelectedBean.id);
+                OldManDetailActivity.startActivity(getActivity(), curSelectedBean);
                 break;
         }
     }

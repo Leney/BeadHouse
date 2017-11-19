@@ -38,20 +38,12 @@
                 android:text="李大帅 88岁"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"
+                android:drawableRight="@mipmap/man"
+                android:drawablePadding="@dimen/space_10"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/old_man_detail_icon"
                 app:layout_goneMarginTop="@dimen/space_5" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/space_5"
-                android:layout_marginStart="@dimen/space_5"
-                android:src="@mipmap/man"
-                app:layout_constraintBottom_toBottomOf="@+id/old_man_detail_name"
-                app:layout_constraintLeft_toRightOf="@+id/old_man_detail_name"
-                app:layout_constraintTop_toTopOf="@+id/old_man_detail_name" />
         </android.support.constraint.ConstraintLayout>
 
         <TextView
