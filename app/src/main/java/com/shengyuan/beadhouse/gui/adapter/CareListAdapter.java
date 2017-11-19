@@ -1,9 +1,11 @@
 package com.shengyuan.beadhouse.gui.adapter;
 
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
@@ -26,8 +28,9 @@ public class CareListAdapter extends BaseAdapter {
         this.list = list;
     }
 
-    public void setCurSelectedPostion(int curSelectedPosition) {
+    public void setCurSelectedPosition(int curSelectedPosition) {
         this.curSelectedPosition = curSelectedPosition;
+        notifyDataSetChanged();
     }
 
     public int getCurSelectedPosition() {
@@ -72,18 +75,22 @@ public class CareListAdapter extends BaseAdapter {
             viewHolder.name.setText(bean.name);
         }
         if(curSelectedPosition == position){
-            // 是被选中的position
+            viewHolder.itemLay.setBackgroundResource(R.drawable.shape_corner_select_bg);
+            viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(),R.color.white));
         }else {
-            // 是未被选中position
+            viewHolder.itemLay.setBackgroundResource(R.drawable.shape_corner_unselect_bg);
+            viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(),R.color.text_888888));
         }
 
         return convertView;
     }
 
     private class ViewHolder {
+        LinearLayout itemLay;
         ImageView icon;
         TextView name;
         public void init(View rootView){
+            itemLay = rootView.findViewById(R.id.care_list_item_lay);
             icon = rootView.findViewById(R.id.care_list_item_icon);
             name = rootView.findViewById(R.id.care_list_item_name);
         }

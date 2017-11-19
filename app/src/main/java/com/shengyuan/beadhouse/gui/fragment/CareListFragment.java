@@ -33,7 +33,13 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
         list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             CareListBean bean = new CareListBean();
-            bean.icon = "http://img1.imgtn.bdimg.com/it/u=3875968917,2352913688&fm=200&gp=0.jpg";
+            if(i == 0){
+                bean.icon = "http://www.taopic.com/uploads/allimg/111210/53178-1112100US3100.jpg";
+            }else if (i == 1){
+                bean.icon = "http://img4.imgtn.bdimg.com/it/u=1752075433,3129306283&fm=27&gp=0.jpg";
+            }else {
+                bean.icon = "http://img1.imgtn.bdimg.com/it/u=3875968917,2352913688&fm=200&gp=0.jpg";
+            }
             bean.name = "名称(" + i + ")";
             bean.age = 85 + i;
             bean.familyPhone = "0755-25689362";
@@ -61,6 +67,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
         }
         if (listener == null || adapter.getCurSelectedPosition() == position) return;
         listener.onSelected(list.get(position));
+        adapter.setCurSelectedPosition(position);
 //        // 正常老人详情跳转
 //        OldManDetailActivity.startActivity(getActivity(),list.get(position).id);
     }
