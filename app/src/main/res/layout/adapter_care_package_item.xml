@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/space_27"
+    android:paddingLeft="@dimen/space_11"
+    android:paddingRight="@dimen/space_11"
+    android:paddingTop="@dimen/space_27">
+    <TextView
+        android:id="@+id/care_package_adapter_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_333333"
+        android:text="专业版骨折包"
+        android:textSize="@dimen/text_size_13"/>
+
+    <TextView
+        android:id="@+id/care_package_adapter_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_666666"
+        android:layout_marginTop="@dimen/space_16"
+        android:lineSpacingExtra="@dimen/space_5"
+        android:text="1.描述"
+        android:textSize="@dimen/text_size_12"/>
+
+    <ProgressBar
+        android:id="@+id/care_package_adapter_progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_36"
+        android:progressDrawable="@drawable/progressbar"
+        android:progress="60"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_10">
+        <TextView
+            android:id="@+id/care_package_adapter_begin_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_666666"
+            android:text="开始时间:2017-05-25"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_10"/>
+        <TextView
+            android:id="@+id/care_package_adapter_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_color"
+            android:text="结束时间:2017-05-25"
+            android:textSize="@dimen/text_size_10"/>
+    </LinearLayout>
+</LinearLayout>

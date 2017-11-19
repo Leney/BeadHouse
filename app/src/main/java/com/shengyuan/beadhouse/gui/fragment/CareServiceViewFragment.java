@@ -6,6 +6,7 @@ import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.CarePackageActivity;
 import com.shengyuan.beadhouse.gui.activity.GuardianActivity;
 import com.shengyuan.beadhouse.gui.activity.PhysiologyDataActivity;
 import com.shengyuan.beadhouse.gui.adapter.ServiceItemAdapter;
@@ -23,6 +24,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
     private GridView gridView;
     private ServiceItemAdapter adapter;
     private List<CareServiceBean> itemList;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_care_service_view;
@@ -75,6 +77,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
         switch (bean.type){
             case CareServiceBean.TYPE_SERVICE_PACKAGE:
                 // 照护套餐
+                CarePackageActivity.startActivity(getActivity(),1252);
                 break;
             case CareServiceBean.TYPE_PHYSIOLOGY_INFO:
                 // 生理数据
