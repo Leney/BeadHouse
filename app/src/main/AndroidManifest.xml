@@ -104,6 +104,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
+        <!-- 系统设置界面-->
+        <activity
+            android:name=".gui.activity.SystemSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <!-- 弹token过期需登录的界面-->
         <activity
             android:name=".gui.activity.HandleTokenExpiredActivity"
