@@ -8,4 +8,5 @@ public class CareListBean {
     public int id;
     public String icon;
     public String name;
+    public int age;
 }

@@ -18,9 +18,20 @@ import java.util.List;
 
 public class CareListAdapter extends BaseAdapter {
     private List<CareListBean> list;
-
+    /**
+     * 当前选中的item  position
+     */
+    private int curSelectedPosition = 0;
     public CareListAdapter(List<CareListBean> list) {
         this.list = list;
+    }
+
+    public void setCurSelectedPostion(int curSelectedPosition) {
+        this.curSelectedPosition = curSelectedPosition;
+    }
+
+    public int getCurSelectedPosition() {
+        return curSelectedPosition;
     }
 
     @Override
@@ -59,6 +70,11 @@ public class CareListAdapter extends BaseAdapter {
             CareListBean bean = (CareListBean) getItem(position);
             GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
             viewHolder.name.setText(bean.name);
+        }
+        if(curSelectedPosition == position){
+            // 是被选中的position
+        }else {
+            // 是未被选中position
         }
 
         return convertView;

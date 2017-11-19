@@ -6,7 +6,6 @@ import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
-import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
 import com.shengyuan.beadhouse.gui.adapter.CareListAdapter;
 import com.shengyuan.beadhouse.model.CareListBean;
 
@@ -22,6 +21,8 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
     private GridView gridView;
     private CareListAdapter adapter;
     private List<CareListBean> list;
+    private OnSelectedItemListener listener;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_care_list;
@@ -33,7 +34,8 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
         for (int i = 0; i < 3; i++) {
             CareListBean bean = new CareListBean();
             bean.icon = "http://img1.imgtn.bdimg.com/it/u=3875968917,2352913688&fm=200&gp=0.jpg";
-            bean.name = "名称("+i+")";
+            bean.name = "名称(" + i + ")";
+            bean.age = 85 + i;
             list.add(bean);
         }
         list.add(new CareListBean());
@@ -48,11 +50,24 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(position == list.size() -1){
+        if (position == list.size() - 1) {
             // 最后一个item "增加老人"
             return;
         }
-        // 正常老人详情跳转
-        OldManDetailActivity.startActivity(getActivity(),list.get(position).id);
+        if (listener == null || adapter.getCurSelectedPosition() == position) return;
+        listener.onSelected(list.get(position));
+//        // 正常老人详情跳转
+//        OldManDetailActivity.startActivity(getActivity(),list.get(position).id);
+    }
+
+    public void setOnSelectedItemListener(OnSelectedItemListener listener) {
+        this.listener = listener;
+    }
+
+    /**
+     * 选择了子条目的监听器
+     */
+    public interface OnSelectedItemListener {
+        void onSelected(CareListBean bean);
     }
 }
