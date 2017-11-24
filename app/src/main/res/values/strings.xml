@@ -32,6 +32,7 @@
     <string name="care_elderly_list">关注老人列表</string>
     <string name="personal_center">个人中心</string>
     <string name="order_center">订单中心</string>
+    <string name="order_records">订单记录</string>
     <string name="account_money">老人账户</string>
     <string name="mine_cards">我的优惠券</string>
     <string name="system_setting">系统设置</string>
@@ -88,4 +89,7 @@
     <string name="yuan">元</string>
     <string name="exchange_date">兑换日期：</string>
     <string name="valid_date">有效期至：</string>
+    <string name="web_page">网页</string>
+    <string name="need_pay_money">需支付金额</string>
+    <string name="pay">支付</string>
 </resources>

@@ -3,6 +3,7 @@
     package="com.shengyuan.beadhouse">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:name=".BHApplication"
         android:allowBackup="true"
@@ -113,6 +114,18 @@
         <!-- 我的优惠券界面-->
         <activity
             android:name=".gui.activity.MyCouponActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <!-- 网页界面-->
+        <activity
+            android:name=".gui.activity.WebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <!-- 订单中心网页界面-->
+        <activity
+            android:name=".gui.activity.OrderCenterWebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 

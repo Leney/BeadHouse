@@ -15,6 +15,7 @@ import com.shengyuan.beadhouse.base.BaseActivity;
 
 public class SystemSettingActivity extends BaseActivity implements View.OnClickListener {
     private TextView servicePhone;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_system_setting;
@@ -34,7 +35,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.system_setting_about_us_lay:
                 // 关于我们
                 break;
@@ -43,6 +44,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.system_setting_help_center_lay:
                 // 帮助中心
+                WebActivity.startActivity(SystemSettingActivity.this, "http://www.baidu.com", getResources().getString(R.string.help_center));
                 break;
             case R.id.system_setting_service_phone_lay:
                 // 客服热线
@@ -53,7 +55,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    public static void startActivity(Context context){
-        context.startActivity(new Intent(context,SystemSettingActivity.class));
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, SystemSettingActivity.class));
     }
 }

@@ -76,6 +76,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initView();
 
+    protected void tryAgain(){
+        showLoadingView();
+    }
+
 //    /**
 //     * 加载网络数据
 //     */
