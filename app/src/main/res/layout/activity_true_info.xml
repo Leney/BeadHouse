@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,19 +32,19 @@
             android:id="@+id/true_info_account_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_12"
-            android:gravity="end"
             android:layout_weight="1"
-            android:text="5255544ddd4"
             android:background="#00000000"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="5255544ddd4"
             android:textColor="@color/text_666666"
-            android:maxLines="1"/>
+            android:textSize="@dimen/text_size_12" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/split_line_height"
-        android:background="@color/split_line"/>
+        android:background="@color/split_line" />
 
     <!--姓名-->
     <LinearLayout
@@ -64,19 +66,19 @@
             style="@style/EditStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="end"
             android:layout_weight="1"
-            android:paddingRight="0dp"
             android:background="#00000000"
-            android:textColor="@color/text_666666"
+            android:gravity="end"
             android:hint="@string/input_true_name"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:paddingRight="0dp"
+            android:textColor="@color/text_666666" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/split_line_height"
-        android:background="@color/split_line"/>
+        android:background="@color/split_line" />
 
     <!--性别-->
     <LinearLayout
@@ -93,30 +95,71 @@
             android:textColor="@color/text_333333"
             android:textSize="@dimen/text_size_13" />
 
-        <TextView
-            android:id="@+id/true_info_sex_text"
+        <View
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_12"
-            android:gravity="end"
-            android:layout_weight="1"
-            android:text="男"
-            android:background="#00000000"
-            android:textColor="@color/text_666666"
-            android:maxLines="1"/>
+            android:layout_height="1px"
+            android:layout_weight="1" />
 
-        <ImageView
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/true_info_sex_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_circle_corner_out_gray_bg"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/space_5"
+                android:paddingLeft="@dimen/space_25"
+                android:paddingRight="@dimen/space_25"
+                android:paddingTop="@dimen/space_5"
+                android:text="@string/man"
+                android:textColor="@color/text_666666"
+                android:textSize="@dimen/text_size_12" />
+
+            <ImageView
+                android:id="@+id/true_info_man_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@mipmap/ic_select" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/space_9"
-            android:layout_marginStart="@dimen/space_9"
-            android:src="@mipmap/ic_right" />
+            android:layout_marginLeft="@dimen/space_10">
+
+            <TextView
+                android:id="@+id/true_info_sex_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_circle_corner_out_green_bg"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/space_5"
+                android:paddingLeft="@dimen/space_25"
+                android:paddingRight="@dimen/space_25"
+                android:paddingTop="@dimen/space_5"
+                android:text="@string/woman"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/text_size_12" />
+
+            <ImageView
+                android:id="@+id/true_info_woman_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@mipmap/ic_select" />
+        </FrameLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/split_line_height"
-        android:background="@color/split_line"/>
+        android:background="@color/split_line" />
 
     <!--身份证号码-->
     <LinearLayout
@@ -138,13 +181,13 @@
             style="@style/EditStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="end"
             android:layout_weight="1"
-            android:paddingRight="0dp"
             android:background="#00000000"
-            android:textColor="@color/text_666666"
+            android:gravity="end"
             android:hint="@string/input_true_card_num"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:paddingRight="0dp"
+            android:textColor="@color/text_666666" />
     </LinearLayout>
 
     <TextView
@@ -154,5 +197,5 @@
         android:layout_marginLeft="@dimen/space_37"
         android:layout_marginRight="@dimen/space_37"
         android:layout_marginTop="@dimen/space_37"
-        android:text="@string/commit"/>
+        android:text="@string/commit" />
 </LinearLayout>
