@@ -47,9 +47,10 @@
             android:layout_height="match_parent"
             android:paddingTop="@dimen/space_37"
             android:paddingBottom="@dimen/space_37"
-            android:paddingLeft="@dimen/space_40"
-            android:paddingRight="@dimen/space_40"
+            android:paddingLeft="@dimen/space_30"
+            android:paddingRight="@dimen/space_30"
             android:textSize="@dimen/text_size_11"
+            android:lineSpacingExtra="@dimen/space_4"
             android:textColor="@color/text_888888"
             android:text="公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介"/>
     </LinearLayout>
