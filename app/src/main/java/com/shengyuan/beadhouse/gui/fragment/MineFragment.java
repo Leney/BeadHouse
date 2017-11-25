@@ -2,7 +2,6 @@ package com.shengyuan.beadhouse.gui.fragment;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
@@ -19,7 +18,7 @@ import com.shengyuan.beadhouse.gui.activity.SystemSettingActivity;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ImageView userIcon;
-    private TextView msgNum;
+//    private TextView msgNum;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_mine;
@@ -29,7 +28,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     protected void initView(View rootView) {
 
         userIcon = rootView.findViewById(R.id.mine_user_icon);
-        msgNum = rootView.findViewById(R.id.mine_msg_num);
+//        msgNum = rootView.findViewById(R.id.mine_msg_num);
 
         userIcon.setOnClickListener(this);
 

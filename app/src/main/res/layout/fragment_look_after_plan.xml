@@ -22,7 +22,7 @@
             android:src="@mipmap/default_user_icon" />
 
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -44,7 +44,7 @@
             android:text="5"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_10"
-            android:layout_marginTop="@dimen/space_13"/>
+            android:layout_marginTop="@dimen/space_13"/>-->
     </RelativeLayout>
 
     <LinearLayout
