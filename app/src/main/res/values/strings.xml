@@ -94,4 +94,6 @@
     <string name="pay">支付</string>
     <string name="login_out_can_not_delete_data">退出后不会删除历史数据</string>
     <string name="cancel">取消</string>
+    <string name="fraction">分</string>
+    <string name="old_man_today_total_fraction">老人当天综合分值</string>
 </resources>

@@ -6,7 +6,6 @@ package com.shengyuan.beadhouse.model;
 
 public class PhysiologyBean {
     public int id;
-    public String icon;
     public String name;
     public String value;
 }

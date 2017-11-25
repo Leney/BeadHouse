@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
-import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.model.PhysiologyBean;
 
 import java.util.List;
@@ -88,9 +87,29 @@ public class PhysiologyAdapter extends BaseExpandableListAdapter {
         }
 
         PhysiologyBean bean = (PhysiologyBean) getChild(groupPosition,childPosition);
-        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,true);
+//        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,true);
         viewHolder.name.setText(bean.name);
         viewHolder.value.setText(bean.value);
+        switch (childPosition){
+            case 0:
+                viewHolder.icon.setImageResource(R.mipmap.phy_ic_1);
+                break;
+            case 1:
+                viewHolder.icon.setImageResource(R.mipmap.phy_ic_2);
+                break;
+            case 2:
+                viewHolder.icon.setImageResource(R.mipmap.phy_ic_3);
+                break;
+            case 3:
+                viewHolder.icon.setImageResource(R.mipmap.phy_ic_4);
+                break;
+            case 4:
+                viewHolder.icon.setImageResource(R.mipmap.phy_ic_5);
+                break;
+            case 5:
+                viewHolder.icon.setImageResource(R.mipmap.phy_ic_6);
+                break;
+        }
 
         return convertView;
     }
