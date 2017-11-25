@@ -41,8 +41,8 @@ public class CustomDayView extends DayView {
 
     @Override
     public void refreshContent() {
-        renderToday(day.getDate());
         renderSelect(day.getState());
+        renderToday(day.getDate());
         renderMarker(day.getDate(), day.getState());
         super.refreshContent();
     }
@@ -66,14 +66,22 @@ public class CustomDayView extends DayView {
 
     private void renderSelect(State state) {
         if (state == State.SELECT) {
+            // 被选中
             selectedBackground.setVisibility(VISIBLE);
             dateTv.setTextColor(Color.WHITE);
         } else if (state == State.NEXT_MONTH || state == State.PAST_MONTH) {
+            // 不是当前月份的天数
             selectedBackground.setVisibility(GONE);
             dateTv.setTextColor(Color.parseColor("#d5d5d5"));
         } else {
+            // 是当前月份的天数
             selectedBackground.setVisibility(GONE);
-            dateTv.setTextColor(Color.parseColor("#111111"));
+            if(day.getPosCol() == 5 || day.getPosCol() == 6){
+                // 星期六或者星期天
+                dateTv.setTextColor(Color.RED);
+            }else {
+                dateTv.setTextColor(Color.parseColor("#888888"));
+            }
         }
     }
 
@@ -81,6 +89,7 @@ public class CustomDayView extends DayView {
         if (date != null) {
             if (date.equals(today)) {
                 dateTv.setText("今");
+                dateTv.setTextColor(Color.WHITE);
                 todayBackground.setVisibility(VISIBLE);
             } else {
                 dateTv.setText(date.day + "");

@@ -4,7 +4,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.ldf.calendar.Utils;
 import com.ldf.calendar.component.CalendarAttr;
@@ -30,8 +29,8 @@ import java.util.List;
 
 public class LookAfterPlanFragment extends BaseFragment implements View.OnClickListener {
 
-    TextView textViewYearDisplay;
-    TextView textViewMonthDisplay;
+//    TextView textViewYearDisplay;
+//    TextView textViewMonthDisplay;
     MonthPager monthPager;
 
     private ArrayList<Calendar> currentCalendars = new ArrayList<>();
@@ -85,13 +84,13 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
         monthPager = rootView.findViewById(R.id.calendar_view);
         //此处强行setViewHeight，毕竟你知道你的日历牌的高度
         monthPager.setViewheight(Utils.dpi2px(getActivity(), 270));
-        textViewYearDisplay = rootView.findViewById(R.id.show_year_view);
-        textViewMonthDisplay = rootView.findViewById(R.id.show_month_view);
+//        textViewYearDisplay = rootView.findViewById(R.id.show_year_view);
+//        textViewMonthDisplay = rootView.findViewById(R.id.show_month_view);
 
-        // 下一月按钮
-        rootView.findViewById(R.id.look_after_fragment_next_month).setOnClickListener(this);
-        // 上一月按钮
-        rootView.findViewById(R.id.look_after_fragment_last_month).setOnClickListener(this);
+//        // 下一月按钮
+//        rootView.findViewById(R.id.look_after_fragment_next_month).setOnClickListener(this);
+//        // 上一月按钮
+//        rootView.findViewById(R.id.look_after_fragment_last_month).setOnClickListener(this);
 
         scheduleRecyclerView = rootView.findViewById(R.id.look_after_fragment_schedule_recycler_view);
         scheduleRecyclerView.setHasFixedSize(true);
@@ -114,8 +113,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
      */
     private void initCurrentDate() {
         currentDate = new CalendarDate();
-        textViewYearDisplay.setText(currentDate.getYear() + "年");
-        textViewMonthDisplay.setText(currentDate.getMonth() + "");
+//        textViewYearDisplay.setText(currentDate.getYear() + "年");
+//        textViewMonthDisplay.setText(currentDate.getMonth() + "");
     }
 
     /**
@@ -169,8 +168,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 
     private void refreshClickDate(CalendarDate date) {
         currentDate = date;
-        textViewYearDisplay.setText(date.getYear() + "年");
-        textViewMonthDisplay.setText(date.getMonth() + "");
+//        textViewYearDisplay.setText(date.getYear() + "年");
+//        textViewMonthDisplay.setText(date.getMonth() + "");
 
         List<ScheduleBean> list = new ArrayList<>();
 
@@ -217,8 +216,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
                 if (currentCalendars.get(position % currentCalendars.size()) instanceof Calendar) {
                     CalendarDate date = currentCalendars.get(position % currentCalendars.size()).getSeedDate();
                     currentDate = date;
-                    textViewYearDisplay.setText(date.getYear() + "年");
-                    textViewMonthDisplay.setText(date.getMonth() + "");
+//                    textViewYearDisplay.setText(date.getYear() + "年");
+//                    textViewMonthDisplay.setText(date.getMonth() + "");
                 }
             }
 
@@ -231,14 +230,14 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.look_after_fragment_next_month:
-                // 下一月
-                monthPager.setCurrentItem(monthPager.getCurrentPosition() + 1);
-                break;
-            case R.id.look_after_fragment_last_month:
-                // 上一月
-                monthPager.setCurrentItem(monthPager.getCurrentPosition() - 1);
-                break;
+//            case R.id.look_after_fragment_next_month:
+//                // 下一月
+//                monthPager.setCurrentItem(monthPager.getCurrentPosition() + 1);
+//                break;
+//            case R.id.look_after_fragment_last_month:
+//                // 上一月
+//                monthPager.setCurrentItem(monthPager.getCurrentPosition() - 1);
+//                break;
         }
     }
 
