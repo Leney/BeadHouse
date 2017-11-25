@@ -83,7 +83,7 @@
     </style>
 
     <!-- 底部弹出dialog样式-->
-    <style name="MyDialogTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="MyDialogTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
         <item name="android:windowFrame">@null</item><!-- 边框 -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item><!-- 外部变灰 -->

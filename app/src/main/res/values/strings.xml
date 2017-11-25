@@ -92,4 +92,6 @@
     <string name="web_page">网页</string>
     <string name="need_pay_money">需支付金额</string>
     <string name="pay">支付</string>
+    <string name="login_out_can_not_delete_data">退出后不会删除历史数据</string>
+    <string name="cancel">取消</string>
 </resources>

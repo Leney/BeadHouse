@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.gui.dialog.LoginOutDialog;
 
 /**
  * 系统设置
@@ -20,6 +21,7 @@ import com.shengyuan.beadhouse.base.BaseActivity;
 
 public class SystemSettingActivity extends BaseActivity implements View.OnClickListener {
     private TextView servicePhone;
+    private LoginOutDialog loginOutDialog;
 
     @Override
     protected int getLayoutId() {
@@ -30,7 +32,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
     protected void initView() {
         baseTitle.setTitleName(getResources().getString(R.string.system_setting));
         findViewById(R.id.system_setting_about_us_lay).setOnClickListener(this);
-        findViewById(R.id.system_setting_feed_back_lay).setOnClickListener(this);
+//        findViewById(R.id.system_setting_feed_back_lay).setOnClickListener(this);
         findViewById(R.id.system_setting_help_center_lay).setOnClickListener(this);
         findViewById(R.id.system_setting_service_phone_lay).setOnClickListener(this);
         findViewById(R.id.system_setting_login_out_btn).setOnClickListener(this);
@@ -45,9 +47,9 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
                 // 关于我们
                 AboutUsActivity.startActivity(SystemSettingActivity.this);
                 break;
-            case R.id.system_setting_feed_back_lay:
-                // 意见反馈
-                break;
+//            case R.id.system_setting_feed_back_lay:
+//                // 意见反馈
+//                break;
             case R.id.system_setting_help_center_lay:
                 // 帮助中心
                 WebActivity.startActivity(SystemSettingActivity.this, "http://www.baidu.com", getResources().getString(R.string.help_center));
@@ -71,6 +73,10 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.system_setting_login_out_btn:
                 // 退出登录
+                if(loginOutDialog == null){
+                    loginOutDialog = new LoginOutDialog(SystemSettingActivity.this);
+                }
+                loginOutDialog.show();
                 break;
         }
     }

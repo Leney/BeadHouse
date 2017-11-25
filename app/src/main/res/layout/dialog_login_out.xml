@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_11"
+        android:layout_marginRight="@dimen/space_11"
+        android:background="@drawable/shape_top_circle_corner_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/space_17"
+        android:paddingTop="@dimen/space_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_out_can_not_delete_data"
+            android:textColor="@color/text_555555"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/dialog_login_out_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_10"
+            android:paddingBottom="@dimen/space_12"
+            android:paddingLeft="@dimen/space_20"
+            android:paddingRight="@dimen/space_20"
+            android:paddingTop="@dimen/space_12"
+            android:text="@string/login_out"
+            android:textColor="@color/red_color"
+            android:textSize="@dimen/text_size_14" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/dialog_login_out_cancel_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_10"
+        android:layout_marginLeft="@dimen/space_11"
+        android:layout_marginRight="@dimen/space_11"
+        android:layout_marginTop="@dimen/space_10"
+        android:background="@drawable/shape_circle_corner_bg"
+        android:gravity="center"
+        android:paddingBottom="@dimen/space_12"
+        android:paddingLeft="@dimen/space_20"
+        android:paddingRight="@dimen/space_20"
+        android:paddingTop="@dimen/space_12"
+        android:text="@string/cancel"
+        android:textColor="@color/text_555555"
+        android:textSize="@dimen/text_size_14" />
+</LinearLayout>
