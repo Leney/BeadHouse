@@ -96,4 +96,5 @@
     <string name="cancel">取消</string>
     <string name="fraction">分</string>
     <string name="old_man_today_total_fraction">老人当天综合分值</string>
+    <string name="click_date_check_tips">点击日期查看当天服务项目</string>
 </resources>

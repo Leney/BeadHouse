@@ -34,7 +34,6 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     TextView textViewMonthDisplay;
     MonthPager monthPager;
 
-
     private ArrayList<Calendar> currentCalendars = new ArrayList<>();
     /**
      * 日期Adapter
@@ -71,6 +70,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     protected void initView(View rootView) {
 
         scheduleBeanList = new ArrayList<>();
+        // 为header占位
+        scheduleBeanList.add(new ScheduleBean());
         //默认当天的日程数据
         for (int i = 0; i < 3; i++) {
             ScheduleBean bean = new ScheduleBean();
@@ -96,8 +97,9 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
         scheduleRecyclerView.setHasFixedSize(true);
         scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         scheduleAdapter = new ScheduleAdapter(getActivity(), scheduleBeanList);
-        scheduleRecyclerView.setAdapter(scheduleAdapter);
+        scheduleAdapter.setmHeaderCount(1);
 
+        scheduleRecyclerView.setAdapter(scheduleAdapter);
         initCurrentDate();
         initCalendarView();
 
@@ -181,6 +183,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
             list.add(bean);
         }
         scheduleBeanList.clear();
+        // 为header占位
+        scheduleBeanList.add(new ScheduleBean());
         scheduleBeanList.addAll(list);
         scheduleAdapter.notifyDataSetChanged();
     }
