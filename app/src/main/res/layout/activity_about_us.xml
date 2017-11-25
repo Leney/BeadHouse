@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_57"
+            android:paddingTop="@dimen/space_57"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/space_84"
+                android:layout_height="@dimen/space_84"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/about_us_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/text_999999"
+                android:text="v2.5"
+                android:paddingLeft="@dimen/space_13"
+                android:paddingRight="@dimen/space_13"
+                android:paddingTop="@dimen/space_4"
+                android:paddingBottom="@dimen/space_4"
+                android:background="@drawable/shape_gray_stoken_bg"
+                android:layout_marginTop="@dimen/space_12"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/about_us_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/space_37"
+            android:paddingBottom="@dimen/space_37"
+            android:paddingLeft="@dimen/space_40"
+            android:paddingRight="@dimen/space_40"
+            android:textSize="@dimen/text_size_11"
+            android:textColor="@color/text_888888"
+            android:text="公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介公司简介"/>
+    </LinearLayout>
+</ScrollView>
