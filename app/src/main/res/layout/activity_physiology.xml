@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/phy_scroe_yellow"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
             android:id="@+id/physiology_fraction"
@@ -44,8 +44,8 @@
             android:text="@string/fraction"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_11"
-            app:layout_constraintLeft_toRightOf="@id/physiology_fraction"
-            app:layout_constraintTop_toTopOf="@id/physiology_fraction" />
+            app:layout_constraintLeft_toRightOf="@+id/physiology_fraction"
+            app:layout_constraintTop_toTopOf="@+id/physiology_fraction" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:textSize="@dimen/text_size_12"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/physiology_fraction_bg" />
+            app:layout_constraintTop_toBottomOf="@+id/physiology_fraction_bg" />
     </android.support.constraint.ConstraintLayout>
 
     <ExpandableListView
@@ -66,6 +66,6 @@
         android:layout_height="match_parent"
         android:childDivider="@color/split_line"
         android:divider="@color/transparent"
-        android:dividerHeight="@dimen/split_line_height"
+        android:dividerHeight="1dp"
         android:groupIndicator="@color/transparent" />
 </LinearLayout>

@@ -7,10 +7,10 @@
     <View
         android:id="@+id/schedule_split_view"
         android:layout_width="@dimen/space_2"
-        android:layout_height="@dimen/space_32"
+        android:layout_height="@dimen/space_40"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="@dimen/space_10"
-        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginBottom="@dimen/space_8"
+        android:layout_marginTop="@dimen/space_8"
         android:layout_marginLeft="@dimen/space_10"
         android:background="@color/main_color" />
 
@@ -39,7 +39,7 @@
             android:id="@+id/schedule_adapter_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_5"
+            android:layout_marginTop="@dimen/space_2"
             android:text="08:00-12:00"
             android:textColor="@color/text_999999"
             android:textSize="@dimen/text_size_14" />

@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="李大帅"
             android:textColor="@color/text_333333"
-            android:textSize="@dimen/text_size_14" />
+            android:textSize="@dimen/text_size_16" />
 
         <TextView
             android:id="@+id/old_man_account_adapter_sex_and_age"
