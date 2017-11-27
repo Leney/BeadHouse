@@ -49,7 +49,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_order_center_lay:
                 // 订单中心
-                OrderCenterWebActivity.startActivity(getActivity(),"http://www.baidu.com",getResources().getString(R.string.order_center));
+                OrderCenterWebActivity.startActivity(getActivity(),"http://test.vshare.com/",getResources().getString(R.string.order_center));
                 break;
             case R.id.mine_account_money_lay:
                 // 老人账户

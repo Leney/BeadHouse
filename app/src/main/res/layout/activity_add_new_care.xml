@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/add_new_care_search_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/space_11"
+        android:paddingRight="@dimen/space_11"
+        android:paddingTop="@dimen/space_48">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_care_man_tips"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_12" />
+
+        <EditText
+            android:id="@+id/add_new_care_card_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_10"
+            android:background="@drawable/shape_circle_corner_out_gray_bg"
+            android:hint="@string/input_card_no_search_hint"
+            android:paddingBottom="@dimen/space_12"
+            android:paddingLeft="@dimen/space_10"
+            android:paddingRight="@dimen/space_10"
+            android:paddingTop="@dimen/space_12"
+            android:textColor="@color/text_333333"
+            android:textColorHint="@color/des_color"
+            android:textSize="@dimen/space_14" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/add_new_care_search_result_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/space_18"
+        android:paddingLeft="@dimen/space_11"
+        android:paddingRight="@dimen/space_11"
+        android:paddingTop="@dimen/space_18">
+
+        <ImageView
+            android:id="@+id/add_new_care_search_result_icon"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@mipmap/personal_default_icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 姓名-->
+        <TextView
+            android:id="@+id/add_new_care_search_result_name_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:layout_marginTop="@dimen/space_5"
+            android:text="@string/format_name"
+            android:textColor="@color/text_666666"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_icon"
+            app:layout_constraintTop_toTopOf="@+id/add_new_care_search_result_icon" />
+
+        <TextView
+            android:id="@+id/add_new_care_search_result_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:text="赵华"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_name_tips"
+            app:layout_constraintTop_toTopOf="@+id/add_new_care_search_result_name_tips" />
+
+        <!-- 年龄-->
+        <TextView
+            android:id="@+id/add_new_care_search_result_age_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/format_age"
+            android:textColor="@color/text_666666"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_icon"
+            app:layout_constraintTop_toBottomOf="@+id/add_new_care_search_result_name_tips" />
+
+        <TextView
+            android:id="@+id/add_new_care_search_result_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:text="88岁"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_age_tips"
+            app:layout_constraintTop_toTopOf="@+id/add_new_care_search_result_age_tips" />
+
+        <!-- 性别-->
+        <TextView
+            android:id="@+id/add_new_care_search_result_sex_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/format_age"
+            android:textColor="@color/text_666666"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_icon"
+            app:layout_constraintTop_toBottomOf="@+id/add_new_care_search_result_age_tips" />
+
+        <TextView
+            android:id="@+id/add_new_care_search_result_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:text="男"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_sex_tips"
+            app:layout_constraintTop_toTopOf="@+id/add_new_care_search_result_sex_tips" />
+
+        <!-- 身份证号-->
+        <TextView
+            android:id="@+id/add_new_care_search_result_card_no_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/format_card_no"
+            android:textColor="@color/text_666666"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_icon"
+            app:layout_constraintTop_toBottomOf="@+id/add_new_care_search_result_sex_tips" />
+
+        <TextView
+            android:id="@+id/add_new_care_search_result_card_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_11"
+            android:layout_marginStart="@dimen/space_11"
+            android:text="5005897895125165593"
+            android:textColor="@color/text_333333"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintLeft_toRightOf="@+id/add_new_care_search_result_card_no_tips"
+            app:layout_constraintTop_toTopOf="@+id/add_new_care_search_result_card_no_tips" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/add_new_care_search_now_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/space_25"
+        android:layout_marginRight="@dimen/space_25"
+        android:layout_marginTop="@dimen/space_20"
+        android:text="@string/search_now" />
+</LinearLayout>

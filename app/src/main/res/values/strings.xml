@@ -97,4 +97,11 @@
     <string name="fraction">分</string>
     <string name="old_man_today_total_fraction">老人当天综合分值</string>
     <string name="click_date_check_tips">点击日期查看当天服务项目</string>
+    <string name="search_care_man_tips">查询你想要关注的人</string>
+    <string name="input_card_no_search_hint">请输入身份证号码查询</string>
+    <string name="search_now">立即查询</string>
+    <string name="format_name">姓名：</string>
+    <string name="format_age">年龄：</string>
+    <string name="format_card_no">身份证号：</string>
+    <string name="input_right_card_no">请输入正确的身份证号码</string>
 </resources>
