@@ -6,6 +6,7 @@ import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.AddNewCareActivity;
 import com.shengyuan.beadhouse.gui.adapter.CareListAdapter;
 import com.shengyuan.beadhouse.model.CareListBean;
 
@@ -69,6 +70,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (position == list.size() - 1) {
             // 最后一个item "增加老人"
+            AddNewCareActivity.startActivity(getActivity());
             return;
         }
         if (listener == null || adapter.getCurSelectedPosition() == position) return;

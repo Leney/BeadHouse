@@ -104,4 +104,14 @@
     <string name="format_age">年龄：</string>
     <string name="format_card_no">身份证号：</string>
     <string name="input_right_card_no">请输入正确的身份证号码</string>
+    <string name="warm_tips">温馨提示</string>
+    <string name="sure_add">确定添加</string>
+    <string name="add_care">添加关注</string>
+
+
+    <string-array name="relationships">
+        <item>子女</item>
+        <item>亲友</item>
+        <item>医护人员</item>
+    </string-array>
 </resources>
