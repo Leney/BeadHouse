@@ -107,6 +107,7 @@
     <string name="warm_tips">温馨提示</string>
     <string name="sure_add">确定添加</string>
     <string name="add_care">添加关注</string>
+    <string name="add_new_care_old_man">新增关注老人</string>
 
 
     <string-array name="relationships">

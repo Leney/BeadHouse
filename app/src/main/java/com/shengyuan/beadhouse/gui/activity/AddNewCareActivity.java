@@ -46,6 +46,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initView() {
+        baseTitle.setTitleName(getResources().getString(R.string.add_new_care_old_man));
         searchLay = (LinearLayout) findViewById(R.id.add_new_care_search_lay);
         resultLay = (ConstraintLayout) findViewById(R.id.add_new_care_search_result_lay);
         searchInput = (EditText) findViewById(R.id.add_new_care_card_input);
