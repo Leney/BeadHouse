@@ -97,6 +97,8 @@
         android:layout_width="0dp"
         android:layout_height="43dp"
         android:background="@color/white"
+        android:paddingLeft="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/care_elderly_info_lay"

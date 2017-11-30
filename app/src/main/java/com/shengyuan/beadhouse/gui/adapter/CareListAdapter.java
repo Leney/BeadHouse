@@ -24,6 +24,7 @@ public class CareListAdapter extends BaseAdapter {
      * 当前选中的item  position
      */
     private int curSelectedPosition = 0;
+
     public CareListAdapter(List<CareListBean> list) {
         this.list = list;
     }
@@ -55,31 +56,34 @@ public class CareListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if(convertView == null){
-            convertView = View.inflate(parent.getContext(),R.layout.adapter_care_list_item,null);
+        if (convertView == null) {
+            convertView = View.inflate(parent.getContext(), R.layout.adapter_care_list_item, null);
             viewHolder = new ViewHolder();
             viewHolder.init(convertView);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(position == list.size() - 1){
+        if (position == list.size() - 1) {
             // 是最后一条数据
-            viewHolder.icon.setImageResource(R.mipmap.add_btn);
+            viewHolder.icon.setVisibility(View.INVISIBLE);
+            viewHolder.addImg.setVisibility(View.VISIBLE);
             viewHolder.name.setText(parent.getResources().getString(R.string.add_new_old_man));
-        }else {
+        } else {
             // 不是最后一条数据
             CareListBean bean = (CareListBean) getItem(position);
-            GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
+            viewHolder.icon.setVisibility(View.VISIBLE);
+            viewHolder.addImg.setVisibility(View.INVISIBLE);
+            GlideLoader.loadNetWorkResource(parent.getContext(), bean.icon, viewHolder.icon, false);
             viewHolder.name.setText(bean.name);
         }
-        if(curSelectedPosition == position){
+        if (curSelectedPosition == position) {
             viewHolder.itemLay.setBackgroundResource(R.drawable.shape_corner_select_bg);
-            viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(),R.color.white));
-        }else {
+            viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.white));
+        } else {
             viewHolder.itemLay.setBackgroundResource(R.drawable.shape_corner_unselect_bg);
-            viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(),R.color.text_888888));
+            viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.text_888888));
         }
 
         return convertView;
@@ -87,11 +91,13 @@ public class CareListAdapter extends BaseAdapter {
 
     private class ViewHolder {
         LinearLayout itemLay;
-        ImageView icon;
+        ImageView icon, addImg;
         TextView name;
-        public void init(View rootView){
+
+        public void init(View rootView) {
             itemLay = rootView.findViewById(R.id.care_list_item_lay);
             icon = rootView.findViewById(R.id.care_list_item_icon);
+            addImg = rootView.findViewById(R.id.care_list_item_add_img);
             name = rootView.findViewById(R.id.care_list_item_name);
         }
     }
