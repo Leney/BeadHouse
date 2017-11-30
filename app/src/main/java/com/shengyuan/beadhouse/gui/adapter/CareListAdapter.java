@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.glide.GlideLoader;
+import com.shengyuan.beadhouse.gui.view.RoundedImageView;
 import com.shengyuan.beadhouse.model.CareListBean;
 
 import java.util.List;
@@ -91,7 +92,9 @@ public class CareListAdapter extends BaseAdapter {
 
     private class ViewHolder {
         LinearLayout itemLay;
-        ImageView icon, addImg;
+//        ImageView icon, addImg;
+        RoundedImageView icon;
+        ImageView addImg;
         TextView name;
 
         public void init(View rootView) {

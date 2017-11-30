@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/space_118">
 
-        <ImageView
+        <com.shengyuan.beadhouse.gui.view.RoundedImageView
             android:id="@+id/care_list_item_icon"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_118" />
