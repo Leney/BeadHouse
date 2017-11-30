@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/space_17"
     android:paddingRight="@dimen/space_17">
     <!-- 手机号码-->
@@ -12,9 +12,9 @@
         android:id="@+id/login_by_pwd_account_input"
         style="@style/EditStyle"
         android:layout_marginTop="@dimen/space_44"
+        android:digits="0123456789"
         android:hint="@string/please_input_phone_hint"
         android:inputType="phone"
-        android:digits="0123456789"
         android:maxLength="11"
         android:maxLines="1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -34,17 +34,6 @@
         app:layout_constraintTop_toBottomOf="@id/login_by_pwd_account_input" />
 
     <TextView
-        android:id="@+id/login_by_pwd_find_pwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/find_back_pwd"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_by_pwd_pwd_input"
-        android:layout_marginTop="@dimen/space_10"
-        android:textSize="@dimen/text_size_14"
-        android:textColor="#999999"/>
-
-    <TextView
         android:id="@+id/login_by_pwd_login_btn"
         style="@style/ButtonStyle"
         android:layout_marginLeft="@dimen/space_37"
@@ -54,4 +43,25 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_by_pwd_pwd_input" />
+
+    <!-- 忘记密码-->
+    <TextView
+        android:id="@+id/login_by_pwd_find_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_15"
+        android:text="@string/find_back_pwd"
+        android:textColor="@color/main_color"
+        android:textSize="@dimen/text_size_14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_by_pwd_login_btn" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/split_line_height"
+        android:background="@color/main_color"
+        app:layout_constraintLeft_toLeftOf="@id/login_by_pwd_find_pwd"
+        app:layout_constraintRight_toRightOf="@id/login_by_pwd_find_pwd"
+        app:layout_constraintTop_toBottomOf="@id/login_by_pwd_find_pwd" />
 </android.support.constraint.ConstraintLayout>

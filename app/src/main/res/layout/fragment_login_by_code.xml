@@ -26,6 +26,7 @@
             style="@style/EditStyle"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/transparent"
             android:hint="@string/input_num_hint"
             android:inputType="phone"
             android:digits="0123456789"
