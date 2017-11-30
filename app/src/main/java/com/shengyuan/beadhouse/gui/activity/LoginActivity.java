@@ -57,6 +57,7 @@ public class LoginActivity extends BaseActivity {
                 RegisterActivity.startActivity(LoginActivity.this);
             }
         });
+        showCenterView();
     }
 
     private void init() {

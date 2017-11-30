@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.LoginActivity;
 import com.shengyuan.beadhouse.gui.activity.MyCouponActivity;
 import com.shengyuan.beadhouse.gui.activity.OldManAccountListActivity;
 import com.shengyuan.beadhouse.gui.activity.OrderCenterWebActivity;
@@ -37,6 +38,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.mine_card_lay).setOnClickListener(this);
         rootView.findViewById(R.id.mine_system_setting_lay).setOnClickListener(this);
 
+        rootView.findViewById(R.id.mine_personal_name).setOnClickListener(this);
+
         showCenterView();
     }
 
@@ -62,6 +65,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_system_setting_lay:
                 // 系统设置
                 SystemSettingActivity.startActivity(getActivity());
+                break;
+            case R.id.mine_personal_name:
+                // TODO 暂时做登录入口
+                LoginActivity.startActivity(getActivity());
                 break;
         }
     }
