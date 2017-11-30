@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
     protected void initView() {
         baseTitle.setTitleName(getResources().getString(R.string.login));
         baseTitle.setRightText(getResources().getString(R.string.register));
+        baseTitle.setRightVisible(true);
         init();
         tabLayout = (TabLayout) findViewById(R.id.login_tab_layout);
         tabLayout.addTab(tabLayout.newTab());
