@@ -10,8 +10,7 @@
         android:id="@+id/guardian_adapter_icon"
         android:layout_width="@dimen/space_77"
         android:layout_height="@dimen/space_77"
-        android:scaleType="fitXY"
-        android:src="@mipmap/personal_default_icon" />
+        android:src="@mipmap/default_lis_head_icon" />
 
     <LinearLayout
         android:layout_width="0dp"

@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
-import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.model.GuardianBean;
 
 import java.util.List;
@@ -55,8 +54,8 @@ public class GuardianAdapter extends BaseAdapter {
         viewHolder.name.setText(bean.name);
         viewHolder.relationship.setText(bean.relationship);
         viewHolder.phone.setText(bean.phone);
-        // TODO 还要设置头像
-        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
+//        // TODO 还要设置头像
+//        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
 
         return convertView;
     }

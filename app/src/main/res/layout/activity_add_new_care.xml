@@ -51,7 +51,7 @@
             android:id="@+id/add_new_care_search_result_icon"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:src="@mipmap/personal_default_icon"
+            android:src="@mipmap/default_lis_head_icon"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
