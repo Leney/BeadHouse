@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector_list_item"
     android:gravity="center_vertical"
-    android:padding="@dimen/space_12">
+    android:paddingTop="@dimen/space_5"
+    android:paddingLeft="@dimen/space_12"
+    android:paddingRight="@dimen/space_12">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/space_96"

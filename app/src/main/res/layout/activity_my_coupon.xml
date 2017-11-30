@@ -13,31 +13,36 @@
         android:paddingRight="@dimen/space_29"
         android:paddingTop="@dimen/space_37">
 
-        <TextView
-            android:id="@+id/my_coupon_exchange_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/space_39"
-            android:layout_alignParentEnd="true"
-            android:background="@color/main_color"
-            android:gravity="center"
-            android:paddingLeft="@dimen/space_32"
-            android:paddingRight="@dimen/space_32"
-            android:text="@string/exchange"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_14" />
-
-        <EditText
-            android:id="@+id/my_coupon_input"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space_39"
-            android:layout_toLeftOf="@id/my_coupon_exchange_btn"
-            android:background="@drawable/my_coupon_input_bg"
-            android:hint="@string/input_coupon_exchange_tips"
-            android:maxLines="1"
-            android:paddingLeft="@dimen/space_10"
-            android:textColor="@color/text_333333"
-            android:textColorHint="@color/text_999999"
-            android:textSize="@dimen/text_size_12" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_coupon_input_bg">
+            <TextView
+                android:id="@+id/my_coupon_exchange_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/space_40"
+                android:layout_alignParentEnd="true"
+                android:background="@color/main_color"
+                android:gravity="center"
+                android:paddingLeft="@dimen/space_32"
+                android:paddingRight="@dimen/space_32"
+                android:text="@string/exchange"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14" />
+            <EditText
+                android:id="@+id/my_coupon_input"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_39"
+                android:layout_toLeftOf="@id/my_coupon_exchange_btn"
+                android:hint="@string/input_coupon_exchange_tips"
+                android:maxLines="1"
+                android:background="@color/transparent"
+                android:paddingLeft="@dimen/space_10"
+                android:textColor="@color/text_333333"
+                android:textColorHint="@color/text_999999"
+                android:textSize="@dimen/text_size_12" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <ListView
