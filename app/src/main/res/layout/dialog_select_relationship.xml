@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/shape_white_in_circle_conner_bg"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/shape_white_in_circle_conner_bg"
+              android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,24 +13,30 @@
         android:paddingRight="@dimen/space_22"
         android:text="@string/warm_tips"
         android:textColor="@color/text_333333"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
-    <Spinner
-        android:id="@+id/relationship_dialog_spinner"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/space_22"
         android:layout_marginRight="@dimen/space_22"
         android:layout_marginTop="@dimen/space_15"
         android:background="@drawable/shape_spinner_bg"
-        android:paddingLeft="@dimen/space_5"
-        android:dropDownVerticalOffset="50dp"/>
+        android:paddingLeft="@dimen/space_5">
+
+        <Spinner
+            android:id="@+id/relationship_dialog_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_2"
+            android:dropDownVerticalOffset="@dimen/space_40"/>
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/split_line_height"
         android:layout_marginTop="@dimen/space_30"
-        android:background="@color/split_line" />
+        android:background="@color/split_line"/>
 
     <TextView
         android:id="@+id/relationship_dialog_sure_add_btn"
@@ -41,5 +47,5 @@
         android:paddingTop="@dimen/space_12"
         android:text="@string/sure_add"
         android:textColor="@color/main_color"
-        android:textSize="@dimen/text_size_14" />
+        android:textSize="@dimen/text_size_14"/>
 </LinearLayout>

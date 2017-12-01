@@ -76,12 +76,12 @@ public class CustomDayView extends DayView {
         } else {
             // 是当前月份的天数
             selectedBackground.setVisibility(GONE);
-            if(day.getPosCol() == 5 || day.getPosCol() == 6){
-                // 星期六或者星期天
-                dateTv.setTextColor(Color.RED);
-            }else {
+//            if(day.getPosCol() == 5 || day.getPosCol() == 6){
+//                // 星期六或者星期天
+//                dateTv.setTextColor(Color.RED);
+//            }else {
                 dateTv.setTextColor(Color.parseColor("#888888"));
-            }
+//            }
         }
     }
 
