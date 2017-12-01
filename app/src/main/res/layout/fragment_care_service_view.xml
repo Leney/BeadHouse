@@ -12,7 +12,5 @@
         android:layout_marginLeft="@dimen/space_25"
         android:layout_marginRight="@dimen/space_25"
         android:gravity="center"
-        android:horizontalSpacing="@dimen/space_8"
-        android:numColumns="2"
-        android:verticalSpacing="@dimen/space_8" />
+        android:numColumns="2"/>
 </LinearLayout>
