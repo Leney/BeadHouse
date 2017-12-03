@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ldf.calendar.Utils;
 import com.ldf.calendar.component.CalendarAttr;
@@ -31,6 +32,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 
 //    TextView textViewYearDisplay;
 //    TextView textViewMonthDisplay;
+
+    private TextView dateText;
     MonthPager monthPager;
 
     private ArrayList<Calendar> currentCalendars = new ArrayList<>();
@@ -92,6 +95,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 //        // 上一月按钮
 //        rootView.findViewById(R.id.look_after_fragment_last_month).setOnClickListener(this);
 
+        dateText = rootView.findViewById(R.id.look_after_date);
         scheduleRecyclerView = rootView.findViewById(R.id.look_after_fragment_schedule_recycler_view);
         scheduleRecyclerView.setHasFixedSize(true);
         scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -113,6 +117,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
      */
     private void initCurrentDate() {
         currentDate = new CalendarDate();
+        String dateStr = currentDate.getYear() + "年" + currentDate.getMonth() + "月";
+        dateText.setText(dateStr);
 //        textViewYearDisplay.setText(currentDate.getYear() + "年");
 //        textViewMonthDisplay.setText(currentDate.getMonth() + "");
     }
@@ -168,8 +174,10 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 
     private void refreshClickDate(CalendarDate date) {
         currentDate = date;
-//        textViewYearDisplay.setText(date.getYear() + "年");
-//        textViewMonthDisplay.setText(date.getMonth() + "");
+        String dateStr = date.getYear() + "年" + date.getMonth() + "月";
+        this.dateText.setText(dateStr);
+//        textViewYearDisplay.setText(dateText.getYear() + "年");
+//        textViewMonthDisplay.setText(dateText.getMonth() + "");
 
         List<ScheduleBean> list = new ArrayList<>();
 
@@ -216,8 +224,10 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
                 if (currentCalendars.get(position % currentCalendars.size()) instanceof Calendar) {
                     CalendarDate date = currentCalendars.get(position % currentCalendars.size()).getSeedDate();
                     currentDate = date;
-//                    textViewYearDisplay.setText(date.getYear() + "年");
-//                    textViewMonthDisplay.setText(date.getMonth() + "");
+                    String dateStr = date.getYear() + "年" + date.getMonth() + "月";
+                    dateText.setText(dateStr);
+//                    textViewYearDisplay.setText(dateText.getYear() + "年");
+//                    textViewMonthDisplay.setText(dateText.getMonth() + "");
                 }
             }
 
@@ -242,7 +252,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     }
 
 
-    //    /**
+//    /**
 //     * onWindowFocusChanged回调时，将当前月的种子日期修改为今天
 //     *
 //     * @return void
@@ -259,8 +269,10 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 //    private void refreshMonthPager() {
 //        CalendarDate today = new CalendarDate();
 //        calendarAdapter.notifyDataChanged(today);
-//        textViewYearDisplay.setText(today.getYear() + "年");
-//        textViewMonthDisplay.setText(today.getMonth() + "");
+//        String dateStr = today.getYear() + "年" + today.getMonth() + "月";
+//        dateText.setText(dateStr);
+////        textViewYearDisplay.setText(today.getYear() + "年");
+////        textViewMonthDisplay.setText(today.getMonth() + "");
 //    }
 
 //    public void onClickBackToDayBtn() {

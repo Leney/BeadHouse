@@ -22,6 +22,15 @@
             android:src="@mipmap/default_user_icon" />
 
 
+        <TextView
+            android:id="@+id/look_after_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017年10月"
+            android:textSize="@dimen/text_size_16"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"/>
+
         <!--<ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
