@@ -32,7 +32,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     protected void initView(View rootView) {
         list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             CareListBean bean = new CareListBean();
             if (i == 0) {
                 bean.icon = "http://www.taopic.com/uploads/allimg/111210/53178-1112100US3100.jpg";
@@ -55,7 +55,7 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
 
         gridView = rootView.findViewById(R.id.care_list_fragment_grid_view);
         gridView.setOnItemClickListener(this);
-        adapter = new CareListAdapter(list);
+        adapter = new CareListAdapter(list,getActivity());
 
         gridView.setAdapter(adapter);
 

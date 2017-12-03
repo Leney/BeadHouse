@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/care_list_item_lay"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/care_list_item_lay"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space_118">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <com.shengyuan.beadhouse.gui.view.RoundedImageView
-            android:id="@+id/care_list_item_icon"
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space_118" />
+            android:layout_height="@dimen/space_118">
 
-        <ImageView
-            android:id="@+id/care_list_item_add_img"
-            android:layout_width="@dimen/space_80"
-            android:layout_height="@dimen/space_80"
-            android:src="@mipmap/add_btn"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+            <com.shengyuan.beadhouse.gui.view.RoundedImageView
+                android:id="@+id/care_list_item_icon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_118" />
 
-    <TextView
-        android:id="@+id/care_list_item_name"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_30"
-        android:gravity="center"
-        android:text="李大帅"
-        android:textSize="@dimen/text_size_12" />
+            <ImageView
+                android:id="@+id/care_list_item_add_img"
+                android:layout_width="@dimen/space_80"
+                android:layout_height="@dimen/space_80"
+                android:layout_gravity="center"
+                android:src="@mipmap/add_btn" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/care_list_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_30"
+            android:gravity="center"
+            android:text="李大帅"
+            android:textSize="@dimen/text_size_12" />
+    </LinearLayout>
 </LinearLayout>

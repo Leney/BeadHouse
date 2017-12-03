@@ -1,5 +1,6 @@
 package com.shengyuan.beadhouse.gui.adapter;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.view.RoundedImageView;
 import com.shengyuan.beadhouse.model.CareListBean;
+import com.shengyuan.beadhouse.util.DisplayUtils;
 
 import java.util.List;
 
@@ -26,8 +28,14 @@ public class CareListAdapter extends BaseAdapter {
      */
     private int curSelectedPosition = 0;
 
-    public CareListAdapter(List<CareListBean> list) {
+    private LinearLayout.LayoutParams leftParams, rightParams;
+
+    public CareListAdapter(List<CareListBean> list, Context context) {
         this.list = list;
+        this.leftParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        this.leftParams.leftMargin = DisplayUtils.dip2px(context, 25);
+        this.rightParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        this.rightParams.rightMargin = DisplayUtils.dip2px(context, 25);
     }
 
     public void setCurSelectedPosition(int curSelectedPosition) {
@@ -79,6 +87,16 @@ public class CareListAdapter extends BaseAdapter {
             GlideLoader.loadNetWorkResource(parent.getContext(), bean.icon, viewHolder.icon, false);
             viewHolder.name.setText(bean.name);
         }
+
+        if (position % 2 == 0) {
+            // 左边的item
+            viewHolder.itemLay.setLayoutParams(leftParams);
+        } else {
+            // 右边的item
+            viewHolder.itemLay.setLayoutParams(rightParams);
+        }
+
+
         if (curSelectedPosition == position) {
             viewHolder.itemLay.setBackgroundResource(R.drawable.shape_corner_select_bg);
             viewHolder.name.setTextColor(ContextCompat.getColor(parent.getContext(), R.color.white));
@@ -92,7 +110,7 @@ public class CareListAdapter extends BaseAdapter {
 
     private class ViewHolder {
         LinearLayout itemLay;
-//        ImageView icon, addImg;
+        //        ImageView icon, addImg;
         RoundedImageView icon;
         ImageView addImg;
         TextView name;
