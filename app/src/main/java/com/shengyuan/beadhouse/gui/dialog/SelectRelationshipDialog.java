@@ -25,6 +25,8 @@ public class SelectRelationshipDialog extends BaseDialog implements View.OnClick
 
     private List<String> list;
 
+    private OnAddSureListener mListener;
+
     public SelectRelationshipDialog(@NonNull Context context) {
         super(context);
         setDialogWidth(0.8f);
@@ -45,7 +47,7 @@ public class SelectRelationshipDialog extends BaseDialog implements View.OnClick
         String[] array = getContext().getResources().getStringArray(R.array.relationships);
         list = Arrays.asList(array);
         //适配器
-        spinnerAdapter= new SpinnerAdapter(list);
+        spinnerAdapter = new SpinnerAdapter(list);
         spinner.setAdapter(spinnerAdapter);
     }
 
@@ -54,7 +56,18 @@ public class SelectRelationshipDialog extends BaseDialog implements View.OnClick
         switch (v.getId()) {
             case R.id.relationship_dialog_sure_add_btn:
                 dismiss();
+                if (mListener != null) {
+                    mListener.onAddSure();
+                }
                 break;
         }
+    }
+
+    public void setListener(OnAddSureListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnAddSureListener {
+        void onAddSure();
     }
 }

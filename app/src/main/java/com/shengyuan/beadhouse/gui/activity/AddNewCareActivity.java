@@ -19,7 +19,7 @@ import com.shengyuan.beadhouse.gui.dialog.SelectRelationshipDialog;
  * Created by dell on 2017/11/27.
  */
 
-public class AddNewCareActivity extends BaseActivity implements View.OnClickListener {
+public class AddNewCareActivity extends BaseActivity implements View.OnClickListener, SelectRelationshipDialog.OnAddSureListener {
     private LinearLayout searchLay;
     private ConstraintLayout resultLay;
     private EditText searchInput;
@@ -69,6 +69,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
                     // 当前是结果页面，点击则添加----> 弹框选择关系
                     if (dialog == null) {
                         dialog = new SelectRelationshipDialog(AddNewCareActivity.this);
+                        dialog.setListener(this);
                     }
                     dialog.show();
                 } else {
@@ -109,5 +110,11 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, AddNewCareActivity.class));
+    }
+
+    @Override
+    public void onAddSure() {
+        // 确定添加按钮
+        finish();
     }
 }
