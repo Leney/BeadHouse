@@ -9,20 +9,18 @@ public class HttpConstance {
     /**
      * 基础的网络路径
      */
-    public static final String BASE_URL = "http://yanfayi.cn:8889";
+    public static final String BASE_URL = "http://sanatorium.appvv.com";
     /**
      * 请求成功code
      *
      */
-    public static final int RESULT_CODE_SUCCESS=1;
+    public static final int RESULT_CODE_SUCCESS=200;
     /**
      * 请求失败
      */
-    public static final int RESULT_CODE_ERROR=0;
+    public static final int RESULT_CODE_ERROR=1;
     /**
      * token过期
      */
     public static final int RESULT_CODE_EXPIRED=2;
-
-
 }

@@ -92,4 +92,13 @@ public class RetrofitClient {
     public Subscription getRoomList(Map<String, Object> params, ResponseResultListener<RoomInfoBean2> subscriber) {
         return this.apiService.getRoomList(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
+
+
+    /**
+     * 获取短信验证码
+     * @return
+     */
+    public Subscription getMessageCode(String phone,ResponseResultListener subscriber){
+        return this.apiService.getMessageCode(phone).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
 }

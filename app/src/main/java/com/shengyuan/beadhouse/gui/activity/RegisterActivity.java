@@ -86,7 +86,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 }
                 getCodeBtn.start(60);
                 // TODO 获取验证码
-
                 break;
             case R.id.register_register_btn:
                 // 注册

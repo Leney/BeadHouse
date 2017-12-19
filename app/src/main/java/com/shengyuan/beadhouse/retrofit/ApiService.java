@@ -5,6 +5,8 @@ import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import java.util.Map;
 
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -41,4 +43,7 @@ public interface ApiService {
      */
     @GET("/contest/get_room_list")
     Observable<HttpResult<RoomInfoBean2>> getRoomList(@QueryMap Map<String,Object> params);
+
+    @POST("/api/confirme/")
+    Observable<HttpResult> getMessageCode(@Query("username") String phone);
 }
