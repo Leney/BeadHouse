@@ -3,6 +3,7 @@ package com.shengyuan.beadhouse;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -20,6 +21,9 @@ public class BHApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        //初始化百度地图
+        SDKInitializer.initialize(getApplicationContext());
 
         // 初始化日志
         Logger.addLogAdapter(new AndroidLogAdapter());

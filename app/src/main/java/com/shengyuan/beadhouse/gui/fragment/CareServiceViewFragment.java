@@ -9,6 +9,7 @@ import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.gui.activity.CarePackageActivity;
 import com.shengyuan.beadhouse.gui.activity.GuardianActivity;
 import com.shengyuan.beadhouse.gui.activity.PhysiologyDataActivity;
+import com.shengyuan.beadhouse.gui.activity.RemoteServiceActivity;
 import com.shengyuan.beadhouse.gui.adapter.ServiceItemAdapter;
 import com.shengyuan.beadhouse.model.CareServiceBean;
 
@@ -85,6 +86,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                 break;
             case CareServiceBean.TYPE_OUTSIDE_MONITOR:
                 // 远程监控
+                RemoteServiceActivity.startActivity(getActivity());
                 break;
             case CareServiceBean.TYPE_GUARDIAN:
                 // 监护人
