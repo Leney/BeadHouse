@@ -18,5 +18,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="22.7dp"
-        android:layout_height="wrap_content" />
+        android:gravity="center"
+        android:layout_height="@dimen/space_180" />
 </android.support.constraint.ConstraintLayout>

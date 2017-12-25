@@ -5,14 +5,23 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.gui.activity.RegisterActivity;
+import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CountDownTextView;
+import com.shengyuan.beadhouse.model.LoginBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 免密登录
@@ -25,6 +34,8 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
      * 倒计时控件
      */
     private CountDownTextView getCodeBtn;
+
+    private WaitingDialog waitingDialog = null;
 
     @Override
     protected int getLayoutId() {
@@ -80,12 +91,13 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
                     return;
                 }
                 getCodeBtn.start(60);
-                // TODO 获取验证码
-
+                // 获取验证码
+                String getCodePhone = accountInput.getText().toString().trim();
+                compositeSubscription.add(retrofitClient.getMessageCode(getCodePhone));
                 break;
             case R.id.login_by_code_login_btn:
                 // 立即登录
-                String phone = accountInput.getText().toString();
+                String phone = accountInput.getText().toString().trim();
                 if (phone.isEmpty()) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.input_num_hint), Toast.LENGTH_SHORT).show();
                     return;
@@ -94,13 +106,37 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
                     Toast.makeText(getActivity(), getResources().getString(R.string.input_right_phone), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String code = codeInput.getText().toString();
+                String code = codeInput.getText().toString().trim();
                 if (code.isEmpty()) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.input_msg_code), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // TODO 立即登录
+                // 立即登录
+                if (waitingDialog == null) {
+                    waitingDialog = new WaitingDialog(getActivity());
+                }
+                waitingDialog.show();
+                // 请求登录接口
+                Map<String, Object> params = new HashMap<>();
+                params.put("username", phone);
+                params.put("password", code);
+                params.put("logintype", "code");
+                retrofitClient.login(params, new ResponseResultListener<LoginBean>() {
+                    @Override
+                    public void success(LoginBean loginBean) {
+                        Log.i("llj", "登陆成功--token--->>>" + loginBean.getToken());
+                        BHApplication.getInstance().setToken(loginBean.getToken()+":unused");
+//                        BHApplication.getInstance().setToken();
+//                        // 再去获取登陆用户的个人信息
+//                        getLoginInfo();
+                    }
+
+                    @Override
+                    public void failure(CommonException e) {
+                        Log.e("llj", "登陆失败,e---->>>" + e.getMessage());
+                    }
+                });
                 break;
         }
     }

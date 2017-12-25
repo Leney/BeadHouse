@@ -11,6 +11,7 @@ import com.githang.statusbar.StatusBarCompat;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.gui.view.BaseTitleView;
 import com.shengyuan.beadhouse.retrofit.RetrofitClient;
+import com.shengyuan.beadhouse.util.ActivityUtils;
 
 import rx.subscriptions.CompositeSubscription;
 
@@ -21,10 +22,10 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected RetrofitClient retrofitClient;
-//    protected SQLBriteProvider sqlBriteProvider;
+    //    protected SQLBriteProvider sqlBriteProvider;
     protected CompositeSubscription compositeSubscription = null;
-    // TODO 临时写死默认的token
-    protected String token = "7yts73rm1510121415981";
+//    // TODO 临时写死默认的token
+//    protected String token = "7yts73rm1510121415981";
 
     protected RelativeLayout loadingLay;
     protected RelativeLayout errorLay;
@@ -43,11 +44,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        // 添加Activity到统一管理器中去
+        ActivityUtils.addActivity(this);
         initModeConfig();
         if (isSetStatusColor) {
             // 设置状态栏颜色
 //            Tools.setStatusColor(this, ContextCompat.getColor(BaseActivity.this, R.color.title_color));
-            StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.title_color));
+            StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.title_color));
         }
 
         baseTitle = (BaseTitleView) findViewById(R.id.base_activity_title_view);
@@ -76,112 +79,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initView();
 
-    protected void tryAgain(){
+    protected void tryAgain() {
         showLoadingView();
     }
-
-//    /**
-//     * 加载网络数据
-//     */
-//    protected void loadNetDataGet(final String tag, Map<String, Object> requestMap) {
-//        if (requestMap == null) requestMap = new HashMap<>();
-//        Observable.just(requestMap).map(new Func1<Map<String, Object>, String>() {
-//            @Override
-//            public String call(Map<String, Object> stringObjectMap) {
-//                String url = NetUtil.getURL(Constance.MAIN_URL, stringObjectMap);
-//                Request request = null;
-//                if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
-//                    request = new Request.Builder()
-//                            .url(url)
-//                            .addHeader("Connection", "close")
-//                            .build();
-//                } else {
-//                    request = new Request.Builder()
-//                            .url(url)
-//                            .build();
-//                }
-//                try {
-//                    Response response = BHApplication.getInstance().getOkHttpClient().newCall(request).execute();
-//                    return response.body().string();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        }).subscribeOn(Schedulers.newThread())
-//                .unsubscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<String>() {
-//                    @Override
-//                    public void call(String s) {
-//                        if (!TextUtils.isEmpty(s)) {
-//                            loadDataSuccess(tag, s);
-//                        } else {
-//                            loadDataFailed(tag, -1, "无法连接到服务器");
-//                        }
-//                    }
-//                });
-//
-//    }
-
-//    /**
-//     * 加载网络数据,Post方式
-//     */
-//    protected void loadNetDataPost(final String tag, Map<String, Object> requestMap) {
-//        if (requestMap == null) requestMap = new HashMap<>();
-//        Observable.just(requestMap).map(new Func1<Map<String, Object>, String>() {
-//            @Override
-//            public String call(Map<String, Object> objectMap) {
-//                RequestBody requestBody = NetUtil.getPostBuilder(objectMap).build();
-//                String url = Constance.MAIN_URL + tag;
-//                Request request = null;
-//                if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
-//                    request = new Request.Builder()
-//                            .url(url)
-//                            .addHeader("Connection", "close")
-//                            .post(requestBody)
-//                            .build();
-//                } else {
-//                    request = new Request.Builder()
-//                            .url(Constance.MAIN_URL + tag)
-//                            .build();
-//                }
-//
-//                try {
-//                    Response response = BHApplication.getInstance().getOkHttpClient().newCall(request).execute();
-//                    return response.body().string();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        }).subscribeOn(Schedulers.newThread())
-//                .unsubscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<String>() {
-//                    @Override
-//                    public void call(String s) {
-//                        if (!TextUtils.isEmpty(s)) {
-//                            loadDataSuccess(tag, s);
-//                        } else {
-//                            loadDataFailed(tag, -1, "无法连接到服务器");
-//                        }
-//                    }
-//                });
-//    }
-
-//    /**
-//     * 加载成功
-//     */
-//    protected void loadDataSuccess(String tag, String response) {
-//    }
-//
-//    /**
-//     * 加载网络数据失败
-//     */
-//    protected void loadDataFailed(String tag, int errorCode, String errorMsg) {
-//    }
-
 
     protected void showCenterView() {
         loadingLay.setVisibility(View.GONE);
@@ -215,5 +115,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         compositeSubscription.clear();
+        ActivityUtils.removeActivity(this);
     }
 }

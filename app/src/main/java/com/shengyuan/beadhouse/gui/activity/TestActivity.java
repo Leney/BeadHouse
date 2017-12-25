@@ -57,7 +57,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
      */
     private void getNetworkDemo(){
         Map<String, Object> params = new HashMap<>();
-        params.put("token", token);
+//        params.put("token", token);
         params.put("pageIndex", 1);
         params.put("pageSize", 10);
         params.put("resGrade", 1);

@@ -3,6 +3,7 @@ package com.shengyuan.beadhouse.retrofit;
 import android.content.Context;
 
 import com.shengyuan.beadhouse.BHApplication;
+import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.okhttp.OkHttpProvider;
 import com.shengyuan.beadhouse.rxjava.SubscribeUtils;
@@ -110,5 +111,24 @@ public class RetrofitClient {
      */
     public Subscription register(Map<String,Object> params,ResponseResultListener subscriber){
         return this.apiService.register(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 登陆
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription login(Map<String,Object> params,ResponseResultListener<LoginBean> subscriber){
+        return this.apiService.login(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 获取登陆用户的基本信息
+     * @param subscriber
+     * @return
+     */
+    public Subscription getLoginInfo(ResponseResultListener subscriber){
+        return this.apiService.getLoginInfo().compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

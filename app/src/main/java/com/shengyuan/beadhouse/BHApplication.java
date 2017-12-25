@@ -1,24 +1,20 @@
 package com.shengyuan.beadhouse;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-
-import okhttp3.OkHttpClient;
 
 /**
  * Created by dell on 2017/11/2.
  */
 
 public class BHApplication extends Application {
-    private OkHttpClient okHttpClient;
+    //    private OkHttpClient okHttpClient;
     private static BHApplication instance;
-    private String token;
-
-    public static BHApplication getInstance() {
-        return instance;
-    }
+    private String token = "";
+    private static Context mContext;//上下文
 
     @Override
     public void onCreate() {
@@ -35,11 +31,20 @@ public class BHApplication extends Application {
 //        });
     }
 
-    public OkHttpClient getOkHttpClient() {
-        if (okHttpClient == null) {
-            okHttpClient = new OkHttpClient();
-        }
-        return okHttpClient;
+//    public OkHttpClient getOkHttpClient() {
+//        if (okHttpClient == null) {
+//            okHttpClient = new OkHttpClient();
+//        }
+//        return okHttpClient;
+//    }
+
+    /**
+     * 单例模式
+     *
+     * @return
+     */
+    public synchronized static BHApplication getInstance() {
+        return instance;
     }
 
     public String getToken() {
@@ -48,5 +53,13 @@ public class BHApplication extends Application {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public static Context getContext() {
+        return mContext;
+    }
+
+    public static void setContext(Context mContext) {
+        BHApplication.mContext = mContext;
     }
 }

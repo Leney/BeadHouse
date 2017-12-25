@@ -1,5 +1,6 @@
 package com.shengyuan.beadhouse.retrofit;
 
+import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 
 import java.util.Map;
@@ -46,11 +47,37 @@ public interface ApiService {
     @GET("/contest/get_room_list")
     Observable<HttpResult<RoomInfoBean2>> getRoomList(@QueryMap Map<String, Object> params);
 
+    /**
+     * 获取验证码
+     * @param phone
+     * @return
+     */
     @FormUrlEncoded
     @POST("/api/confirme/")
     Observable<HttpResult> getMessageCode(@Field("username") String phone);
 
+    /**
+     * 注册
+     * @param params
+     * @return
+     */
     @FormUrlEncoded
     @POST("/api/regist/")
     Observable<HttpResult> register(@FieldMap Map<String, Object> params);
+
+    /**
+     * 登陆
+     * @param params
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/login/")
+    Observable<HttpResult<LoginBean>> login(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取当前登陆的用户信息
+     * @return
+     */
+    @GET("/api/get_register/")
+    Observable<HttpResult> getLoginInfo();
 }
