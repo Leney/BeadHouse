@@ -74,6 +74,16 @@ public class LoginActivity extends BaseActivity {
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList, tabTitleList);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        int length = fragmentList.size();
+        for (int i = 0; i < length; i++) {
+            if (fragmentList.get(i) == null) continue;
+            fragmentList.get(i).onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, LoginActivity.class));
     }

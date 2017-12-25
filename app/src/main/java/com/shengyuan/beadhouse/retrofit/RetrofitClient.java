@@ -98,7 +98,17 @@ public class RetrofitClient {
      * 获取短信验证码
      * @return
      */
-    public Subscription getMessageCode(String phone,ResponseResultListener subscriber){
-        return this.apiService.getMessageCode(phone).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    public Subscription getMessageCode(String phone){
+        return this.apiService.getMessageCode(phone).compose(SubscribeUtils.createTransformer()).subscribe();
+    }
+
+    /**
+     * 注册账号
+     * @param params
+     * @param subscriber
+     * @return
+     */
+    public Subscription register(Map<String,Object> params,ResponseResultListener subscriber){
+        return this.apiService.register(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

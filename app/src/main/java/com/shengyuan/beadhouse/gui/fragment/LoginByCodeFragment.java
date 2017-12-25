@@ -1,5 +1,7 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.gui.activity.RegisterActivity;
 import com.shengyuan.beadhouse.gui.view.CountDownTextView;
 
 /**
@@ -99,6 +102,16 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
 
                 // TODO 立即登录
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RegisterActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // 注册成功返回
+            String phone = data.getStringExtra("phone");
+            accountInput.setText(phone);
         }
     }
 

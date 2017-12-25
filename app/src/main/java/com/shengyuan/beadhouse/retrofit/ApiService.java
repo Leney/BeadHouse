@@ -4,9 +4,11 @@ import com.shengyuan.beadhouse.model.RoomInfoBean2;
 
 import java.util.Map;
 
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -42,8 +44,13 @@ public interface ApiService {
      * @return
      */
     @GET("/contest/get_room_list")
-    Observable<HttpResult<RoomInfoBean2>> getRoomList(@QueryMap Map<String,Object> params);
+    Observable<HttpResult<RoomInfoBean2>> getRoomList(@QueryMap Map<String, Object> params);
 
+    @FormUrlEncoded
     @POST("/api/confirme/")
-    Observable<HttpResult> getMessageCode(@Query("username") String phone);
+    Observable<HttpResult> getMessageCode(@Field("username") String phone);
+
+    @FormUrlEncoded
+    @POST("/api/regist/")
+    Observable<HttpResult> register(@FieldMap Map<String, Object> params);
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="6.7dp"
+    android:paddingLeft="20.3dp"
+    android:paddingRight="20.3dp"
+    android:paddingTop="9dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/dialog_waiting_tips"
+        android:layout_width="wrap_content"
+        android:text="@string/waiting_please"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="22.7dp"
+        android:layout_height="wrap_content" />
+</android.support.constraint.ConstraintLayout>

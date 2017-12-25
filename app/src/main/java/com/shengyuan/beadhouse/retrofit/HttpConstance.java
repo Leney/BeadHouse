@@ -6,10 +6,14 @@ package com.shengyuan.beadhouse.retrofit;
  */
 
 public class HttpConstance {
+//    /**
+//     * 基础的网络路径
+//     */
+//    public static final String BASE_URL = "http://sanatorium.appvv.com";
     /**
      * 基础的网络路径
      */
-    public static final String BASE_URL = "http://sanatorium.appvv.com";
+    public static final String BASE_URL = "http://61.155.215.48:5000";
     /**
      * 请求成功code
      *
@@ -18,7 +22,7 @@ public class HttpConstance {
     /**
      * 请求失败
      */
-    public static final int RESULT_CODE_ERROR=1;
+    public static final int RESULT_CODE_ERROR=500;
     /**
      * token过期
      */

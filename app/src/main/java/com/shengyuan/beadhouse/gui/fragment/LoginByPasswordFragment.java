@@ -1,5 +1,7 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -7,6 +9,7 @@ import android.widget.Toast;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.gui.activity.FindBackPwdGetCodeActivity;
+import com.shengyuan.beadhouse.gui.activity.RegisterActivity;
 
 /**
  * 登录，帐号和密码登录
@@ -56,6 +59,16 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
                 // 找回密码
                 FindBackPwdGetCodeActivity.startActivity(getActivity());
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RegisterActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // 注册成功返回
+            String phone = data.getStringExtra("phone");
+            accountInput.setText(phone);
         }
     }
 }
