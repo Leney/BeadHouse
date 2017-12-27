@@ -97,10 +97,12 @@ public class RetrofitClient {
     /**
      * 获取短信验证码
      *
+     * @param phone 手机号
+     * @param type  类型(regist=注册，forget=忘记密码，telchange=修改手机号，login=短信登陆)
      * @return
      */
-    public Subscription getMessageCode(String phone) {
-        return this.apiService.getMessageCode(phone).compose(SubscribeUtils.createTransformer()).subscribe();
+    public Subscription getMessageCode(String phone, String type) {
+        return this.apiService.getMessageCode(phone, type).compose(SubscribeUtils.createTransformer()).subscribe();
     }
 
     /**
@@ -143,5 +145,16 @@ public class RetrofitClient {
      */
     public Subscription setNewPassword(Map<String, Object> params, ResponseResultListener subscriber) {
         return this.apiService.setNewPassword(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+
+    /**
+     * 找回密码，验证验证码
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription verifyCode(Map<String, Object> params, ResponseResultListener subscriber) {
+        return this.apiService.verifyCode(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

@@ -9,9 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CountDownTextView;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 找回密码，获取验证码界面
@@ -23,6 +31,8 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
     private EditText accountInput, codeInput;
 
     private CountDownTextView getCodeBtn;
+
+    private WaitingDialog waitingDialog = null;
 
     @Override
     protected int getLayoutId() {
@@ -79,7 +89,7 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
                 getCodeBtn.start(60);
                 // 获取验证码
                 String getCodePhone = accountInput.getText().toString().trim();
-                compositeSubscription.add(retrofitClient.getMessageCode(getCodePhone));
+                compositeSubscription.add(retrofitClient.getMessageCode(getCodePhone, Constance.TYPE_FORGET));
                 break;
             case R.id.find_pwd_commit_btn:
                 // 提交按钮
@@ -97,9 +107,8 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
                     Toast.makeText(this, getResources().getString(R.string.input_msg_code), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // TODO 是否需要验证验证码是否正确
-                // TODO 测试，直接在这里跳转了
-                SetNewPwdActivity.startActivity(FindBackPwdGetCodeActivity.this, phone, code);
+                // 验证验证码是否正确
+                verifyCode(phone,code);
                 break;
         }
     }
@@ -107,6 +116,37 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
     @Override
     public void onCountDownDone() {
         // 倒计时完成
+    }
+
+    /**
+     * 验证找回密码的验证码是否正确
+     *
+     * @param phone
+     * @param code
+     */
+    private void verifyCode(final String phone, final String code) {
+        if (waitingDialog == null) {
+            waitingDialog = new WaitingDialog(FindBackPwdGetCodeActivity.this);
+        }
+        waitingDialog.show();
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", phone);
+        params.put("type", Constance.TYPE_FORGET);
+        params.put("code", code);
+        retrofitClient.verifyCode(params, new ResponseResultListener() {
+            @Override
+            public void success(Object o) {
+                waitingDialog.dismiss();
+                // 跳转到设置密码的界面
+                SetNewPwdActivity.startActivity(FindBackPwdGetCodeActivity.this, phone, code);
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                waitingDialog.dismiss();
+                ToastUtils.showToast(e.getMessage());
+            }
+        });
     }
 
     public static void startActivity(Context context) {

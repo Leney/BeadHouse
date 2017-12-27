@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
@@ -101,7 +102,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 getCodeBtn.start(60);
                 String phoneNum = accountInput.getText().toString();
                 // 获取验证码
-                Subscription subscription = retrofitClient.getMessageCode(phoneNum);
+                Subscription subscription = retrofitClient.getMessageCode(phoneNum, Constance.TYPE_REGIST);
                 compositeSubscription.add(subscription);
                 break;
             case R.id.register_register_btn:
@@ -142,8 +143,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         // 注册成功跳转到登陆界面
                         Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
-                        intent.putExtra("phone",phone);
-                        setResult(RESULT_OK,intent);
+                        intent.putExtra("phone", phone);
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
 
@@ -163,7 +164,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     public static void startActivity(Activity activity) {
-        activity.startActivityForResult(new Intent(activity, RegisterActivity.class),REQUEST_CODE);
+        activity.startActivityForResult(new Intent(activity, RegisterActivity.class), REQUEST_CODE);
     }
 
 }

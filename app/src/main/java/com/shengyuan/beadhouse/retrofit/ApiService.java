@@ -49,15 +49,17 @@ public interface ApiService {
 
     /**
      * 获取验证码
+     *
      * @param phone
      * @return
      */
     @FormUrlEncoded
     @POST("/api/confirme/")
-    Observable<HttpResult> getMessageCode(@Field("username") String phone);
+    Observable<HttpResult> getMessageCode(@Field("username") String phone, @Field("type") String type);
 
     /**
      * 注册
+     *
      * @param params
      * @return
      */
@@ -67,6 +69,7 @@ public interface ApiService {
 
     /**
      * 登陆
+     *
      * @param params
      * @return
      */
@@ -76,6 +79,7 @@ public interface ApiService {
 
     /**
      * 获取当前登陆的用户信息
+     *
      * @return
      */
     @GET("/api/get_register/")
@@ -83,9 +87,19 @@ public interface ApiService {
 
     /**
      * 找回密码，设置新的密码
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("/api/forget-password/")
     Observable<HttpResult> setNewPassword(@FieldMap Map<String, Object> params);
+
+    /**
+     * 找回密码，验证验证码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/judge_confirm/")
+    Observable<HttpResult> verifyCode(@FieldMap Map<String, Object> params);
 }

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.shengyuan.beadhouse.BHApplication;
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.control.UserAccountManager;
@@ -107,7 +108,7 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
                 getCodeBtn.start(60);
                 // 获取验证码
                 String getCodePhone = accountInput.getText().toString().trim();
-                compositeSubscription.add(retrofitClient.getMessageCode(getCodePhone));
+                compositeSubscription.add(retrofitClient.getMessageCode(getCodePhone, Constance.TYPE_LOGIN));
                 break;
             case R.id.login_by_code_login_btn:
                 // 立即登录
