@@ -21,6 +21,7 @@ import com.shengyuan.beadhouse.gui.view.CountDownTextView;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -153,6 +154,7 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
             public void failure(CommonException e) {
                 Log.e("llj", "登陆失败,e---->>>" + e.getMessage());
                 waitingDialog.dismiss();
+                ToastUtils.showToast(e.getMessage());
             }
         });
         compositeSubscription.add(subscription);
