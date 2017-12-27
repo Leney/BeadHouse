@@ -1,5 +1,6 @@
 package com.shengyuan.beadhouse.retrofit;
 
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 
@@ -102,4 +103,12 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/judge_confirm/")
     Observable<HttpResult> verifyCode(@FieldMap Map<String, Object> params);
+
+    /**
+     * 找回密码，验证验证码
+     *
+     * @return
+     */
+    @GET("/api/get_focus/")
+    Observable<HttpResult<CareOldManListBean>> getCareOldManList();
 }

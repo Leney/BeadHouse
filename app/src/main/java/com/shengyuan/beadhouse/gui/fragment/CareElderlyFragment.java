@@ -13,6 +13,9 @@ import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.FragmentAdapter;
 import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
 import com.shengyuan.beadhouse.model.CareListBean;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,5 +115,22 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
                 OldManDetailActivity.startActivity(getActivity(), curSelectedBean);
                 break;
         }
+    }
+
+    /**
+     * 获取关注老人列表
+     */
+    private void getCareOldManList() {
+        retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
+            @Override
+            public void success(CareOldManListBean bean) {
+
+            }
+
+            @Override
+            public void failure(CommonException e) {
+
+            }
+        });
     }
 }
