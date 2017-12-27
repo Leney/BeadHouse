@@ -77,11 +77,13 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
                     return;
                 }
                 getCodeBtn.start(60);
-                // TODO 获取验证码
+                // 获取验证码
+                String getCodePhone = accountInput.getText().toString().trim();
+                compositeSubscription.add(retrofitClient.getMessageCode(getCodePhone));
                 break;
             case R.id.find_pwd_commit_btn:
                 // 提交按钮
-                String phone = accountInput.getText().toString();
+                String phone = accountInput.getText().toString().trim();
                 if (phone.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.input_num_hint), Toast.LENGTH_SHORT).show();
                     return;
@@ -90,15 +92,14 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
                     Toast.makeText(this, getResources().getString(R.string.input_right_phone), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String code = codeInput.getText().toString();
+                String code = codeInput.getText().toString().trim();
                 if (code.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.input_msg_code), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // TODO 请求网络注册
-
+                // TODO 是否需要验证验证码是否正确
                 // TODO 测试，直接在这里跳转了
-                SetNewPwdActivity.startActivity(FindBackPwdGetCodeActivity.this);
+                SetNewPwdActivity.startActivity(FindBackPwdGetCodeActivity.this, phone, code);
                 break;
         }
     }

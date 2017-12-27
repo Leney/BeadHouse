@@ -80,4 +80,12 @@ public interface ApiService {
      */
     @GET("/api/get_register/")
     Observable<HttpResult> getLoginInfo();
+
+    /**
+     * 找回密码，设置新的密码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/forget-password/")
+    Observable<HttpResult> setNewPassword(@FieldMap Map<String, Object> params);
 }

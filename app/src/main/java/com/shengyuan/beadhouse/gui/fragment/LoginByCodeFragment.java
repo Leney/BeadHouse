@@ -43,6 +43,14 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
 
     private WaitingDialog waitingDialog = null;
 
+    public String phone = "";
+
+    public static LoginByCodeFragment newInstance(String phone) {
+        LoginByCodeFragment instance = new LoginByCodeFragment();
+        instance.phone = phone;
+        return instance;
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_login_by_code;

@@ -36,6 +36,14 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
 
     private WaitingDialog waitingDialog = null;
 
+    public String phone = "";
+
+    public static LoginByPasswordFragment newInstance(String phone) {
+        LoginByPasswordFragment instance = new LoginByPasswordFragment();
+        instance.phone = phone;
+        return instance;
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_login_by_pwd;
@@ -47,6 +55,8 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
         pwdInput = rootView.findViewById(R.id.login_by_pwd_pwd_input);
         rootView.findViewById(R.id.login_by_pwd_login_btn).setOnClickListener(this);
         rootView.findViewById(R.id.login_by_pwd_find_pwd).setOnClickListener(this);
+
+        accountInput.setText(phone);
         showCenterView();
     }
 

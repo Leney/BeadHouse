@@ -111,6 +111,7 @@
     <string name="waiting_please">请稍候...</string>
     <string name="register_success">注册成功</string>
     <string name="remote_service">远程看护</string>
+    <string name="change_pwd_success">修改密码成功</string>
 
 
     <string-array name="relationships">

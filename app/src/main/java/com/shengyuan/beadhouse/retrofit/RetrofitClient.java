@@ -82,7 +82,6 @@ public class RetrofitClient {
     }
 
 
-
     /**
      * 获取抢答列表
      *
@@ -97,38 +96,52 @@ public class RetrofitClient {
 
     /**
      * 获取短信验证码
+     *
      * @return
      */
-    public Subscription getMessageCode(String phone){
+    public Subscription getMessageCode(String phone) {
         return this.apiService.getMessageCode(phone).compose(SubscribeUtils.createTransformer()).subscribe();
     }
 
     /**
      * 注册账号
+     *
      * @param params
      * @param subscriber
      * @return
      */
-    public Subscription register(Map<String,Object> params,ResponseResultListener subscriber){
+    public Subscription register(Map<String, Object> params, ResponseResultListener subscriber) {
         return this.apiService.register(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 
     /**
      * 登陆
+     *
      * @param params
      * @param subscriber
      * @return
      */
-    public Subscription login(Map<String,Object> params,ResponseResultListener<LoginBean> subscriber){
+    public Subscription login(Map<String, Object> params, ResponseResultListener<LoginBean> subscriber) {
         return this.apiService.login(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 
     /**
      * 获取登陆用户的基本信息
+     *
      * @param subscriber
      * @return
      */
-    public Subscription getLoginInfo(ResponseResultListener subscriber){
+    public Subscription getLoginInfo(ResponseResultListener subscriber) {
         return this.apiService.getLoginInfo().compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 找回密码，设置新的密码
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription setNewPassword(Map<String, Object> params, ResponseResultListener subscriber) {
+        return this.apiService.setNewPassword(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

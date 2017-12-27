@@ -32,6 +32,8 @@ public class LoginActivity extends BaseActivity {
 
     private ViewPager viewPager;
 
+    private String phone;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
@@ -39,6 +41,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        phone = getIntent().getStringExtra("phone");
         baseTitle.setTitleName(getResources().getString(R.string.login));
         baseTitle.setRightText(getResources().getString(R.string.register));
         baseTitle.setRightVisible(true);
@@ -65,8 +68,8 @@ public class LoginActivity extends BaseActivity {
         fragmentList = new ArrayList<>();
         tabTitleList = new ArrayList<>();
 
-        fragmentList.add(new LoginByPasswordFragment());
-        fragmentList.add(new LoginByCodeFragment());
+        fragmentList.add(LoginByPasswordFragment.newInstance(phone));
+        fragmentList.add(LoginByCodeFragment.newInstance(phone));
 
         tabTitleList.add(getResources().getString(R.string.login_by_pwd));
         tabTitleList.add(getResources().getString(R.string.login_by_code));
@@ -86,6 +89,18 @@ public class LoginActivity extends BaseActivity {
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, LoginActivity.class));
+    }
+
+    /**
+     * 启动登陆界面，传入账号(phone)
+     *
+     * @param context
+     * @param phone
+     */
+    public static void startActivity(Context context, String phone) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra("phone", phone);
+        context.startActivity(intent);
     }
 
 }
