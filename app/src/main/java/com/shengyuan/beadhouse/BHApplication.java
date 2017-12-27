@@ -21,6 +21,7 @@ public class BHApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        mContext = getApplicationContext();
 
         //初始化百度地图
         SDKInitializer.initialize(getApplicationContext());

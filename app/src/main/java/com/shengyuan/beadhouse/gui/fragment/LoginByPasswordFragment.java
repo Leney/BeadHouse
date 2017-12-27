@@ -10,7 +10,9 @@ import android.widget.Toast;
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.control.UserAccountManager;
 import com.shengyuan.beadhouse.gui.activity.FindBackPwdGetCodeActivity;
+import com.shengyuan.beadhouse.gui.activity.MainActivity;
 import com.shengyuan.beadhouse.gui.activity.RegisterActivity;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.model.LoginBean;
@@ -19,6 +21,9 @@ import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * 登录，帐号和密码登录
@@ -64,30 +69,9 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
                     return;
                 }
 
-                if (waitingDialog == null) {
-                    waitingDialog = new WaitingDialog(getActivity());
-                }
-                waitingDialog.show();
-                // 请求登录接口
-                Map<String, Object> params = new HashMap<>();
-                params.put("username", phone);
-                params.put("password", pwd);
-                params.put("logintype", "pwd");
-                retrofitClient.login(params, new ResponseResultListener<LoginBean>() {
-                    @Override
-                    public void success(LoginBean loginBean) {
-                        Log.i("llj", "登陆成功--token--->>>" + loginBean.getToken());
-                        BHApplication.getInstance().setToken(loginBean.getToken()+":unused");
-//                        BHApplication.getInstance().setToken();
-                        // 再去获取登陆用户的个人信息
-                        getLoginInfo();
-                    }
+                // 登陆
+                login(phone, pwd);
 
-                    @Override
-                    public void failure(CommonException e) {
-                        Log.e("llj", "登陆失败,e---->>>" + e.getMessage());
-                    }
-                });
                 break;
             case R.id.login_by_pwd_find_pwd:
                 // 找回密码
@@ -96,24 +80,40 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
         }
     }
 
-    /**
-     * 获取当前登陆用户的信息
-     */
-    private void getLoginInfo() {
-        retrofitClient.getLoginInfo(new ResponseResultListener() {
+    private void login(String phone, String pwd) {
+        if (waitingDialog == null) {
+            waitingDialog = new WaitingDialog(getActivity());
+        }
+        waitingDialog.show();
+        // 请求登录接口
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", phone);
+        params.put("password", pwd);
+        params.put("logintype", "pwd");
+        Subscription subscription = retrofitClient.login(params, new ResponseResultListener<LoginBean>() {
             @Override
-            public void success(Object o) {
-                Log.i("llj", "获取登陆用户信息成功--->>>" + o.toString());
-                waitingDialog.dismiss();
-                getActivity().finish();
+            public void success(final LoginBean loginBean) {
+                Log.i("llj", "登陆成功--token--->>>" + loginBean.getToken());
+                UserAccountManager.getInstance().saveUserAccountToDB(loginBean, new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        // 设置全局token值
+                        BHApplication.getInstance().setToken(loginBean.getToken());
+                        waitingDialog.dismiss();
+                        MainActivity.startActivity(getActivity());
+                        getActivity().finish();
+                        Log.i("llj", "保存到数据库成功！！");
+                    }
+                });
             }
 
             @Override
             public void failure(CommonException e) {
-                Log.e("llj", "获取登陆用户信息失败,e---->>>" + e.getMessage());
+                Log.e("llj", "登陆失败,e---->>>" + e.getMessage());
                 waitingDialog.dismiss();
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     @Override

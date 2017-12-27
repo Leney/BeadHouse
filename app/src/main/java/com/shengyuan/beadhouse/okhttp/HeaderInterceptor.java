@@ -37,7 +37,7 @@ public class HeaderInterceptor implements Interceptor {
       /*          .addHeader("Accept", "application/vnd.yourapi.v1.full+json")*/
         String token = BHApplication.getInstance().getToken();
         if (!TextUtils.isEmpty(token)) {
-            builder.addHeader("token", token);
+            builder.addHeader("Authorization", token);
         }
         Log.i("llj","header中，token----->>>"+token);
         return chain.proceed(builder.build());

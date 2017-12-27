@@ -14,18 +14,18 @@ public class SqlHelper {
             + " ("
             + DBColumns._ID
             + " integer primary key autoincrement, "
-            + DBColumns.COLUMNS_USER_ID
-            + " integer, "
-            + DBColumns.COLUMNS_USER_PHONE
+            + DBColumns.COLUMNS_ID_NUMBER
+            + " text, "
+            + DBColumns.COLUMNS_DATE_TIME
+            + " text, "
+            + DBColumns.COLUMNS_USER_ACCOUNT
             + " text, "
             + DBColumns.COLUMNS_USER_TOKEN
             + " text, "
-            + DBColumns.COLUMNS_USER_PHONE
-            + " text, "
             + DBColumns.COLUMNS_NAME
             + " text, "
-            + DBColumns.COLUMNS_ICON
+            + DBColumns.COLUMNS_PHOTO
             + " text,"
             + DBColumns.COLUMNS_SEX
-            + " bit);";
+            + " text);";
 }
