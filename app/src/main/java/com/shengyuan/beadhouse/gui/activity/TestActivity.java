@@ -12,6 +12,8 @@ import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Subscription;
+
 /**
  * Created by dell on 2017/11/2.
  */
@@ -30,7 +32,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.test_get_request_btn:
 //                Map<String,Object> map = new HashMap<>();
 //                map.put("skuIds","J_954086");
@@ -40,7 +42,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
 //                RegisterActivity.startActivity(TestActivity.this);
 //                LoginActivity.startActivity(TestActivity.this);
-
 
 
                 // 请求网络
@@ -55,14 +56,14 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 调用网络请求使用范例
      */
-    private void getNetworkDemo(){
+    private void getNetworkDemo() {
         Map<String, Object> params = new HashMap<>();
 //        params.put("token", token);
         params.put("pageIndex", 1);
         params.put("pageSize", 10);
         params.put("resGrade", 1);
         params.put("resKind", 1);
-        retrofitClient.getRoomList(params, new ResponseResultListener<RoomInfoBean2>() {
+        Subscription subscription = retrofitClient.getRoomList(params, new ResponseResultListener<RoomInfoBean2>() {
             @Override
             public void success(RoomInfoBean2 roomInfoBean2) {
                 Log.i("llj", "请求列表数据成功!!!");
@@ -73,6 +74,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                 Log.e("llj", "请求列表数据失败!!!");
             }
         });
+        compositeSubscription.add(subscription);
     }
 
 }

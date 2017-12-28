@@ -130,4 +130,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/add-attention/")
     Observable<HttpResult> addCareOldMan(@FieldMap Map<String, Object> params);
+
+    /**
+     * 完善个人资料
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/perfect-information/")
+    Observable<HttpResult> perfectPersonalInfo(@FieldMap Map<String, Object> params);
 }

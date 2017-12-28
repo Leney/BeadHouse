@@ -114,6 +114,7 @@
     <string name="change_pwd_success">修改密码成功</string>
     <string name="care_old_man_success">关注老人成功</string>
     <string name="care_man_first">请先关注老人</string>
+    <string name="perfect_info_success">完善资料成功</string>
 
 
     <string-array name="relationships">

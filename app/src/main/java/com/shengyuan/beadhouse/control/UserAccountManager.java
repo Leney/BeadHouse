@@ -67,4 +67,23 @@ public class UserAccountManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action1);
     }
+
+    /**
+     * 完善用户个人信息
+     *
+     * @param name
+     * @param sex
+     * @param cardId
+     * @return
+     */
+    public Subscription perfectUserInfo(final String name, final String sex, final String cardId, Action1<LoginBean> action1) {
+        return Observable.create(new Observable.OnSubscribe<LoginBean>() {
+            @Override
+            public void call(Subscriber<? super LoginBean> subscriber) {
+                subscriber.onNext(UserDBManager.getInstance().perfectUserInfo(name, sex, cardId));
+            }
+        }).subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action1);
+    }
 }

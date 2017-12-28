@@ -21,6 +21,8 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Subscription;
+
 /**
  * 找回密码，获取验证码界面
  * Created by dell on 2017/11/5.
@@ -133,7 +135,7 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
         params.put("username", phone);
         params.put("type", Constance.TYPE_FORGET);
         params.put("code", code);
-        retrofitClient.verifyCode(params, new ResponseResultListener() {
+        Subscription subscription = retrofitClient.verifyCode(params, new ResponseResultListener() {
             @Override
             public void success(Object o) {
                 waitingDialog.dismiss();
@@ -147,6 +149,7 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     public static void startActivity(Context context) {

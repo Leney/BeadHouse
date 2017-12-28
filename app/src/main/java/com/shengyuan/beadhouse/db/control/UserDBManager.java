@@ -120,7 +120,7 @@ public class UserDBManager {
      * 查询出当前登陆用户的信息
      */
     public LoginBean query() {
-        Log.i("llj","dbHelper == null ---->>>"+(dbHelper == null));
+        Log.i("llj", "dbHelper == null ---->>>" + (dbHelper == null));
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = null;
         try {
@@ -132,6 +132,44 @@ public class UserDBManager {
                     , null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 return TransformHelper.getLoginBean(cursor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return null;
+    }
+
+    /**
+     * 完善个人资料
+     */
+    public LoginBean perfectUserInfo(String name, String sex, String cardId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.query(
+                    DBColumns.TABLE_USER_INFO
+                    , null
+                    , null
+                    , null
+                    , null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                LoginBean loginBean = TransformHelper.getLoginBean(cursor);
+                loginBean.setComplete("yes");
+                loginBean.getUser().setName(name);
+                loginBean.getUser().setSex(sex);
+                loginBean.getUser().setID_number(cardId);
+
+                ContentValues values = TransformHelper.getLoginBeanContentValues(loginBean);
+                db.update(
+                        DBColumns.TABLE_USER_INFO, values
+                        , DBColumns.COLUMNS_USER_ACCOUNT + "=?"
+                        , new String[]{loginBean.getUser().getUsername()});
+                return loginBean;
             }
         } catch (Exception e) {
             e.printStackTrace();

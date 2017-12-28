@@ -17,6 +17,8 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Subscription;
+
 /**
  * 设置新的密码界面
  * Created by dell on 2017/11/5.
@@ -87,7 +89,7 @@ public class SetNewPwdActivity extends BaseActivity implements View.OnClickListe
         params.put("username", phone);
         params.put("code", code);
         params.put("new_password", newPwd);
-        retrofitClient.setNewPassword(params, new ResponseResultListener() {
+        Subscription subscription = retrofitClient.setNewPassword(params, new ResponseResultListener() {
             @Override
             public void success(Object o) {
                 waitingDialog.dismiss();
@@ -104,6 +106,7 @@ public class SetNewPwdActivity extends BaseActivity implements View.OnClickListe
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     public static void startActivity(Context context, String phone, String code) {

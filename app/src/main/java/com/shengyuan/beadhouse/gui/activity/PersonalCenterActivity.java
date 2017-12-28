@@ -1,5 +1,6 @@
 package com.shengyuan.beadhouse.gui.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -21,10 +22,10 @@ import rx.functions.Action1;
  */
 
 public class PersonalCenterActivity extends BaseActivity implements View.OnClickListener {
-    private LinearLayout headLay,accountLay,trueInfoLay,bindingPhoneLay,modifyPwdLay,careListLay,inviteControlLay;
+    private LinearLayout headLay, accountLay, trueInfoLay, bindingPhoneLay, modifyPwdLay, careListLay, inviteControlLay;
     private ImageView icon;
-    private TextView account,trueInfo,phone;
-    private TextView careNum,inviteControlNum;
+    private TextView account, trueInfo, phone;
+    private TextView careNum, inviteControlNum;
 
     @Override
     protected int getLayoutId() {
@@ -62,7 +63,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.personal_head_icon_lay:
                 // 头像部分
                 break;
@@ -71,7 +72,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.personal_modify_true_name_lay:
                 // 真实信息部分
-                TrueInfoActivity.startActivity(PersonalCenterActivity.this);
+                TrueInfoActivity.startActivityForResult(PersonalCenterActivity.this);
                 break;
             case R.id.personal_modify_binding_phone_lay:
                 // 更改绑定手机部分
@@ -90,10 +91,22 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TrueInfoActivity.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                // 完善用户信息成功
+                // 再次去获取当前用户的信息
+                getPersonalInfo();
+            }
+        }
+    }
+
     /**
      * 获取当前登陆的个人信息
      */
-    private void getPersonalInfo(){
+    private void getPersonalInfo() {
         UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
             @Override
             public void call(LoginBean bean) {
@@ -106,18 +119,19 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
 
     /**
      * 设置个人信息显示视图
+     *
      * @param bean
      */
-    private void setInfoView(LoginBean bean){
-        if(bean == null) return;
-        GlideLoader.loadNetWorkResource(PersonalCenterActivity.this,bean.getUser().getPhoto(),icon,R.mipmap.personal_default_icon,true);
+    private void setInfoView(LoginBean bean) {
+        if (bean == null) return;
+        GlideLoader.loadNetWorkResource(PersonalCenterActivity.this, bean.getUser().getPhoto(), icon, R.mipmap.personal_default_icon, true);
         account.setText(bean.getUser().getUsername());
         trueInfo.setText(bean.getUser().getName());
         phone.setText(bean.getUser().getUsername());
         // TODO 关注老人的数量、和邀请的监护人数量待定
     }
 
-    public static void startActivity(Context context){
-        context.startActivity(new Intent(context,PersonalCenterActivity.class));
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, PersonalCenterActivity.class));
     }
 }

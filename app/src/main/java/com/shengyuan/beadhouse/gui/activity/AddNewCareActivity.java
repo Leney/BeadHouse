@@ -25,6 +25,8 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Subscription;
+
 /**
  * 新增关注老人界面
  * Created by dell on 2017/11/27.
@@ -137,7 +139,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
             waitingDialog = new WaitingDialog(AddNewCareActivity.this);
         }
         waitingDialog.show();
-        retrofitClient.searchOldManByCardId(cardId, new ResponseResultListener<SearchOldManResultBean>() {
+        Subscription subscription = retrofitClient.searchOldManByCardId(cardId, new ResponseResultListener<SearchOldManResultBean>() {
             @Override
             public void success(SearchOldManResultBean searchOldManResultBean) {
                 resultTheolderBean = searchOldManResultBean.getTheolder();
@@ -154,6 +156,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     /**
@@ -163,7 +166,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
         Map<String, Object> params = new HashMap<>();
         params.put("ID_number", cardId);
         params.put("relation", relation);
-        retrofitClient.addCareOldMan(params, new ResponseResultListener() {
+        Subscription subscription = retrofitClient.addCareOldMan(params, new ResponseResultListener() {
             @Override
             public void success(Object o) {
                 CareOldManListBean.FocusListBean focusListBean = new CareOldManListBean.FocusListBean();
@@ -192,6 +195,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
 
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     @Override
