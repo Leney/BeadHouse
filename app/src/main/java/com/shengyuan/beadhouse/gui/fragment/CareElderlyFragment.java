@@ -75,7 +75,13 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         fragmentList = new ArrayList<>();
         tabTitleList = new ArrayList<>();
 
-        careServiceViewFragment = new CareServiceViewFragment();
+        if (list.isEmpty()) {
+            // 没有关注的老人
+            careServiceViewFragment = CareServiceViewFragment.newInstance(null);
+        } else {
+            curSelectedBean = list.get(0);
+            careServiceViewFragment = CareServiceViewFragment.newInstance(curSelectedBean);
+        }
         careListFragment = CareListFragment.newInstance(list);
         // 设置老人列表item监听
         careListFragment.setOnSelectedItemListener(this);
@@ -102,10 +108,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
     @Override
     public void onSelected(CareOldManListBean.FocusListBean bean) {
         // 老人列表选择item 发生改变的监听
-        if (bean == null) return;
-        curSelectedBean = bean;
-        GlideLoader.loadNetWorkResource(getActivity(), curSelectedBean.getPhoto(), icon, true);
-        name.setText(curSelectedBean.getName() + " " + curSelectedBean.getAge() + "岁");
+        setSelectedBeanView(bean);
     }
 
     @Override
@@ -113,10 +116,33 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         switch (v.getId()) {
             case R.id.care_elderly_info_btn:
                 // 老人资料卡
-                if (curSelectedBean == null) return;
+                if (curSelectedBean == null) {
+                    // TODO 弹窗先关注老人
+                    ToastUtils.showToast("你还没关注老人");
+                    return;
+                }
                 OldManDetailActivity.startActivity(getActivity(), curSelectedBean);
                 break;
         }
+    }
+
+    /**
+     * 设置选中的老人信息视图显示
+     *
+     * @param bean
+     */
+    private void setSelectedBeanView(CareOldManListBean.FocusListBean bean) {
+        curSelectedBean = bean;
+        if (curSelectedBean == null) {
+            // 没有关注的老人
+            icon.setImageResource(R.mipmap.default_user_icon);
+            name.setText(getResources().getString(R.string.care_man_first));
+        } else {
+            // 有关注的老人
+            GlideLoader.loadNetWorkResource(getActivity(), curSelectedBean.getPhoto(), icon, R.mipmap.default_user_icon, true);
+            name.setText(curSelectedBean.getName() + " " + curSelectedBean.getAge() + "岁");
+        }
+        careServiceViewFragment.setCurSelectedBean(curSelectedBean);
     }
 
     /**

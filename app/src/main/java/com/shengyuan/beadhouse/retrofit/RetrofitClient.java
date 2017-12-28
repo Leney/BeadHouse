@@ -6,6 +6,7 @@ import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
+import com.shengyuan.beadhouse.model.SearchOldManResultBean;
 import com.shengyuan.beadhouse.okhttp.OkHttpProvider;
 import com.shengyuan.beadhouse.rxjava.SubscribeUtils;
 
@@ -166,5 +167,26 @@ public class RetrofitClient {
      */
     public Subscription getCareOldManList(ResponseResultListener<CareOldManListBean> subscriber) {
         return this.apiService.getCareOldManList().compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 通过身份证号搜索老人
+     *
+     * @param cardId     身份证号码
+     * @param subscriber
+     * @return
+     */
+    public Subscription searchOldManByCardId(String cardId, ResponseResultListener<SearchOldManResultBean> subscriber) {
+        return this.apiService.searchOldManByCardId(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 通过身份证号搜索老人
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription addCareOldMan(Map<String, Object> params, ResponseResultListener subscriber) {
+        return this.apiService.addCareOldMan(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

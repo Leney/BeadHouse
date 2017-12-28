@@ -112,6 +112,8 @@
     <string name="register_success">注册成功</string>
     <string name="remote_service">远程看护</string>
     <string name="change_pwd_success">修改密码成功</string>
+    <string name="care_old_man_success">关注老人成功</string>
+    <string name="care_man_first">请先关注老人</string>
 
 
     <string-array name="relationships">

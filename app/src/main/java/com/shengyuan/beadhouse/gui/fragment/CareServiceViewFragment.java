@@ -11,6 +11,7 @@ import com.shengyuan.beadhouse.gui.activity.GuardianActivity;
 import com.shengyuan.beadhouse.gui.activity.PhysiologyDataActivity;
 import com.shengyuan.beadhouse.gui.activity.RemoteServiceActivity;
 import com.shengyuan.beadhouse.gui.adapter.ServiceItemAdapter;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.CareServiceBean;
 
 import java.util.ArrayList;
@@ -25,6 +26,17 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
     private GridView gridView;
     private ServiceItemAdapter adapter;
     private List<CareServiceBean> itemList;
+
+    /**
+     * 当前选中的老人对象
+     */
+    public CareOldManListBean.FocusListBean curSelectedBean;
+
+    public static CareServiceViewFragment newInstance(CareOldManListBean.FocusListBean curSelectedBean) {
+        CareServiceViewFragment instance = new CareServiceViewFragment();
+        instance.curSelectedBean = curSelectedBean;
+        return instance;
+    }
 
     @Override
     protected int getLayoutId() {
@@ -75,10 +87,10 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         CareServiceBean bean = itemList.get(position);
-        switch (bean.type){
+        switch (bean.type) {
             case CareServiceBean.TYPE_SERVICE_PACKAGE:
                 // 照护套餐
-                CarePackageActivity.startActivity(getActivity(),1252);
+                CarePackageActivity.startActivity(getActivity(), 1252);
                 break;
             case CareServiceBean.TYPE_PHYSIOLOGY_INFO:
                 // 生理数据
@@ -93,5 +105,25 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                 GuardianActivity.startActivity(getActivity());
                 break;
         }
+    }
+
+    /**
+     * 设置当前显示的老人信息
+     *
+     * @param bean
+     */
+    public void setCurSelectedBean(CareOldManListBean.FocusListBean bean) {
+        curSelectedBean = bean;
+        if (curSelectedBean == null) {
+            // 没有选中的老人(没有关注的老人)
+            itemList.get(0).describe = "服务进度0%";
+            itemList.get(3).describe = "已有0名";
+        } else {
+            // 有选中的老人
+            // TODO 进度值等修改好接口之后再改
+            itemList.get(0).describe = "服务进度" + bean.getID_number();
+            itemList.get(3).describe = "已有" + bean.getID_number()+ "名";
+        }
+        adapter.notifyDataSetChanged();
     }
 }

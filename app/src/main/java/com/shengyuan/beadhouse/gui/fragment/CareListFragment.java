@@ -1,9 +1,14 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.gui.activity.AddNewCareActivity;
@@ -41,28 +46,6 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     protected void initView(View rootView) {
-//        list = new ArrayList<>();
-//        for (int i = 0; i < 6; i++) {
-//            CareListBean bean = new CareListBean();
-//            if (i == 0) {
-//                bean.icon = "http://www.taopic.com/uploads/allimg/111210/53178-1112100US3100.jpg";
-//            } else if (i == 1) {
-//                bean.icon = "http://img4.imgtn.bdimg.com/it/u=1752075433,3129306283&fm=27&gp=0.jpg";
-//            } else {
-//                bean.icon = "http://img1.imgtn.bdimg.com/it/u=3875968917,2352913688&fm=200&gp=0.jpg";
-//            }
-//            bean.name = "名称(" + i + ")";
-//            bean.age = 85 + i;
-//            bean.familyPhone = "0755-25689362";
-//            bean.mobilePhone = "13589586985";
-//            bean.addressRang = "广东省深圳市";
-//            bean.address = "龙华区大浪东头村56栋";
-//            bean.sex = i % 2;
-//            list.add(bean);
-//        }
-//        list.add(new CareListBean());
-
-
         gridView = rootView.findViewById(R.id.care_list_fragment_grid_view);
         gridView.setOnItemClickListener(this);
         adapter = new CareListAdapter(list, getActivity());
@@ -74,6 +57,9 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
             this.listener.onSelected(list.get(0));
         }
         showCenterView();
+
+        // 注册添加关注老人成功的广播
+        getActivity().registerReceiver(mReceiver, new IntentFilter(Constance.ACTION_CARE_NEW_OLD_MAN));
     }
 
     @Override
@@ -90,9 +76,39 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
 //        OldManDetailActivity.startActivity(getActivity(),list.get(position).id);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // 注销广播
+        getActivity().unregisterReceiver(mReceiver);
+    }
+
     public void setOnSelectedItemListener(OnSelectedItemListener listener) {
         this.listener = listener;
     }
+
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Constance.ACTION_CARE_NEW_OLD_MAN)) {
+                // 关注了新的老人广播
+                CareOldManListBean.FocusListBean focusListBean = (CareOldManListBean.FocusListBean) intent.getSerializableExtra("FocusListBean");
+                if (focusListBean == null) return;
+                // 添加到倒数第二个
+                int length = list.size();
+                if (length <= 1) {
+                    // 没有关注的老人
+                    list.add(0, focusListBean);
+                } else {
+                    // 有关注都老人
+                    // 添加到倒数第二个位置，因为倒数第一个位置是"添加"item
+                    list.add(length - 1, focusListBean);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
+    };
 
     /**
      * 选择了子条目的监听器

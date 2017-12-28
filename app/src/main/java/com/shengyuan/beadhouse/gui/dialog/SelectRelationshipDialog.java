@@ -57,7 +57,7 @@ public class SelectRelationshipDialog extends BaseDialog implements View.OnClick
             case R.id.relationship_dialog_sure_add_btn:
                 dismiss();
                 if (mListener != null) {
-                    mListener.onAddSure();
+                    mListener.onAddSure(list.get(spinner.getSelectedItemPosition()));
                 }
                 break;
         }
@@ -68,6 +68,6 @@ public class SelectRelationshipDialog extends BaseDialog implements View.OnClick
     }
 
     public interface OnAddSureListener {
-        void onAddSure();
+        void onAddSure(String relation);
     }
 }

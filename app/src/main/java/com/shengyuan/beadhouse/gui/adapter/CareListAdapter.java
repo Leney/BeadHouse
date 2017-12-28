@@ -85,7 +85,7 @@ public class CareListAdapter extends BaseAdapter {
             CareOldManListBean.FocusListBean bean = (CareOldManListBean.FocusListBean) getItem(position);
             viewHolder.icon.setVisibility(View.VISIBLE);
             viewHolder.addImg.setVisibility(View.INVISIBLE);
-            GlideLoader.loadNetWorkResource(parent.getContext(), bean.getPhoto(), viewHolder.icon, false);
+            GlideLoader.loadNetWorkResource(parent.getContext(), bean.getPhoto(), viewHolder.icon,R.mipmap.personal_default_icon,false);
             viewHolder.name.setText(bean.getName());
         }
 

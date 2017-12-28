@@ -3,6 +3,7 @@ package com.shengyuan.beadhouse.retrofit;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
+import com.shengyuan.beadhouse.model.SearchOldManResultBean;
 
 import java.util.Map;
 
@@ -111,4 +112,22 @@ public interface ApiService {
      */
     @GET("/api/get_focus/")
     Observable<HttpResult<CareOldManListBean>> getCareOldManList();
+
+    /**
+     * 根据身份证号搜索老人
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/select-olders/")
+    Observable<HttpResult<SearchOldManResultBean>> searchOldManByCardId(@Field("ID_number") String cardId);
+
+    /**
+     * 添加关注老人
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/add-attention/")
+    Observable<HttpResult> addCareOldMan(@FieldMap Map<String, Object> params);
 }

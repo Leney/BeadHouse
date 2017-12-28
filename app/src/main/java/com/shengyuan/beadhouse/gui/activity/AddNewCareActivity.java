@@ -10,9 +10,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.dialog.SelectRelationshipDialog;
+import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.model.SearchOldManResultBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 新增关注老人界面
@@ -30,6 +41,11 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
     private TextView searchAndAddBtn;
 
     /**
+     * 搜索出结果的老人信息对象
+     */
+    private SearchOldManResultBean.TheolderBean resultTheolderBean;
+
+    /**
      * 标识当前页是否显示结果页面
      */
     private boolean isResult = false;
@@ -38,6 +54,8 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
      * 选择关系dialog
      */
     private SelectRelationshipDialog dialog;
+
+    private WaitingDialog waitingDialog = null;
 
     @Override
     protected int getLayoutId() {
@@ -79,8 +97,7 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
                         Toast.makeText(AddNewCareActivity.this, getResources().getString(R.string.input_right_card_no), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    isResult = true;
-                    setVisibleLay();
+                    searchOldManByCardId(no);
                 }
                 break;
         }
@@ -98,6 +115,91 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+
+    /**
+     * 设置搜索结果视图
+     */
+    private void setSearchResultView(SearchOldManResultBean.TheolderBean bean) {
+        GlideLoader.loadNetWorkResource(this, bean.getPhoto(), icon, R.mipmap.default_lis_head_icon, false);
+        name.setText(bean.getName());
+        age.setText(bean.getAge() + getResources().getString(R.string.age));
+        sex.setText(bean.getSex());
+        cardNo.setText(bean.getID_number());
+    }
+
+    /**
+     * 通过身份证id搜索老人
+     *
+     * @param cardId
+     */
+    private void searchOldManByCardId(String cardId) {
+        if (waitingDialog == null) {
+            waitingDialog = new WaitingDialog(AddNewCareActivity.this);
+        }
+        waitingDialog.show();
+        retrofitClient.searchOldManByCardId(cardId, new ResponseResultListener<SearchOldManResultBean>() {
+            @Override
+            public void success(SearchOldManResultBean searchOldManResultBean) {
+                resultTheolderBean = searchOldManResultBean.getTheolder();
+                isResult = true;
+                setVisibleLay();
+                // 设置搜索结果
+                setSearchResultView(searchOldManResultBean.getTheolder());
+                waitingDialog.dismiss();
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                waitingDialog.dismiss();
+                ToastUtils.showToast(e.getErrorMsg());
+            }
+        });
+    }
+
+    /**
+     * 确定添加关注老人
+     */
+    private void sureAdd(String cardId, String relation) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("ID_number", cardId);
+        params.put("relation", relation);
+        retrofitClient.addCareOldMan(params, new ResponseResultListener() {
+            @Override
+            public void success(Object o) {
+                CareOldManListBean.FocusListBean focusListBean = new CareOldManListBean.FocusListBean();
+                focusListBean.setID_number(resultTheolderBean.getID_number());
+                focusListBean.setAddress(resultTheolderBean.getAddress());
+                focusListBean.setAddtime(resultTheolderBean.getAddtime());
+                focusListBean.setAge(resultTheolderBean.getAge());
+                focusListBean.setArea(resultTheolderBean.getArea());
+                focusListBean.setBody(resultTheolderBean.getBody());
+                focusListBean.setCell_phone(resultTheolderBean.getCell_phone());
+                focusListBean.setFix_phone(resultTheolderBean.getFix_phone());
+                focusListBean.setIs_delete(resultTheolderBean.getIs_delete());
+                focusListBean.setName(resultTheolderBean.getName());
+                focusListBean.setPhoto(resultTheolderBean.getPhoto());
+                focusListBean.setSex(resultTheolderBean.getSex());
+
+                Intent intent = new Intent(Constance.ACTION_CARE_NEW_OLD_MAN);
+                intent.putExtra("FocusListBean", focusListBean);
+                sendBroadcast(intent);
+                ToastUtils.showToast(getResources().getString(R.string.care_old_man_success));
+                finish();
+            }
+
+            @Override
+            public void failure(CommonException e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onAddSure(String relation) {
+        // 确定添加按钮
+        sureAdd(resultTheolderBean.getID_number(), relation);
+    }
+
     @Override
     public void onBackPressed() {
         if (isResult) {
@@ -110,11 +212,5 @@ public class AddNewCareActivity extends BaseActivity implements View.OnClickList
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, AddNewCareActivity.class));
-    }
-
-    @Override
-    public void onAddSure() {
-        // 确定添加按钮
-        finish();
     }
 }
