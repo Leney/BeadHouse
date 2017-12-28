@@ -23,10 +23,11 @@ public class TransformHelper {
         values.put(DBColumns.COLUMNS_ID_NUMBER, bean.getUser().getID_number());
         values.put(DBColumns.COLUMNS_DATE_TIME, bean.getUser().getDatetime());
         values.put(DBColumns.COLUMNS_USER_ACCOUNT, bean.getUser().getUsername());
-        values.put(DBColumns.COLUMNS_USER_TOKEN, bean.getToken());
         values.put(DBColumns.COLUMNS_NAME, bean.getUser().getName());
         values.put(DBColumns.COLUMNS_PHOTO, bean.getUser().getPhoto());
         values.put(DBColumns.COLUMNS_SEX, bean.getUser().getSex());
+        values.put(DBColumns.COLUMNS_USER_TOKEN, bean.getToken());
+        values.put(DBColumns.COLUMNS_COMPLETE, bean.getComplete());
         return values;
     }
 
@@ -47,6 +48,7 @@ public class TransformHelper {
         userBean.setPhoto(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_PHOTO)));
         userBean.setSex(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_SEX)));
         loginBean.setToken(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_USER_TOKEN)));
+        loginBean.setComplete(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_COMPLETE)));
         loginBean.setUser(userBean);
         return loginBean;
     }

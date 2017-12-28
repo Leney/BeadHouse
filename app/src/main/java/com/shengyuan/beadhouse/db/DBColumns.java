@@ -45,4 +45,8 @@ public class DBColumns implements BaseColumns {
      * 用户性别
      */
     public static final String COLUMNS_SEX = "sex";
+    /**
+     * 是否完善了资料
+     */
+    public static final String COLUMNS_COMPLETE = "complete";
 }

@@ -9,6 +9,11 @@ import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.control.UserAccountManager;
+import com.shengyuan.beadhouse.glide.GlideLoader;
+import com.shengyuan.beadhouse.model.LoginBean;
+
+import rx.functions.Action1;
 
 /**
  * 个人中心
@@ -50,7 +55,9 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
         modifyPwdLay.setOnClickListener(this);
         careListLay.setOnClickListener(this);
         inviteControlLay.setOnClickListener(this);
-        showCenterView();
+
+        // 获取本地数据库中保存的个人信息
+        getPersonalInfo();
     }
 
     @Override
@@ -81,6 +88,33 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 // 邀请监控人部分
                 break;
         }
+    }
+
+    /**
+     * 获取当前登陆的个人信息
+     */
+    private void getPersonalInfo(){
+        UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
+            @Override
+            public void call(LoginBean bean) {
+                // 设置个人信息显示
+                setInfoView(bean);
+                showCenterView();
+            }
+        });
+    }
+
+    /**
+     * 设置个人信息显示视图
+     * @param bean
+     */
+    private void setInfoView(LoginBean bean){
+        if(bean == null) return;
+        GlideLoader.loadNetWorkResource(PersonalCenterActivity.this,bean.getUser().getPhoto(),icon,R.mipmap.personal_default_icon,true);
+        account.setText(bean.getUser().getUsername());
+        trueInfo.setText(bean.getUser().getName());
+        phone.setText(bean.getUser().getUsername());
+        // TODO 关注老人的数量、和邀请的监护人数量待定
     }
 
     public static void startActivity(Context context){

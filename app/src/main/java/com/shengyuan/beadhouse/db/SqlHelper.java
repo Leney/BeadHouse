@@ -26,6 +26,8 @@ public class SqlHelper {
             + " text, "
             + DBColumns.COLUMNS_PHOTO
             + " text,"
+            + DBColumns.COLUMNS_COMPLETE
+            + " text,"
             + DBColumns.COLUMNS_SEX
             + " text);";
 }
