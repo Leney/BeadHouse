@@ -20,4 +20,6 @@ public class Constance {
     /*******************************广播相关Action**********************************/
     /** 添加新的关注老人广播*/
     public static final String ACTION_CARE_NEW_OLD_MAN = "com.shengyuan.beadhouse.ACTION_CARE_NEW_OLD_MAN";
+    /** 账户信息改变广播*/
+    public static final String ACTION_MODIFY_USER_INFO = "com.shengyuan.beadhouse.ACTION_MODIFY_USER_INFO";
 }

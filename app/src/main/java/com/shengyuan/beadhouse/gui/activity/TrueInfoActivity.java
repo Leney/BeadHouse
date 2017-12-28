@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.control.UserAccountManager;
@@ -151,6 +152,8 @@ public class TrueInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void call(LoginBean bean) {
                 ToastUtils.showToast(getResources().getString(R.string.perfect_info_success));
+                // 发送账户信息改变的广播
+                sendBroadcast(new Intent(Constance.ACTION_MODIFY_USER_INFO));
                 setResult(Activity.RESULT_OK);
                 finish();
             }
