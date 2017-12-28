@@ -122,7 +122,7 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
             public void failure(CommonException e) {
                 Log.e("llj", "登陆失败,e---->>>" + e.getMessage());
                 waitingDialog.dismiss();
-                ToastUtils.showToast(e.getMessage());
+                ToastUtils.showToast(e.getErrorMsg());
             }
         });
         compositeSubscription.add(subscription);

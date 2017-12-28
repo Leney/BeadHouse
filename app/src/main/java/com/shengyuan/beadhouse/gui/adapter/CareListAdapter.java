@@ -12,17 +12,18 @@ import android.widget.TextView;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.view.RoundedImageView;
-import com.shengyuan.beadhouse.model.CareListBean;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.util.DisplayUtils;
 
 import java.util.List;
 
 /**
+ *
  * Created by dell on 2017/11/11.
  */
 
 public class CareListAdapter extends BaseAdapter {
-    private List<CareListBean> list;
+    private List<CareOldManListBean.FocusListBean> list;
     /**
      * 当前选中的item  position
      */
@@ -30,7 +31,7 @@ public class CareListAdapter extends BaseAdapter {
 
     private LinearLayout.LayoutParams leftParams, rightParams;
 
-    public CareListAdapter(List<CareListBean> list, Context context) {
+    public CareListAdapter(List<CareOldManListBean.FocusListBean> list, Context context) {
         this.list = list;
         this.leftParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         this.leftParams.leftMargin = DisplayUtils.dip2px(context, 25);
@@ -81,11 +82,11 @@ public class CareListAdapter extends BaseAdapter {
             viewHolder.name.setText(parent.getResources().getString(R.string.add_new_old_man));
         } else {
             // 不是最后一条数据
-            CareListBean bean = (CareListBean) getItem(position);
+            CareOldManListBean.FocusListBean bean = (CareOldManListBean.FocusListBean) getItem(position);
             viewHolder.icon.setVisibility(View.VISIBLE);
             viewHolder.addImg.setVisibility(View.INVISIBLE);
-            GlideLoader.loadNetWorkResource(parent.getContext(), bean.icon, viewHolder.icon, false);
-            viewHolder.name.setText(bean.name);
+            GlideLoader.loadNetWorkResource(parent.getContext(), bean.getPhoto(), viewHolder.icon, false);
+            viewHolder.name.setText(bean.getName());
         }
 
         if (position % 2 == 0) {

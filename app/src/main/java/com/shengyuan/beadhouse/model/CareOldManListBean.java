@@ -1,5 +1,6 @@
 package com.shengyuan.beadhouse.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class CareOldManListBean {
         this.focus_list = focus_list;
     }
 
-    public static class FocusListBean {
+    public static class FocusListBean implements Serializable {
         /**
          * ID_number : 350303199307132113
          * address : 是的根深蒂固

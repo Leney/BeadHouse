@@ -144,7 +144,7 @@ public class FindBackPwdGetCodeActivity extends BaseActivity implements View.OnC
             @Override
             public void failure(CommonException e) {
                 waitingDialog.dismiss();
-                ToastUtils.showToast(e.getMessage());
+                ToastUtils.showToast(e.getErrorMsg());
             }
         });
     }

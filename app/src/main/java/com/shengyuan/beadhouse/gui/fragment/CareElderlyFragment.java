@@ -12,10 +12,10 @@ import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.FragmentAdapter;
 import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
-import com.shengyuan.beadhouse.model.CareListBean;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
     /**
      * 当前选中的老人对象
      */
-    private CareListBean curSelectedBean;
+    private CareOldManListBean.FocusListBean curSelectedBean;
 
     /**
      * 服务总览Fragment
@@ -52,6 +52,8 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
      * 关注老人列表Fragment
      */
     private CareListFragment careListFragment;
+
+    private View rootView;
 
     @Override
     protected int getLayoutId() {
@@ -65,9 +67,27 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         icon = rootView.findViewById(R.id.care_elderly_user_icon);
         name = rootView.findViewById(R.id.care_elderly_name);
         rootView.findViewById(R.id.care_elderly_info_btn).setOnClickListener(this);
+        this.rootView = rootView;
+        getCareOldManList();
+    }
 
+    private void init(List<CareOldManListBean.FocusListBean> list) {
+        fragmentList = new ArrayList<>();
+        tabTitleList = new ArrayList<>();
 
-        init();
+        careServiceViewFragment = new CareServiceViewFragment();
+        careListFragment = CareListFragment.newInstance(list);
+        // 设置老人列表item监听
+        careListFragment.setOnSelectedItemListener(this);
+
+        fragmentList.add(careServiceViewFragment);
+        fragmentList.add(careListFragment);
+
+        tabTitleList.add(getResources().getString(R.string.care_all_view));
+        tabTitleList.add(getResources().getString(R.string.care_elderly_list));
+
+        fragmentAdapter = new FragmentAdapter(getChildFragmentManager(), fragmentList, tabTitleList);
+
         tabLayout = rootView.findViewById(R.id.care_elderly_tab_layout);
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
@@ -79,31 +99,13 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         showCenterView();
     }
 
-    private void init() {
-        fragmentList = new ArrayList<>();
-        tabTitleList = new ArrayList<>();
-
-        careServiceViewFragment = new CareServiceViewFragment();
-        careListFragment = new CareListFragment();
-        // 设置老人列表item监听
-        careListFragment.setOnSelectedItemListener(this);
-
-        fragmentList.add(careServiceViewFragment);
-        fragmentList.add(careListFragment);
-
-        tabTitleList.add(getResources().getString(R.string.care_all_view));
-        tabTitleList.add(getResources().getString(R.string.care_elderly_list));
-
-        fragmentAdapter = new FragmentAdapter(getChildFragmentManager(), fragmentList, tabTitleList);
-    }
-
     @Override
-    public void onSelected(CareListBean bean) {
+    public void onSelected(CareOldManListBean.FocusListBean bean) {
         // 老人列表选择item 发生改变的监听
         if (bean == null) return;
         curSelectedBean = bean;
-        GlideLoader.loadNetWorkResource(getActivity(), curSelectedBean.icon, icon, true);
-        name.setText(curSelectedBean.name + " " + curSelectedBean.age + "岁");
+        GlideLoader.loadNetWorkResource(getActivity(), curSelectedBean.getPhoto(), icon, true);
+        name.setText(curSelectedBean.getName() + " " + curSelectedBean.getAge() + "岁");
     }
 
     @Override
@@ -124,12 +126,12 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
             @Override
             public void success(CareOldManListBean bean) {
-
+                init(bean.getFocus_list());
             }
 
             @Override
             public void failure(CommonException e) {
-
+                ToastUtils.showToast(e.getErrorMsg());
             }
         });
     }

@@ -101,7 +101,7 @@ public class SetNewPwdActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void failure(CommonException e) {
                 waitingDialog.dismiss();
-                ToastUtils.showToast(e.getMessage());
+                ToastUtils.showToast(e.getErrorMsg());
             }
         });
     }

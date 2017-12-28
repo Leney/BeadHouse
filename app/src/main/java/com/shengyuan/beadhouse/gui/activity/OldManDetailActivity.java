@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.glide.GlideLoader;
-import com.shengyuan.beadhouse.model.CareListBean;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 
 /**
  * 老人资料详情
@@ -35,7 +35,7 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
 
     private ImageView familyPhoneCall, mobilePhoneCall;
 
-    private CareListBean bean;
+    private CareOldManListBean.FocusListBean bean;
 
     private Drawable manDrawable, womanDrawable;
 
@@ -52,7 +52,7 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
 //            finish();
 //            return;
 //        }
-        bean = (CareListBean) getIntent().getSerializableExtra("bean");
+        bean = (CareOldManListBean.FocusListBean) getIntent().getSerializableExtra("bean");
 
         baseTitle.setTitleName(getResources().getString(R.string.old_man_detail));
 
@@ -81,13 +81,13 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void setInfo() {
-        GlideLoader.loadNetWorkResource(OldManDetailActivity.this,bean.icon,icon,true);
-        familyPhone.setText(bean.familyPhone.isEmpty() ? getResources().getString(R.string.un_setting) : bean.familyPhone);
-        mobilePhone.setText(bean.mobilePhone.isEmpty() ? getResources().getString(R.string.un_setting) : bean.mobilePhone);
-        addressRang.setText(bean.addressRang.isEmpty() ? getResources().getString(R.string.un_setting) : bean.addressRang);
-        address.setText(bean.address.isEmpty() ? getResources().getString(R.string.un_setting) : bean.address);
-        name.setText(bean.name + " " + bean.age + "岁");
-        name.setCompoundDrawables(null, null, bean.sex == 0 ? manDrawable : womanDrawable, null);
+        GlideLoader.loadNetWorkResource(OldManDetailActivity.this, bean.getPhoto(), icon, true);
+        familyPhone.setText(bean.getCell_phone().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getCell_phone());
+        mobilePhone.setText(bean.getFix_phone().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getFix_phone());
+        addressRang.setText(bean.getArea().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getArea());
+        address.setText(bean.getAddress().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getAddress());
+        name.setText(bean.getName() + " " + bean.getAge() + "岁");
+        name.setCompoundDrawables(null, null, bean.getSex().equals("男") ? manDrawable : womanDrawable, null);
     }
 
     @Override
@@ -95,28 +95,28 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.old_man_detail_family_phone_call_btn:
                 // 家庭固话拨打电话按钮
-                if(bean.familyPhone.isEmpty()) return;
-                call(bean.familyPhone);
+                if (bean.getCell_phone().isEmpty()) return;
+                call(bean.getCell_phone());
                 break;
             case R.id.old_man_detail_mobile_phone_call_btn:
                 // 移动电话拨打电话按钮
-                if(bean.mobilePhone.isEmpty()) return;
-                call(bean.mobilePhone);
+                if (bean.getFix_phone().isEmpty()) return;
+                call(bean.getFix_phone());
                 break;
         }
     }
 
-    private void call(String phone){
+    private void call(String phone) {
         Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));//直接拨打电话
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(OldManDetailActivity.this,"请到设置中打开拨打电话权限!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(OldManDetailActivity.this, "请到设置中打开拨打电话权限!", Toast.LENGTH_SHORT).show();
             return;
         }
         OldManDetailActivity.this.startActivity(dialIntent);
     }
 
 
-    public static void startActivity(Context context, CareListBean bean) {
+    public static void startActivity(Context context, CareOldManListBean.FocusListBean bean) {
         Intent intent = new Intent(context, OldManDetailActivity.class);
         intent.putExtra("bean", bean);
         context.startActivity(intent);
