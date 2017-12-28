@@ -139,4 +139,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/perfect-information/")
     Observable<HttpResult> perfectPersonalInfo(@FieldMap Map<String, Object> params);
+
+    /**
+     * 修改密码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/change-password/")
+    Observable<HttpResult> modifyPassword(@FieldMap Map<String, Object> params);
 }

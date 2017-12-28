@@ -199,4 +199,14 @@ public class RetrofitClient {
     public Subscription perfectPersonalInfo(Map<String, Object> params, ResponseResultListener subscriber) {
         return this.apiService.perfectPersonalInfo(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
+
+    /**
+     * 完善个人资料
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription modifyPassword(Map<String, Object> params, ResponseResultListener subscriber) {
+        return this.apiService.modifyPassword(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
 }

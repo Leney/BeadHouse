@@ -16,6 +16,7 @@ import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.gui.fragment.CareElderlyFragment;
 import com.shengyuan.beadhouse.gui.fragment.LookAfterPlanFragment;
 import com.shengyuan.beadhouse.gui.fragment.MineFragment;
+import com.shengyuan.beadhouse.util.ActivityUtils;
 
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
@@ -40,8 +41,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.title_color));
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.title_color));
 
+        ActivityUtils.addActivity(this);
         fragmentManager = getSupportFragmentManager();
         radioGroup = (RadioGroup) findViewById(R.id.main_tab_radioGroup);
         radioGroup.setOnCheckedChangeListener(this);
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 changePage(1);
                 break;
             case R.id.main_tab_3:
-                if(curTab == 2) return;
+                if (curTab == 2) return;
                 changePage(2);
                 break;
         }
@@ -81,24 +83,24 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 //        transaction.commitAllowingStateLoss();
 //    }
 
-    private void changePage(int position){
+    private void changePage(int position) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(curTab != -1){
+        if (curTab != -1) {
             // 隐藏上一个Fragment
             transaction.hide(fragments[curTab]);
         }
-        if(fragments[position] == null){
+        if (fragments[position] == null) {
             createFragment(position);
-            transaction.add(R.id.main_tab_fragment_lay,fragments[position]);
-        }else {
+            transaction.add(R.id.main_tab_fragment_lay, fragments[position]);
+        } else {
             transaction.show(fragments[position]);
         }
         curTab = position;
         transaction.commitAllowingStateLoss();
     }
 
-    private void createFragment(int position){
-        switch (position){
+    private void createFragment(int position) {
+        switch (position) {
             case 0:
                 // 创建第一个Fragment
                 fragments[position] = new CareElderlyFragment();
@@ -168,6 +170,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             finish();
             System.exit(0);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityUtils.removeActivity(this);
     }
 
     public static void startActivity(Context context) {

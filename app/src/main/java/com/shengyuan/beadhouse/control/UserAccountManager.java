@@ -86,4 +86,21 @@ public class UserAccountManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action1);
     }
+
+    /**
+     * 清除登陆信息
+     *
+     * @return
+     */
+    public Subscription clear(Action1<Object> action1) {
+        return Observable.create(new Observable.OnSubscribe<Object>() {
+            @Override
+            public void call(Subscriber<? super Object> subscriber) {
+                UserDBManager.getInstance().delete();
+                subscriber.onNext("");
+            }
+        }).subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action1);
+    }
 }

@@ -80,7 +80,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.personal_modify_pwd_lay:
                 // 更改密码部分
-                ModifyPwdActivity.startActivity(PersonalCenterActivity.this);
+                ModifyPwdActivity.startActivity(PersonalCenterActivity.this, account.getText().toString().trim());
                 break;
             case R.id.personal_care_old_man_lay:
                 // 关注老人部分

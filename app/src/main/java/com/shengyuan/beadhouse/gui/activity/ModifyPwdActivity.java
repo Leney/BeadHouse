@@ -9,6 +9,17 @@ import android.widget.Toast;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.control.UserAccountManager;
+import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ActivityUtils;
+import com.shengyuan.beadhouse.util.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import rx.functions.Action1;
 
 /**
  * 修改密码
@@ -16,8 +27,12 @@ import com.shengyuan.beadhouse.base.BaseActivity;
  */
 
 public class ModifyPwdActivity extends BaseActivity implements View.OnClickListener {
-    private EditText oldPwdInput,newPwdInput;
+    private EditText oldPwdInput, newPwdInput;
     private TextView confirmBtn;
+    private WaitingDialog waitingDialog;
+
+    private String account;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_modify_pwd;
@@ -25,6 +40,7 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initView() {
+        account = getIntent().getStringExtra("account");
         baseTitle.setTitleName(getResources().getString(R.string.modify_pwd));
         oldPwdInput = (EditText) findViewById(R.id.modify_pwd_old_pwd_input);
         newPwdInput = (EditText) findViewById(R.id.modify_pwd_new_pwd_input);
@@ -35,25 +51,64 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.modify_pwd_confirm_btn:
                 // 确认修改
                 String oldPwd = oldPwdInput.getText().toString();
-                if(oldPwd.isEmpty()){
+                if (oldPwd.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.input_old_pwd), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String newPwd = newPwdInput.getText().toString();
-                if(newPwd.isEmpty()){
+                if (newPwd.isEmpty()) {
                     Toast.makeText(this, getResources().getString(R.string.input_new_pwd), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // TODO 提交修改密码数据
+                // 提交修改密码数据
+                modifyPassword(oldPwd, newPwd);
                 break;
         }
     }
 
-    public static void startActivity(Context context){
-        context.startActivity(new Intent(context,ModifyPwdActivity.class));
+    /**
+     * 修改密码
+     *
+     * @param oldPwd
+     * @param newPwd
+     */
+    private void modifyPassword(String oldPwd, String newPwd) {
+        if (waitingDialog == null) {
+            waitingDialog = new WaitingDialog(ModifyPwdActivity.this);
+        }
+        waitingDialog.show();
+        Map<String, Object> params = new HashMap<>();
+        params.put("old_password", oldPwd);
+        params.put("new_password", newPwd);
+        retrofitClient.modifyPassword(params, new ResponseResultListener() {
+            @Override
+            public void success(Object o) {
+                waitingDialog.dismiss();
+                ToastUtils.showToast(getResources().getString(R.string.modify_pwd_success));
+                UserAccountManager.getInstance().clear(new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        ActivityUtils.finishAllActivity();
+                        LoginActivity.startActivity(ModifyPwdActivity.this, account);
+                    }
+                });
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                waitingDialog.dismiss();
+                ToastUtils.showToast(e.getErrorMsg());
+            }
+        });
+    }
+
+    public static void startActivity(Context context, String account) {
+        Intent intent = new Intent(context, ModifyPwdActivity.class);
+        intent.putExtra("account", account);
+        context.startActivity(intent);
     }
 }
