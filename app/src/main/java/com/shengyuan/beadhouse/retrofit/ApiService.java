@@ -4,14 +4,18 @@ import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
+import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -148,4 +152,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/change-password/")
     Observable<HttpResult> modifyPassword(@FieldMap Map<String, Object> params);
+
+    /**
+     * 上传图片
+     *
+     * @return
+     */
+    @Multipart
+    @POST("/api/upload_pic/")
+    Observable<HttpResult<UploadHeaderResultBean>> uploadPicture(@Part MultipartBody.Part file);
 }

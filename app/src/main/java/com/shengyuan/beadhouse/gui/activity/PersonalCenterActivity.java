@@ -17,18 +17,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shengyuan.beadhouse.BuildConfig;
+import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.control.UserAccountManager;
 import com.shengyuan.beadhouse.easyPermission.PermissionManager;
 import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.dialog.ChoicePhotoDialog;
+import com.shengyuan.beadhouse.luban.LubanUtils;
 import com.shengyuan.beadhouse.model.LoginBean;
+import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.HttpConstance;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.BitmapUtils;
 import com.shengyuan.beadhouse.util.FileProviderUtils;
+import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.io.File;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import rx.Subscriber;
+import rx.Subscription;
 import rx.functions.Action1;
 
 /**
@@ -163,9 +175,6 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 }
                 break;
             case PHOTO_REQUEST_CUT:
-                //裁剪返回/storage/emulated/0/1514529877757.jpg
-//                Log.i("llj","裁剪返回!!!,mImageFile.exist()---->>>"+mImageFile.exists());
-//                Log.i("llj","mImageFile.path---->>>"+mImageFile.getAbsolutePath());
                 if (resultCode == RESULT_OK) {
                     // 从剪切图片返回的数据
                     GlideLoader.loadNetWorkResource(PersonalCenterActivity.this, currentPicturePath, icon, false);
@@ -186,7 +195,74 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
      * 上传图片
      */
     private void uploadImg() {
-        // TODO 上传图片
+        // 鲁班压缩图片
+        LubanUtils.scalePictureWithRxJava(PersonalCenterActivity.this, currentPicturePath, new Subscriber<File>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(File file) {
+                // 真正的上传图片
+                commitUploadImg(file);
+            }
+        });
+    }
+
+    /**
+     * 提交表单上传图片
+     */
+    private void commitUploadImg(File file) {
+        // 创建 RequestBody，用于封装构建RequestBody
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        // MultipartBody.Part  和后端约定好Key，这里的partName是用pic
+        MultipartBody.Part body = MultipartBody.Part.createFormData("pic", file.getName(), requestFile);
+
+        Subscription subscription = retrofitClient.uploadPicture(body, new ResponseResultListener<UploadHeaderResultBean>() {
+            @Override
+            public void success(UploadHeaderResultBean bean) {
+                // 图片上传成功
+                Log.i("llj", "图片上传成功!!!");
+                ToastUtils.showToast("修改头像成功");
+                // 更新本地用户信息头像信息
+                // 需要组合一下路径
+                String headerUrl = HttpConstance.BASE_URL + bean.getPhoto();
+                updateAccountInfo(headerUrl);
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                ToastUtils.showToast(e.getErrorMsg());
+            }
+        });
+        compositeSubscription.add(subscription);
+    }
+
+    /**
+     * 更新账户信息(更新头像地址)
+     */
+    private void updateAccountInfo(String headerUrl) {
+        UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
+            @Override
+            public void call(LoginBean bean) {
+                bean.getUser().setPhoto(headerUrl);
+                // 更新用户信息
+                UserAccountManager.getInstance().update(bean, new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        // 更新用户信息成功,发送广播通知用户信息发生改变了
+                        Intent intent = new Intent(Constance.ACTION_MODIFY_USER_INFO);
+                        sendBroadcast(intent);
+                    }
+                });
+            }
+        });
     }
 
     private void showTakePhotoDialog() {

@@ -69,6 +69,24 @@ public class UserAccountManager {
     }
 
     /**
+     * 更新当前登陆的用户信息
+     *
+     * @param bean
+     * @return
+     */
+    public Subscription update(LoginBean bean, Action1<Object> action1) {
+        return Observable.create(new Observable.OnSubscribe<Object>() {
+            @Override
+            public void call(Subscriber<? super Object> subscriber) {
+                UserDBManager.getInstance().update(bean);
+                subscriber.onNext("");
+            }
+        }).subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(action1);
+    }
+
+    /**
      * 完善用户个人信息
      *
      * @param name

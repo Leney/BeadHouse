@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+// Java 8 格式
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 26
@@ -23,6 +25,12 @@ android {
             jniLibs.srcDirs = ['libs']
             jni.srcDirs = []
         }
+    }
+
+    // 编译支持Java8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -64,5 +72,7 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     // 谷歌官方权限管理库
     compile 'pub.devrel:easypermissions:1.0.1'
+    // 鲁班压缩
+    compile 'top.zibin:Luban:1.1.2'
     compile files('libs/BaiduLBS_Android.jar')
 }

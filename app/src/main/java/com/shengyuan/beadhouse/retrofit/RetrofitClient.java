@@ -7,11 +7,13 @@ import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
+import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
 import com.shengyuan.beadhouse.okhttp.OkHttpProvider;
 import com.shengyuan.beadhouse.rxjava.SubscribeUtils;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -208,5 +210,15 @@ public class RetrofitClient {
      */
     public Subscription modifyPassword(Map<String, Object> params, ResponseResultListener subscriber) {
         return this.apiService.modifyPassword(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 上传图片
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription uploadPicture(MultipartBody.Part part, ResponseResultListener<UploadHeaderResultBean> subscriber) {
+        return this.apiService.uploadPicture(part).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }
