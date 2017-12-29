@@ -21,6 +21,7 @@ import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CountDownTextView;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.HttpConstance;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.ToastUtils;
 
@@ -147,6 +148,10 @@ public class LoginByCodeFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void success(final LoginBean loginBean) {
                 Log.i("llj", "登陆成功--token--->>>" + loginBean.getToken());
+                if(!loginBean.getUser().getPhoto().isEmpty()){
+                    String headerUrl = HttpConstance.BASE_URL + loginBean.getUser().getPhoto();
+                    loginBean.getUser().setPhoto(headerUrl);
+                }
                 UserAccountManager.getInstance().saveUserAccountToDB(loginBean, new Action1<Object>() {
                     @Override
                     public void call(Object o) {
