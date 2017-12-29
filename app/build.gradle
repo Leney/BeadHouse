@@ -62,5 +62,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     //网络日志输出
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    // 谷歌官方权限管理库
+    compile 'pub.devrel:easypermissions:1.0.1'
     compile files('libs/BaiduLBS_Android.jar')
 }

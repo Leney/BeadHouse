@@ -116,6 +116,8 @@
     <string name="care_man_first">请先关注老人</string>
     <string name="perfect_info_success">完善资料成功</string>
     <string name="modify_pwd_success">修改密码成功</string>
+    <string name="take_photo">拍照</string>
+    <string name="choose_from_album">从相册选择</string>
 
 
     <string-array name="relationships">
