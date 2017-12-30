@@ -28,9 +28,11 @@ public class CareOldManListBean {
          * area : 广西区 北海市 银海区
          * body : 沃尔特瑞也让他
          * cell_phone : 13055260507
+         * count : 2
          * fix_phone : 13055260507
          * is_delete : 0
          * name : 李大爷
+         * pack_progress : 57%
          * photo :
          * sex : 女
          */
@@ -42,9 +44,11 @@ public class CareOldManListBean {
         private String area;
         private String body;
         private String cell_phone;
+        private int count;
         private String fix_phone;
         private int is_delete;
         private String name;
+        private String pack_progress;
         private String photo;
         private String sex;
 
@@ -104,6 +108,14 @@ public class CareOldManListBean {
             this.cell_phone = cell_phone;
         }
 
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
         public String getFix_phone() {
             return fix_phone;
         }
@@ -126,6 +138,14 @@ public class CareOldManListBean {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getPack_progress() {
+            return pack_progress;
+        }
+
+        public void setPack_progress(String pack_progress) {
+            this.pack_progress = pack_progress;
         }
 
         public String getPhoto() {

@@ -120,9 +120,12 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
             itemList.get(3).describe = "已有0名";
         } else {
             // 有选中的老人
-            // TODO 进度值等修改好接口之后再改
-            itemList.get(0).describe = "服务进度" + bean.getID_number();
-            itemList.get(3).describe = "已有" + bean.getID_number()+ "名";
+            if(bean.getPack_progress().isEmpty()){
+                itemList.get(0).describe = "服务进度0%";
+            }else {
+                itemList.get(0).describe = "服务进度" + bean.getPack_progress()+"%";
+            }
+            itemList.get(3).describe = "已有" + bean.getCount()+ "名";
         }
         adapter.notifyDataSetChanged();
     }

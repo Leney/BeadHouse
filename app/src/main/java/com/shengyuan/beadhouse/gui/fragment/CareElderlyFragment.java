@@ -14,6 +14,7 @@ import com.shengyuan.beadhouse.gui.FragmentAdapter;
 import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.HttpConstance;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.ToastUtils;
 
@@ -139,7 +140,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
             name.setText(getResources().getString(R.string.care_man_first));
         } else {
             // 有关注的老人
-            GlideLoader.loadNetWorkResource(getActivity(), curSelectedBean.getPhoto(), icon, R.mipmap.default_user_icon, true);
+            GlideLoader.loadNetWorkResource(getActivity(), HttpConstance.BASE_URL + curSelectedBean.getPhoto(), icon, R.mipmap.default_user_icon, true);
             name.setText(curSelectedBean.getName() + " " + curSelectedBean.getAge() + "岁");
         }
         careServiceViewFragment.setCurSelectedBean(curSelectedBean);
