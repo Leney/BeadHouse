@@ -169,6 +169,8 @@ public class TrueInfoActivity extends BaseActivity implements View.OnClickListen
     private void setInfoView(LoginBean bean) {
         if (bean == null) return;
         account.setText(bean.getUser().getUsername());
+        nameInput.setText(bean.getUser().getName());
+        cardNumInput.setText(bean.getUser().getID_number());
         if (bean.getUser().getSex().equals("男")) {
             setSelectSex(0);
         } else {
