@@ -94,7 +94,11 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                 break;
             case CareServiceBean.TYPE_PHYSIOLOGY_INFO:
                 // 生理数据
-                PhysiologyDataActivity.startActivity(getActivity());
+                if(curSelectedBean == null){
+                    // TODO 弹出去关注老人的提示框
+                }else {
+                    PhysiologyDataActivity.startActivity(getActivity(),curSelectedBean.getID_number());
+                }
                 break;
             case CareServiceBean.TYPE_OUTSIDE_MONITOR:
                 // 远程监控

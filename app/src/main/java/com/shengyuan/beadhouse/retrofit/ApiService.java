@@ -2,6 +2,7 @@ package com.shengyuan.beadhouse.retrofit;
 
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
+import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
@@ -16,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -161,4 +163,12 @@ public interface ApiService {
     @Multipart
     @POST("/api/upload_pic/")
     Observable<HttpResult<UploadHeaderResultBean>> uploadPicture(@Part MultipartBody.Part file);
+
+    /**
+     * 获取老人生理数据
+     *
+     * @return
+     */
+    @GET("/api/physiological-data")
+    Observable<HttpResult<PhysicBean>> getPhysicData(@Query("ID_number") String cardId);
 }

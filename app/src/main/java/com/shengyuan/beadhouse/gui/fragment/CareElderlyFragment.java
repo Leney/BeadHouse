@@ -158,6 +158,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
 
             @Override
             public void failure(CommonException e) {
+                showErrorView();
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.LoginBean;
+import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
@@ -220,5 +221,15 @@ public class RetrofitClient {
      */
     public Subscription uploadPicture(MultipartBody.Part part, ResponseResultListener<UploadHeaderResultBean> subscriber) {
         return this.apiService.uploadPicture(part).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 获取老人生理数据列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getPhysicData(String cardId, ResponseResultListener<PhysicBean> subscriber) {
+        return this.apiService.getPhysicData(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }
