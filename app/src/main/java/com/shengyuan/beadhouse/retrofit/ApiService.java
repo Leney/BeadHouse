@@ -86,6 +86,13 @@ public interface ApiService {
     Observable<HttpResult<LoginBean>> login(@FieldMap Map<String, Object> params);
 
     /**
+     * 登出
+     * @return
+     */
+    @GET("/api/logout/")
+    Observable<HttpResult> loginOut();
+
+    /**
      * 获取当前登陆的用户信息
      *
      * @return

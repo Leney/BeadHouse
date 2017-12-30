@@ -133,6 +133,16 @@ public class RetrofitClient {
     }
 
     /**
+     * 登出
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription loginOut(ResponseResultListener subscriber) {
+        return this.apiService.loginOut().compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
      * 获取登陆用户的基本信息
      *
      * @param subscriber
