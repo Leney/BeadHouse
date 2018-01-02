@@ -7,7 +7,9 @@ import android.widget.ListView;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.gui.adapter.CarePackageAdapter;
-import com.shengyuan.beadhouse.model.CarePackageBean;
+import com.shengyuan.beadhouse.model.ServicePackageBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,8 @@ import java.util.List;
 public class CarePackageActivity extends BaseActivity {
     private ListView listView;
     private CarePackageAdapter adapter;
-    private List<CarePackageBean> list;
-    private int id;
+    private List<ServicePackageBean> list;
+    private String cardId;
 
     @Override
     protected int getLayoutId() {
@@ -30,36 +32,48 @@ public class CarePackageActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        id = getIntent().getIntExtra("id", -1);
-        if (id < 0) {
-            finish();
-            return;
-        }
+        cardId = getIntent().getStringExtra("cardId");
         baseTitle.setTitleName(getResources().getString(R.string.care_package));
         list = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            CarePackageBean bean = new CarePackageBean();
-            bean.id = i;
-            bean.name = "照护套餐名称(" + i + ")";
-            bean.info = "1.描述xxxxxxxx\n2.描述yyyyyyyyyyy\n3描述zzzzzzzzzzzzzzzzzzzz";
-            bean.beginTime = "2017-10-25";
-            bean.endTime = "2017-12-15";
-            bean.progress = 30 + (i * 10);
-            list.add(bean);
-        }
-
-
         listView = (ListView) findViewById(R.id.care_package_list_view);
-        adapter = new CarePackageAdapter(list);
-        listView.setAdapter(adapter);
-
-        showCenterView();
+        getServicePackageList(cardId);
     }
 
-    public static void startActivity(Context context, int id) {
+    /**
+     * 获取服务套餐列表对象
+     *
+     * @param cardId
+     */
+    private void getServicePackageList(String cardId) {
+        retrofitClient.getServicePagekageList(cardId, new ResponseResultListener<List<ServicePackageBean>>() {
+            @Override
+            public void success(List<ServicePackageBean> servicePackageBeen) {
+                list.addAll(servicePackageBeen);
+                if (list.isEmpty()) {
+                    showEmptyView();
+                } else {
+                    adapter = new CarePackageAdapter(list);
+                    listView.setAdapter(adapter);
+                    showCenterView();
+                }
+            }
+
+            @Override
+            public void failure(CommonException e) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void tryAgain() {
+        super.tryAgain();
+        getServicePackageList(cardId);
+    }
+
+    public static void startActivity(Context context, String cardId) {
         Intent intent = new Intent(context, CarePackageActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("cardId", cardId);
         context.startActivity(intent);
     }
 }

@@ -28,7 +28,6 @@ import com.shengyuan.beadhouse.luban.LubanUtils;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
-import com.shengyuan.beadhouse.retrofit.HttpConstance;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.BitmapUtils;
 import com.shengyuan.beadhouse.util.FileProviderUtils;
@@ -231,8 +230,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 Log.i("llj", "图片上传成功!!!");
                 ToastUtils.showToast("修改头像成功");
                 // 更新本地用户信息头像信息
-                // 需要组合一下路径
-                String headerUrl = HttpConstance.BASE_URL + bean.getPhoto();
+                String headerUrl = bean.getPhoto();
                 updateAccountInfo(headerUrl);
             }
 

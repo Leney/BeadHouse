@@ -90,7 +90,11 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
         switch (bean.type) {
             case CareServiceBean.TYPE_SERVICE_PACKAGE:
                 // 照护套餐
-                CarePackageActivity.startActivity(getActivity(), 1252);
+                if(curSelectedBean == null){
+                    // TODO 弹出去关注老人的提示框
+                }else {
+                    CarePackageActivity.startActivity(getActivity(), curSelectedBean.getID_number());
+                }
                 break;
             case CareServiceBean.TYPE_PHYSIOLOGY_INFO:
                 // 生理数据

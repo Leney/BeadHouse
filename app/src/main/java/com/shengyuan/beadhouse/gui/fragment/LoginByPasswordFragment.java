@@ -17,7 +17,6 @@ import com.shengyuan.beadhouse.gui.activity.RegisterActivity;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
-import com.shengyuan.beadhouse.retrofit.HttpConstance;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.ToastUtils;
 
@@ -107,7 +106,7 @@ public class LoginByPasswordFragment extends BaseFragment implements View.OnClic
             public void success(final LoginBean loginBean) {
                 Log.i("llj", "登陆成功--token--->>>" + loginBean.getToken());
                 if(!loginBean.getUser().getPhoto().isEmpty()){
-                    String headerUrl = HttpConstance.BASE_URL + loginBean.getUser().getPhoto();
+                    String headerUrl = loginBean.getUser().getPhoto();
                     loginBean.getUser().setPhoto(headerUrl);
                 }
                 UserAccountManager.getInstance().saveUserAccountToDB(loginBean, new Action1<Object>() {

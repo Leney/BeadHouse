@@ -7,7 +7,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
-import com.shengyuan.beadhouse.model.CarePackageBean;
+import com.shengyuan.beadhouse.model.ServicePackageBean;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import java.util.List;
  */
 
 public class CarePackageAdapter extends BaseAdapter {
-    private List<CarePackageBean> list;
+    private List<ServicePackageBean> list;
 
-    public CarePackageAdapter(List<CarePackageBean> list) {
+    public CarePackageAdapter(List<ServicePackageBean> list) {
         this.list = list;
     }
 
@@ -51,12 +51,12 @@ public class CarePackageAdapter extends BaseAdapter {
         }
 
 
-        CarePackageBean bean = (CarePackageBean) getItem(position);
-        viewHolder.name.setText(bean.name);
-        viewHolder.info.setText(bean.info);
-        viewHolder.beginTime.setText(parent.getResources().getString(R.string.begin_time)+bean.beginTime);
-        viewHolder.endTime.setText(parent.getResources().getString(R.string.end_time)+bean.endTime);
-        viewHolder.progressBar.setProgress(bean.progress);
+        ServicePackageBean bean = (ServicePackageBean) getItem(position);
+        viewHolder.name.setText(bean.getTitle());
+        viewHolder.info.setText(bean.getContent());
+        viewHolder.beginTime.setText(parent.getResources().getString(R.string.begin_time)+bean.getStart_time());
+        viewHolder.endTime.setText(parent.getResources().getString(R.string.end_time)+bean.getEnd_time());
+        viewHolder.progressBar.setProgress(Integer.parseInt(bean.getPack_progress()));
 
         return convertView;
     }

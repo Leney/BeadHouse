@@ -5,8 +5,10 @@ import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
+import com.shengyuan.beadhouse.model.ServicePackageBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -178,4 +180,12 @@ public interface ApiService {
      */
     @GET("/api/physiological-data")
     Observable<HttpResult<PhysicBean>> getPhysicData(@Query("ID_number") String cardId);
+
+    /**
+     * 获取服务套餐列表
+     *
+     * @return
+     */
+    @GET("/api/old_pack")
+    Observable<HttpResult<List<ServicePackageBean>>> getServicePackageList(@Query("ID_number") String cardId);
 }

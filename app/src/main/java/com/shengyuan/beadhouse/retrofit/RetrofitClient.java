@@ -8,10 +8,12 @@ import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
+import com.shengyuan.beadhouse.model.ServicePackageBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
 import com.shengyuan.beadhouse.okhttp.OkHttpProvider;
 import com.shengyuan.beadhouse.rxjava.SubscribeUtils;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -241,5 +243,15 @@ public class RetrofitClient {
      */
     public Subscription getPhysicData(String cardId, ResponseResultListener<PhysicBean> subscriber) {
         return this.apiService.getPhysicData(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 获取老人服务套餐列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getServicePagekageList(String cardId, ResponseResultListener<List<ServicePackageBean>> subscriber) {
+        return this.apiService.getServicePackageList(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }
