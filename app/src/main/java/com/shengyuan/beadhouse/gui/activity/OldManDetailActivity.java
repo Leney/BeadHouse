@@ -17,6 +17,7 @@ import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.util.StringUtils;
 
 /**
  * 老人资料详情
@@ -82,10 +83,10 @@ public class OldManDetailActivity extends BaseActivity implements View.OnClickLi
 
     private void setInfo() {
         GlideLoader.loadNetWorkResource(OldManDetailActivity.this, bean.getPhoto(), icon, true);
-        familyPhone.setText(bean.getCell_phone().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getCell_phone());
-        mobilePhone.setText(bean.getFix_phone().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getFix_phone());
-        addressRang.setText(bean.getArea().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getArea());
-        address.setText(bean.getAddress().isEmpty() ? getResources().getString(R.string.un_setting) : bean.getAddress());
+        familyPhone.setText(StringUtils.isEmpty(bean.getCell_phone()) ? getResources().getString(R.string.un_setting) : bean.getCell_phone());
+        mobilePhone.setText(StringUtils.isEmpty(bean.getFix_phone()) ? getResources().getString(R.string.un_setting) : bean.getFix_phone());
+        addressRang.setText(StringUtils.isEmpty(bean.getArea()) ? getResources().getString(R.string.un_setting) : bean.getArea());
+        address.setText(StringUtils.isEmpty(bean.getAddress()) ? getResources().getString(R.string.un_setting) : bean.getAddress());
         name.setText(bean.getName() + " " + bean.getAge() + "岁");
         name.setCompoundDrawables(null, null, bean.getSex().equals("男") ? manDrawable : womanDrawable, null);
     }
