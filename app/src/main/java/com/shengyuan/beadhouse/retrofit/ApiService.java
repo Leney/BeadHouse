@@ -5,6 +5,7 @@ import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
+import com.shengyuan.beadhouse.model.ScheduleBean;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
 import com.shengyuan.beadhouse.model.ServicePackageBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
@@ -197,4 +198,12 @@ public interface ApiService {
      */
     @GET("/api/get_guars")
     Observable<HttpResult<List<GuardianBean>>> getGuardianListForOldMan(@Query("ID_number") String cardId);
+
+    /**
+     * 根据日期获取老人照护计划
+     *
+     * @return
+     */
+    @GET("/api/time_care_plan")
+    Observable<HttpResult<List<ScheduleBean>>> getCarePlanByDate(@Query("ID_number") String cardId,@Query("date") String date);
 }

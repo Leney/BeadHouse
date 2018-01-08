@@ -104,8 +104,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (holder instanceof ViewHolder) {
             ScheduleBean bean = list.get(position);
             ViewHolder viewHolder = (ViewHolder) holder;
-            viewHolder.name.setText(bean.name);
-            viewHolder.time.setText(bean.beginTime + "-" + bean.endTime);
+            viewHolder.name.setText(bean.getContent());
+            viewHolder.time.setText(bean.getStart_time() + "-" + bean.getEnd_time());
         } else if (holder instanceof BottomViewHolder) {
         }
 

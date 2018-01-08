@@ -11,6 +11,7 @@ import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.gui.FragmentAdapter;
+import com.shengyuan.beadhouse.gui.activity.MainActivity;
 import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
@@ -133,6 +134,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
      */
     private void setSelectedBeanView(CareOldManListBean.FocusListBean bean) {
         curSelectedBean = bean;
+        ((MainActivity) getActivity()).changeSelectOldMan(curSelectedBean);
         if (curSelectedBean == null) {
             // 没有关注的老人
             icon.setImageResource(R.mipmap.default_user_icon);

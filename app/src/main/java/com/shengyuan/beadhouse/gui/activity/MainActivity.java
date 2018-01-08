@@ -16,6 +16,7 @@ import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.gui.fragment.CareElderlyFragment;
 import com.shengyuan.beadhouse.gui.fragment.LookAfterPlanFragment;
 import com.shengyuan.beadhouse.gui.fragment.MineFragment;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.util.ActivityUtils;
 
 
@@ -36,6 +37,11 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private Fragment[] fragments = new Fragment[3];
 
     private long mExitTime = 0;
+
+    /**
+     * 当前选中的老人对象
+     */
+    private CareOldManListBean.FocusListBean curSelectedBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
             case 1:
                 // 创建第二个Fragment
-                fragments[position] = new LookAfterPlanFragment();
+//                fragments[position] = new LookAfterPlanFragment();
+                fragments[position] = LookAfterPlanFragment.newInstance(curSelectedBean);
                 break;
             case 2:
                 // 创建第三个Fragment
@@ -176,6 +183,18 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onDestroy() {
         super.onDestroy();
         ActivityUtils.removeActivity(this);
+    }
+
+    /**
+     * 关注老人Framgent中，改变了选中的关注老人
+     *
+     * @param focusListBean
+     */
+    public void changeSelectOldMan(CareOldManListBean.FocusListBean focusListBean) {
+        curSelectedBean = focusListBean;
+        if (fragments[1] == null) return;
+        // 设置改变了当前选中的关注老人
+        ((LookAfterPlanFragment)fragments[1]).changeSelectedOldMan(focusListBean);
     }
 
     public static void startActivity(Context context) {

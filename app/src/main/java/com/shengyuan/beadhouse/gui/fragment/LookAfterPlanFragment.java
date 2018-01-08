@@ -16,8 +16,13 @@ import com.ldf.calendar.view.MonthPager;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
 import com.shengyuan.beadhouse.gui.adapter.ScheduleAdapter;
+import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CustomDayView;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.ScheduleBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +67,19 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
      */
     private List<ScheduleBean> scheduleBeanList;
 
+    /**
+     * 当前选中的老人对象
+     */
+    public CareOldManListBean.FocusListBean curSelectedBean;
+
+    private WaitingDialog waitingDialog = null;
+
+    public static LookAfterPlanFragment newInstance(CareOldManListBean.FocusListBean focusListBean) {
+        LookAfterPlanFragment instance = new LookAfterPlanFragment();
+        instance.curSelectedBean = focusListBean;
+        return instance;
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_look_after_plan;
@@ -74,15 +92,15 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
         scheduleBeanList = new ArrayList<>();
         // 为header占位
         scheduleBeanList.add(new ScheduleBean());
-        //默认当天的日程数据
-        for (int i = 0; i < 3; i++) {
-            ScheduleBean bean = new ScheduleBean();
-            bean.id = i;
-            bean.name = "服务名称(" + i + ")";
-            bean.beginTime = "09:20";
-            bean.endTime = "15:30";
-            scheduleBeanList.add(bean);
-        }
+//        //默认当天的日程数据
+//        for (int i = 0; i < 3; i++) {
+//            ScheduleBean bean = new ScheduleBean();
+//            bean.id = i;
+//            bean.name = "服务名称(" + i + ")";
+//            bean.beginTime = "09:20";
+//            bean.endTime = "15:30";
+//            scheduleBeanList.add(bean);
+//        }
 
         monthPager = rootView.findViewById(R.id.calendar_view);
         //此处强行setViewHeight，毕竟你知道你的日历牌的高度
@@ -106,7 +124,12 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
         initCurrentDate();
         initCalendarView();
 
+        if (curSelectedBean != null) {
+            String date = currentDate.getYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDay();
+            getCarePlanByDate(curSelectedBean.getID_number(), date, true);
+        }
         showCenterView();
+
     }
 
 
@@ -161,7 +184,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     private OnSelectDateListener onSelectDateListener = new OnSelectDateListener() {
         @Override
         public void onSelectDate(CalendarDate date) {
-            refreshClickDate(date);
+            refreshClickDate(date,true);
         }
 
         @Override
@@ -172,28 +195,67 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     };
 
 
-    private void refreshClickDate(CalendarDate date) {
+    private void refreshClickDate(CalendarDate date,boolean isShowDialog) {
         currentDate = date;
         String dateStr = date.getYear() + "年" + date.getMonth() + "月";
         this.dateText.setText(dateStr);
 //        textViewYearDisplay.setText(dateText.getYear() + "年");
 //        textViewMonthDisplay.setText(dateText.getMonth() + "");
-
-        List<ScheduleBean> list = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            ScheduleBean bean = new ScheduleBean();
-            bean.id = i;
-            bean.name = date.getDay() + "号的服务名称(" + i + ")";
-            bean.beginTime = "09:20";
-            bean.endTime = "15:30";
-            list.add(bean);
+        if (curSelectedBean != null) {
+            String selectDate = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
+            getCarePlanByDate(curSelectedBean.getID_number(), selectDate, isShowDialog);
         }
-        scheduleBeanList.clear();
-        // 为header占位
-        scheduleBeanList.add(new ScheduleBean());
-        scheduleBeanList.addAll(list);
-        scheduleAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 根据日期获取老人照护计划
+     *
+     * @param cardId
+     * @param date
+     * @param isShowDialog 是否显示等待的dialog
+     */
+    private void getCarePlanByDate(String cardId, String date, boolean isShowDialog) {
+        if (waitingDialog == null) {
+            waitingDialog = new WaitingDialog(getActivity());
+        }
+        if (isShowDialog) waitingDialog.show();
+        retrofitClient.getCarePlanByDate(cardId, date, new ResponseResultListener<List<ScheduleBean>>() {
+            @Override
+            public void success(List<ScheduleBean> list) {
+//                List<ScheduleBean> list = new ArrayList<>();
+//                for (int i = 0; i < 5; i++) {
+//                    ScheduleBean bean = new ScheduleBean();
+//                    bean.id = i;
+//                    bean.name = date.getDay() + "号的服务名称(" + i + ")";
+//                    bean.beginTime = "09:20";
+//                    bean.endTime = "15:30";
+//                    list.add(bean);
+//                }
+                waitingDialog.dismiss();
+                scheduleBeanList.clear();
+                // 为header占位
+                scheduleBeanList.add(new ScheduleBean());
+                scheduleBeanList.addAll(list);
+                scheduleAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                waitingDialog.dismiss();
+                ToastUtils.showToast("获取照护日程失败");
+            }
+        });
+    }
+
+    /**
+     * 关注老人列表，改变了选中的老人
+     *
+     * @param focusListBean
+     */
+    public void changeSelectedOldMan(CareOldManListBean.FocusListBean focusListBean) {
+        curSelectedBean = focusListBean;
+        // 设置当前选中的日期为今天
+        refreshClickDate(currentDate,false);
     }
 
 

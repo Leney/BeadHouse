@@ -8,6 +8,7 @@ import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
+import com.shengyuan.beadhouse.model.ScheduleBean;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
 import com.shengyuan.beadhouse.model.ServicePackageBean;
 import com.shengyuan.beadhouse.model.UploadHeaderResultBean;
@@ -264,5 +265,15 @@ public class RetrofitClient {
      */
     public Subscription getGuardianForOldMan(String cardId, ResponseResultListener<List<GuardianBean>> subscriber) {
         return this.apiService.getGuardianListForOldMan(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 根据日期获取老人照护计划
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getCarePlanByDate(String cardId,String date, ResponseResultListener<List<ScheduleBean>> subscriber) {
+        return this.apiService.getCarePlanByDate(cardId,date).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }
