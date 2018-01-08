@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.model.CouponBean;
 import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
@@ -275,5 +276,25 @@ public class RetrofitClient {
      */
     public Subscription getCarePlanByDate(String cardId,String date, ResponseResultListener<List<ScheduleBean>> subscriber) {
         return this.apiService.getCarePlanByDate(cardId,date).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 获取我的优惠券列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getMyCouponList(ResponseResultListener<List<CouponBean>> subscriber) {
+        return this.apiService.getMyCouponList().compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 兑换优惠券
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription exchangeCouponByCode(String code,ResponseResultListener subscriber) {
+        return this.apiService.exchangeCouponByCode(code).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

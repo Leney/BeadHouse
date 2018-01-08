@@ -242,7 +242,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
             @Override
             public void failure(CommonException e) {
                 waitingDialog.dismiss();
-                ToastUtils.showToast("获取照护日程失败");
+                ToastUtils.showToast(e.getErrorMsg());
             }
         });
     }

@@ -118,6 +118,8 @@
     <string name="modify_pwd_success">修改密码成功</string>
     <string name="take_photo">拍照</string>
     <string name="choose_from_album">从相册选择</string>
+    <string name="input_code_please">请输入兑换码</string>
+    <string name="exchange_success">兑换成功</string>
 
 
     <string-array name="relationships">

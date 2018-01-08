@@ -51,11 +51,11 @@ public class CouponAdapter extends BaseAdapter {
         }
 
         CouponBean bean = (CouponBean) getItem(position);
-        viewHolder.name.setText(bean.name);
-        viewHolder.money.setText(bean.money + "");
-        viewHolder.exchangeDate.setText(parent.getResources().getString(R.string.exchange_date) + bean.exchangeDate);
-        viewHolder.validDate.setText(parent.getResources().getString(R.string.valid_date) + bean.validDate);
-        viewHolder.stateImg.setImageResource(bean.isUsed ? R.mipmap.coupon_used : R.mipmap.coupon_unuse);
+        viewHolder.name.setText(bean.getType());
+        viewHolder.money.setText(bean.getPrice()+"");
+        viewHolder.exchangeDate.setText(parent.getResources().getString(R.string.exchange_date) + bean.getUpdated_time());
+        viewHolder.validDate.setText(parent.getResources().getString(R.string.valid_date) + bean.getEnd_time());
+        viewHolder.stateImg.setImageResource(bean.getAvailable() == 0 ? R.mipmap.coupon_used : R.mipmap.coupon_unuse);
 
         return convertView;
     }

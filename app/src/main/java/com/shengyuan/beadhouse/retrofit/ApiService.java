@@ -1,6 +1,7 @@
 package com.shengyuan.beadhouse.retrofit;
 
 import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.model.CouponBean;
 import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
@@ -206,4 +207,21 @@ public interface ApiService {
      */
     @GET("/api/time_care_plan")
     Observable<HttpResult<List<ScheduleBean>>> getCarePlanByDate(@Query("ID_number") String cardId,@Query("date") String date);
+
+    /**
+     * 获取我的优惠券列表
+     *
+     * @return
+     */
+    @GET("/api/get_coupon")
+    Observable<HttpResult<List<CouponBean>>> getMyCouponList();
+
+    /**
+     * 兑换优惠券
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/exchange_coupon/")
+    Observable<HttpResult> exchangeCouponByCode(@Field("number") String code);
 }
