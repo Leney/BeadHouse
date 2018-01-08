@@ -14,6 +14,7 @@ import com.shengyuan.beadhouse.easyPermission.PermissionManager;
 import com.shengyuan.beadhouse.gui.dialog.LoginOutDialog;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.HttpConstance;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.ActivityUtils;
 import com.shengyuan.beadhouse.util.ToastUtils;
@@ -64,7 +65,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
 //                break;
             case R.id.system_setting_help_center_lay:
                 // 帮助中心
-                WebActivity.startActivity(SystemSettingActivity.this, "http://www.baidu.com", getResources().getString(R.string.help_center));
+                WebActivity.startActivity(SystemSettingActivity.this, HttpConstance.BASE_URL+"/api/help_center", getResources().getString(R.string.help_center));
                 break;
             case R.id.system_setting_service_phone_lay:
                 // 客服热线
