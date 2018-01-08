@@ -19,6 +19,7 @@ import com.shengyuan.beadhouse.gui.activity.OrderCenterWebActivity;
 import com.shengyuan.beadhouse.gui.activity.PersonalCenterActivity;
 import com.shengyuan.beadhouse.gui.activity.SystemSettingActivity;
 import com.shengyuan.beadhouse.model.LoginBean;
+import com.shengyuan.beadhouse.retrofit.HttpConstance;
 
 import rx.functions.Action1;
 
@@ -68,7 +69,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.mine_order_center_lay:
                 // 订单中心
-                OrderCenterWebActivity.startActivity(getActivity(), "http://test.vshare.com/", getResources().getString(R.string.order_center));
+//                OrderCenterWebActivity.startActivity(getActivity(), "http://test.vshare.com/", getResources().getString(R.string.order_center));
+                OrderCenterWebActivity.startActivity(getActivity(), HttpConstance.BASE_URL + "/api/order_index", getResources().getString(R.string.order_center));
                 break;
             case R.id.mine_account_money_lay:
                 // 老人账户
@@ -115,6 +117,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         GlideLoader.loadNetWorkResource(getActivity(), bean.getUser().getPhoto(), userIcon, R.mipmap.default_user_icon, true);
         name.setText(bean.getUser().getName());
     }
+
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
