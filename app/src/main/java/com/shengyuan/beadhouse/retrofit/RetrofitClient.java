@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
@@ -253,5 +254,15 @@ public class RetrofitClient {
      */
     public Subscription getServicePagekageList(String cardId, ResponseResultListener<List<ServicePackageBean>> subscriber) {
         return this.apiService.getServicePackageList(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 获取老人监护人列表
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getGuardianForOldMan(String cardId, ResponseResultListener<List<GuardianBean>> subscriber) {
+        return this.apiService.getGuardianListForOldMan(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

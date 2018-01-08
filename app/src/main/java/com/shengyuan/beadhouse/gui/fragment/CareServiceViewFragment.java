@@ -13,6 +13,7 @@ import com.shengyuan.beadhouse.gui.activity.RemoteServiceActivity;
 import com.shengyuan.beadhouse.gui.adapter.ServiceItemAdapter;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.CareServiceBean;
+import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,18 +91,20 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
         switch (bean.type) {
             case CareServiceBean.TYPE_SERVICE_PACKAGE:
                 // 照护套餐
-                if(curSelectedBean == null){
+                if (curSelectedBean == null) {
                     // TODO 弹出去关注老人的提示框
-                }else {
+                    ToastUtils.showToast("弹出去关注老人的提示框");
+                } else {
                     CarePackageActivity.startActivity(getActivity(), curSelectedBean.getID_number());
                 }
                 break;
             case CareServiceBean.TYPE_PHYSIOLOGY_INFO:
                 // 生理数据
-                if(curSelectedBean == null){
+                if (curSelectedBean == null) {
                     // TODO 弹出去关注老人的提示框
-                }else {
-                    PhysiologyDataActivity.startActivity(getActivity(),curSelectedBean.getID_number());
+                    ToastUtils.showToast("弹出去关注老人的提示框");
+                } else {
+                    PhysiologyDataActivity.startActivity(getActivity(), curSelectedBean.getID_number());
                 }
                 break;
             case CareServiceBean.TYPE_OUTSIDE_MONITOR:
@@ -110,7 +113,12 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                 break;
             case CareServiceBean.TYPE_GUARDIAN:
                 // 监护人
-                GuardianActivity.startActivity(getActivity());
+                if (curSelectedBean == null) {
+                    // TODO 弹出去关注老人的提示框
+                    ToastUtils.showToast("弹出去关注老人的提示框");
+                } else {
+                    GuardianActivity.startActivity(getActivity(), curSelectedBean.getID_number());
+                }
                 break;
         }
     }
@@ -128,12 +136,12 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
             itemList.get(3).describe = "已有0名";
         } else {
             // 有选中的老人
-            if(bean.getPack_progress().isEmpty()){
+            if (bean.getPack_progress().isEmpty()) {
                 itemList.get(0).describe = "服务进度0%";
-            }else {
-                itemList.get(0).describe = "服务进度" + bean.getPack_progress()+"%";
+            } else {
+                itemList.get(0).describe = "服务进度" + bean.getPack_progress() + "%";
             }
-            itemList.get(3).describe = "已有" + bean.getCount()+ "名";
+            itemList.get(3).describe = "已有" + bean.getCount() + "名";
         }
         adapter.notifyDataSetChanged();
     }

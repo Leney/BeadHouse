@@ -1,6 +1,7 @@
 package com.shengyuan.beadhouse.retrofit;
 
 import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
@@ -188,4 +189,12 @@ public interface ApiService {
      */
     @GET("/api/old_pack")
     Observable<HttpResult<List<ServicePackageBean>>> getServicePackageList(@Query("ID_number") String cardId);
+
+    /**
+     * 获取老人监护人列表
+     *
+     * @return
+     */
+    @GET("/api/get_guars")
+    Observable<HttpResult<List<GuardianBean>>> getGuardianListForOldMan(@Query("ID_number") String cardId);
 }

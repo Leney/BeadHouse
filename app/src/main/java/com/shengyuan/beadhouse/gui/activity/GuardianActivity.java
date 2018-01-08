@@ -8,6 +8,8 @@ import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.gui.adapter.GuardianAdapter;
 import com.shengyuan.beadhouse.model.GuardianBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class GuardianActivity extends BaseActivity {
     private ListView listView;
     private GuardianAdapter adapter;
     private List<GuardianBean> guardianBeanList;
+    private String cardId;
 
     @Override
     protected int getLayoutId() {
@@ -30,36 +33,45 @@ public class GuardianActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        cardId = getIntent().getStringExtra("cardId");
         guardianBeanList = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            GuardianBean bean = new GuardianBean();
-            bean.id = i;
-            bean.name = "监护人姓名(" + i + ")";
-            bean.phone = "151515165118";
-            int v = i % 3;
-            if (v == 0) {
-                bean.relationship = "子女";
-                bean.icon = "http://img1.imgtn.bdimg.com/it/u=410955806,4164577389&fm=27&gp=0.jpg";
-            } else if (v == 1){
-                bean.relationship = "亲戚";
-                bean.icon = "http://www.wzfzl.cn/uploads/allimg/140219/1_140219103511_2.jpg";
-            }else {
-                bean.relationship = "朋友";
-                bean.icon = "http://img1.imgtn.bdimg.com/it/u=3746075707,1914896074&fm=27&gp=0.jpg";
-            }
-            guardianBeanList.add(bean);
-        }
 
         baseTitle.setTitleName(getResources().getString(R.string.guardian));
         listView = (ListView) findViewById(R.id.guardian_list_view);
         adapter = new GuardianAdapter(guardianBeanList);
         listView.setAdapter(adapter);
 
-        showCenterView();
+        getGuardianList(cardId);
     }
 
-    public static void startActivity(Context context){
-        context.startActivity(new Intent(context,GuardianActivity.class));
+    /**
+     * 获取监护人列表
+     */
+    private void getGuardianList(String cardId) {
+        retrofitClient.getGuardianForOldMan(cardId, new ResponseResultListener<List<GuardianBean>>() {
+            @Override
+            public void success(List<GuardianBean> list) {
+                guardianBeanList.addAll(list);
+                adapter.notifyDataSetChanged();
+                showCenterView();
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                showErrorView();
+            }
+        });
+    }
+
+    @Override
+    protected void tryAgain() {
+        super.tryAgain();
+        getGuardianList(cardId);
+    }
+
+    public static void startActivity(Context context, String cardId) {
+        Intent intent = new Intent(context, GuardianActivity.class);
+        intent.putExtra("cardId", cardId);
+        context.startActivity(intent);
     }
 }

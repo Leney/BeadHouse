@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
+import com.shengyuan.beadhouse.glide.GlideLoader;
 import com.shengyuan.beadhouse.model.GuardianBean;
 
 import java.util.List;
@@ -51,11 +52,10 @@ public class GuardianAdapter extends BaseAdapter {
         }
 
         GuardianBean bean = (GuardianBean) getItem(position);
-        viewHolder.name.setText(bean.name);
-        viewHolder.relationship.setText(bean.relationship);
-        viewHolder.phone.setText(bean.phone);
-//        // TODO 还要设置头像
-//        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,false);
+        viewHolder.name.setText(bean.getName());
+        viewHolder.relationship.setText(bean.getRelation());
+        viewHolder.phone.setText(bean.getUsername());
+        GlideLoader.loadNetWorkResource(parent.getContext(),bean.getPhoto(),viewHolder.icon,false);
 
         return convertView;
     }
