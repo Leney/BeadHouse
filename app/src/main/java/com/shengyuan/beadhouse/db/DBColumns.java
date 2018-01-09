@@ -49,4 +49,12 @@ public class DBColumns implements BaseColumns {
      * 是否完善了资料
      */
     public static final String COLUMNS_COMPLETE = "complete";
+    /**
+     * 关注老人数量
+     */
+    public static final String COLUMNS_FOCUS_COUNT = "focus_count";
+    /**
+     * 邀请人数
+     */
+    public static final String COLUMNS_INVITE_COUNT = "invite_count";
 }

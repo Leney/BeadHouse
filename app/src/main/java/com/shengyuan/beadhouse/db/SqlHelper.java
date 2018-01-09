@@ -28,6 +28,10 @@ public class SqlHelper {
             + " text,"
             + DBColumns.COLUMNS_COMPLETE
             + " text,"
+            + DBColumns.COLUMNS_FOCUS_COUNT
+            + " integer,"
+            + DBColumns.COLUMNS_INVITE_COUNT
+            + " integer,"
             + DBColumns.COLUMNS_SEX
             + " text);";
 }

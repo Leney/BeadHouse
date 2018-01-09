@@ -296,7 +296,8 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
         account.setText(bean.getUser().getUsername());
         trueInfo.setText(bean.getUser().getName());
         phone.setText(bean.getUser().getUsername());
-        // TODO 关注老人的数量、和邀请的监护人数量待定
+        careNum.setText(bean.getFocus_count() + "");
+        inviteControlNum.setText(bean.getInvite_count() + "");
     }
 
     @Override

@@ -6,14 +6,17 @@ package com.shengyuan.beadhouse.model;
  */
 
 public class LoginBean {
-
     /**
-     * complete : no
-     * token : eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxNDM0NjY5NiwiaWF0IjoxNTE0MzQzMDk2fQ.eyJ1c2VybmFtZSI6IjE1MTE4MDQyMDA2In0.DEhDDhVaWBzXByBdB29qLNbGE4sTOmMRVWhBu2rt-kQ
-     * user : {"ID_number":"","datetime":"2017-12-27","name":"","photo":"","sex":"","username":"15118042006"}
+     * complete : yes
+     * focus_count : 2
+     * invite_count : 0
+     * token : eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxNTQ3MDM4MywiaWF0IjoxNTE1NDY2NzgzfQ.eyJ1c2VybmFtZSI6IjE1MTE4MDQyMDA2In0.63_R4i5YlhLH96bFLHi61qUpt5fS6jAZVBFWmwq6PVc
+     * user : {"ID_number":"500234198812146695","datetime":"2017-12-27","name":"滴答滴答","photo":"http://61.155.215.48:5000/data0/storage/pics/15118042006.png","sex":"男","username":"15118042006"}
      */
 
     private String complete;
+    private int focus_count;
+    private int invite_count;
     private String token;
     private UserBean user;
 
@@ -23,6 +26,22 @@ public class LoginBean {
 
     public void setComplete(String complete) {
         this.complete = complete;
+    }
+
+    public int getFocus_count() {
+        return focus_count;
+    }
+
+    public void setFocus_count(int focus_count) {
+        this.focus_count = focus_count;
+    }
+
+    public int getInvite_count() {
+        return invite_count;
+    }
+
+    public void setInvite_count(int invite_count) {
+        this.invite_count = invite_count;
     }
 
     public String getToken() {
@@ -43,11 +62,11 @@ public class LoginBean {
 
     public static class UserBean {
         /**
-         * ID_number :
+         * ID_number : 500234198812146695
          * datetime : 2017-12-27
-         * name :
-         * photo :
-         * sex :
+         * name : 滴答滴答
+         * photo : http://61.155.215.48:5000/data0/storage/pics/15118042006.png
+         * sex : 男
          * username : 15118042006
          */
 

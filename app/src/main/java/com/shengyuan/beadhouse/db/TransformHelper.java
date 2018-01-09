@@ -28,6 +28,8 @@ public class TransformHelper {
         values.put(DBColumns.COLUMNS_SEX, bean.getUser().getSex());
         values.put(DBColumns.COLUMNS_USER_TOKEN, bean.getToken());
         values.put(DBColumns.COLUMNS_COMPLETE, bean.getComplete());
+        values.put(DBColumns.COLUMNS_FOCUS_COUNT, bean.getFocus_count());
+        values.put(DBColumns.COLUMNS_INVITE_COUNT, bean.getInvite_count());
         return values;
     }
 
@@ -49,6 +51,8 @@ public class TransformHelper {
         userBean.setSex(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_SEX)));
         loginBean.setToken(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_USER_TOKEN)));
         loginBean.setComplete(cursor.getString(cursor.getColumnIndex(DBColumns.COLUMNS_COMPLETE)));
+        loginBean.setFocus_count(cursor.getInt(cursor.getColumnIndex(DBColumns.COLUMNS_FOCUS_COUNT)));
+        loginBean.setInvite_count(cursor.getInt(cursor.getColumnIndex(DBColumns.COLUMNS_INVITE_COUNT)));
         loginBean.setUser(userBean);
         return loginBean;
     }
