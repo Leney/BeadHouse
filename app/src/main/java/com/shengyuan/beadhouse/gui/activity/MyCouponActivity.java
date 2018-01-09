@@ -83,6 +83,7 @@ public class MyCouponActivity extends BaseActivity implements View.OnClickListen
         retrofitClient.getMyCouponList(new ResponseResultListener<List<CouponBean>>() {
             @Override
             public void success(List<CouponBean> beanList) {
+                list.clear();
                 list.addAll(beanList);
                 adapter.notifyDataSetChanged();
             }
