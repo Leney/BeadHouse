@@ -125,11 +125,34 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
         initCalendarView();
 
         if (curSelectedBean != null) {
-            String date = currentDate.getYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDay();
-            getCarePlanByDate(curSelectedBean.getID_number(), date, true);
+            getCarePlanByDate(curSelectedBean.getID_number(), formatDateByCalendarDate(currentDate), true);
         }
         showCenterView();
 
+    }
+
+    /**
+     * 获取一个所需格式的日期字符串
+     * @param calendarDate
+     * @return
+     */
+    private String formatDateByCalendarDate(CalendarDate calendarDate){
+        StringBuilder date = new StringBuilder();
+        date.append(calendarDate.getYear()).append("-");
+        int month = calendarDate.getMonth();
+        if(month < 10){
+            date.append("0").append(month).append("-");
+        }else {
+            date.append(month).append("-");
+        }
+
+        int day = calendarDate.getDay();
+        if(day < 10){
+            date.append("0").append(day);
+        }else {
+            date.append(day);
+        }
+        return date.toString();
     }
 
 
@@ -202,8 +225,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 //        textViewYearDisplay.setText(dateText.getYear() + "年");
 //        textViewMonthDisplay.setText(dateText.getMonth() + "");
         if (curSelectedBean != null) {
-            String selectDate = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
-            getCarePlanByDate(curSelectedBean.getID_number(), selectDate, isShowDialog);
+            getCarePlanByDate(curSelectedBean.getID_number(), formatDateByCalendarDate(currentDate), isShowDialog);
         }
     }
 
