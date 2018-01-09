@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ldf.calendar.Utils;
@@ -15,6 +16,8 @@ import com.ldf.calendar.view.Calendar;
 import com.ldf.calendar.view.MonthPager;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.glide.GlideLoader;
+import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
 import com.shengyuan.beadhouse.gui.adapter.ScheduleAdapter;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CustomDayView;
@@ -39,6 +42,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 //    TextView textViewMonthDisplay;
 
     private TextView dateText;
+
+    private ImageView icon;
     MonthPager monthPager;
 
     private ArrayList<Calendar> currentCalendars = new ArrayList<>();
@@ -102,6 +107,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 //            scheduleBeanList.add(bean);
 //        }
 
+        icon = rootView.findViewById(R.id.look_after_fragment_user_icon);
+        icon.setOnClickListener(this);
         monthPager = rootView.findViewById(R.id.calendar_view);
         //此处强行setViewHeight，毕竟你知道你的日历牌的高度
         monthPager.setViewheight(Utils.dpi2px(getActivity(), 270));
@@ -126,6 +133,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 
         if (curSelectedBean != null) {
             getCarePlanByDate(curSelectedBean.getID_number(), formatDateByCalendarDate(currentDate), true);
+            GlideLoader.loadNetWorkResource(getActivity(),curSelectedBean.getPhoto(),icon,true);
         }
         showCenterView();
 
@@ -276,6 +284,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
      */
     public void changeSelectedOldMan(CareOldManListBean.FocusListBean focusListBean) {
         curSelectedBean = focusListBean;
+        GlideLoader.loadNetWorkResource(getActivity(),curSelectedBean.getPhoto(),icon,true);
         // 设置当前选中的日期为今天
         refreshClickDate(currentDate,false);
     }
@@ -332,6 +341,15 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
 //                // 上一月
 //                monthPager.setCurrentItem(monthPager.getCurrentPosition() - 1);
 //                break;
+            case R.id.look_after_fragment_user_icon:
+                // 头像
+                if (curSelectedBean == null) {
+                    // TODO 弹窗先关注老人
+                    ToastUtils.showToast("你还没关注老人");
+                    return;
+                }
+                OldManDetailActivity.startActivity(getActivity(), curSelectedBean);
+                break;
         }
     }
 
