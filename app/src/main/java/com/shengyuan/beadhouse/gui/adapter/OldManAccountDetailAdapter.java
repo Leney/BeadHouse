@@ -6,9 +6,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
-import com.shengyuan.beadhouse.model.OldManAccountDetailBean;
+import com.shengyuan.beadhouse.model.ServicePackageBean;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -17,14 +16,14 @@ import java.util.List;
  */
 
 public class OldManAccountDetailAdapter extends BaseAdapter {
-    private List<OldManAccountDetailBean> list;
+    private List<ServicePackageBean> list;
     private OnContinueMoneyListener listener;
 
     public void setContinueMoneyListener(OnContinueMoneyListener listener) {
         this.listener = listener;
     }
 
-    public OldManAccountDetailAdapter(List<OldManAccountDetailBean> list) {
+    public OldManAccountDetailAdapter(List<ServicePackageBean> list) {
         this.list = list;
     }
 
@@ -54,10 +53,10 @@ public class OldManAccountDetailAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        OldManAccountDetailBean bean = (OldManAccountDetailBean) getItem(position);
-        viewHolder.name.setText(bean.name);
-        viewHolder.describe.setText(bean.describe);
-        viewHolder.validTime.setText(parent.getResources().getString(R.string.format_valid_date) + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(bean.validityTime));
+        ServicePackageBean bean = (ServicePackageBean) getItem(position);
+        viewHolder.name.setText(bean.getTitle());
+        viewHolder.describe.setText(bean.getContent());
+        viewHolder.validTime.setText(parent.getResources().getString(R.string.format_valid_date) + bean.getEnd_time());
         viewHolder.continueMoneyBtn.setTag(bean);
         return convertView;
     }
@@ -81,11 +80,11 @@ public class OldManAccountDetailAdapter extends BaseAdapter {
         @Override
         public void onClick(View v) {
             if (listener == null) return;
-            listener.onContinueMoney((OldManAccountDetailBean) v.getTag());
+            listener.onContinueMoney((ServicePackageBean) v.getTag());
         }
     };
 
     public interface OnContinueMoneyListener {
-        void onContinueMoney(OldManAccountDetailBean bean);
+        void onContinueMoney(ServicePackageBean bean);
     }
 }

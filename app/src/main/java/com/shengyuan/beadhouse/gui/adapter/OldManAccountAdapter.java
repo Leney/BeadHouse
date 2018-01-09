@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.glide.GlideLoader;
-import com.shengyuan.beadhouse.model.OldManAccountBean;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import java.util.List;
  */
 
 public class OldManAccountAdapter extends BaseAdapter {
-    private List<OldManAccountBean> list;
+    private List<CareOldManListBean.FocusListBean> list;
 
-    public OldManAccountAdapter(List<OldManAccountBean> list) {
+    public OldManAccountAdapter(List<CareOldManListBean.FocusListBean> list) {
         this.list = list;
     }
 
@@ -51,13 +51,12 @@ public class OldManAccountAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        OldManAccountBean bean = (OldManAccountBean) getItem(position);
-        viewHolder.name.setText(bean.name);
-        StringBuilder builder = new StringBuilder(bean.sex == 0 ? parent.getResources().getString(R.string.man):parent.getResources().getString(R.string.woman));
-        builder.append("  "+bean.age).append(parent.getResources().getString(R.string.age));
+        CareOldManListBean.FocusListBean bean = (CareOldManListBean.FocusListBean) getItem(position);
+        viewHolder.name.setText(bean.getName());
+        StringBuilder builder = new StringBuilder(bean.getSex());
+        builder.append("  ").append(bean.getAge()).append(parent.getResources().getString(R.string.age));
         viewHolder.sexAndAge.setText(builder.toString());
-        // TODO 还要设置头像
-        GlideLoader.loadNetWorkResource(parent.getContext(),bean.icon,viewHolder.icon,true);
+        GlideLoader.loadNetWorkResource(parent.getContext(),bean.getPhoto(),viewHolder.icon,true);
 
         return convertView;
     }

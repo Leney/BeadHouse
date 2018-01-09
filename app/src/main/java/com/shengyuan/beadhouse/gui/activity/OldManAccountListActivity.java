@@ -9,10 +9,14 @@ import android.widget.ListView;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.gui.adapter.OldManAccountAdapter;
-import com.shengyuan.beadhouse.model.OldManAccountBean;
+import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.retrofit.CommonException;
+import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * 老人账户列表
@@ -22,7 +26,7 @@ import java.util.List;
 public class OldManAccountListActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     private ListView listView;
     private OldManAccountAdapter adapter;
-    private List<OldManAccountBean> list;
+    private List<CareOldManListBean.FocusListBean> list;
 
     @Override
     protected int getLayoutId() {
@@ -32,15 +36,15 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
     @Override
     protected void initView() {
         list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            OldManAccountBean bean = new OldManAccountBean();
-            bean.id = i;
-            bean.name = "老人名称(" + i + ")";
-            bean.icon = "http://up.qqjia.com/z/24/tu29253_9.jpg";
-            bean.sex = i % 2 == 0 ? 0 : 1;
-            bean.age = 80+i;
-            list.add(bean);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            OldManAccountBean bean = new OldManAccountBean();
+//            bean.id = i;
+//            bean.name = "老人名称(" + i + ")";
+//            bean.icon = "http://up.qqjia.com/z/24/tu29253_9.jpg";
+//            bean.sex = i % 2 == 0 ? 0 : 1;
+//            bean.age = 80+i;
+//            list.add(bean);
+//        }
 
 
         baseTitle.setTitleName(getResources().getString(R.string.account_money));
@@ -48,16 +52,43 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
         adapter = new OldManAccountAdapter(list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
-        showCenterView();
+
+        getCareOldManList();
     }
 
-    public static void startActivity(Context context){
-        context.startActivity(new Intent(context,OldManAccountListActivity.class));
+    @Override
+    protected void tryAgain() {
+        super.tryAgain();
+        getCareOldManList();
+    }
+
+    /**
+     * 获取关注老人列表
+     */
+    private void getCareOldManList() {
+        retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
+            @Override
+            public void success(CareOldManListBean bean) {
+                list.addAll(bean.getFocus_list());
+                adapter.notifyDataSetChanged();
+                showCenterView();
+            }
+
+            @Override
+            public void failure(CommonException e) {
+                showErrorView();
+                ToastUtils.showToast(e.getErrorMsg());
+            }
+        });
+    }
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, OldManAccountListActivity.class));
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        OldManAccountBean bean = list.get(position);
-        OldManAccountDetailActivity.startActivity(OldManAccountListActivity.this,bean.id,bean.name);
+        CareOldManListBean.FocusListBean bean = list.get(position);
+        OldManAccountDetailActivity.startActivity(OldManAccountListActivity.this, bean.getID_number(), bean.getName());
     }
 }
