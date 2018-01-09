@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.Constance;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
@@ -70,7 +71,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mine_order_center_lay:
                 // 订单中心
 //                OrderCenterWebActivity.startActivity(getActivity(), "http://test.vshare.com/", getResources().getString(R.string.order_center));
-                OrderCenterWebActivity.startActivity(getActivity(), HttpConstance.BASE_URL + "/api/order_index", getResources().getString(R.string.order_center));
+                OrderCenterWebActivity.startActivity(getActivity(), HttpConstance.BASE_URL + "/api/order_index?token=" + BHApplication.getInstance().getToken(), getResources().getString(R.string.order_center));
                 break;
             case R.id.mine_account_money_lay:
                 // 老人账户
