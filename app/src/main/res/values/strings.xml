@@ -120,6 +120,10 @@
     <string name="choose_from_album">从相册选择</string>
     <string name="input_code_please">请输入兑换码</string>
     <string name="exchange_success">兑换成功</string>
+    <string name="un_care_old_man_dialog_tips">关注老人\n您当前还未关注老人</string>
+    <string name="complete_info_dialog_tips">关注老人\n请完善您的个人信息</string>
+    <string name="go_care">去关注</string>
+    <string name="complete_now">立即完善</string>
 
 
     <string-array name="relationships">

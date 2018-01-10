@@ -1,22 +1,29 @@
 package com.shengyuan.beadhouse.gui.fragment;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.control.UserAccountManager;
+import com.shengyuan.beadhouse.gui.activity.AddNewCareActivity;
 import com.shengyuan.beadhouse.gui.activity.CarePackageActivity;
 import com.shengyuan.beadhouse.gui.activity.GuardianActivity;
 import com.shengyuan.beadhouse.gui.activity.PhysiologyDataActivity;
 import com.shengyuan.beadhouse.gui.activity.RemoteServiceActivity;
+import com.shengyuan.beadhouse.gui.activity.TrueInfoActivity;
 import com.shengyuan.beadhouse.gui.adapter.ServiceItemAdapter;
+import com.shengyuan.beadhouse.gui.dialog.NormalTipsDialog;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.CareServiceBean;
-import com.shengyuan.beadhouse.util.ToastUtils;
+import com.shengyuan.beadhouse.model.LoginBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.functions.Action1;
 
 /**
  * 照护服务总览Fragment
@@ -32,6 +39,11 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
      * 当前选中的老人对象
      */
     public CareOldManListBean.FocusListBean curSelectedBean;
+
+    /** 未关注老人的提示dialog*/
+    private NormalTipsDialog unCareOldManDialog;
+    /** 完善个人资料的提示框*/
+    private NormalTipsDialog completeInfoDialog;
 
     public static CareServiceViewFragment newInstance(CareOldManListBean.FocusListBean curSelectedBean) {
         CareServiceViewFragment instance = new CareServiceViewFragment();
@@ -51,7 +63,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
         CareServiceBean serviceBean = new CareServiceBean();
         serviceBean.type = CareServiceBean.TYPE_SERVICE_PACKAGE;
         serviceBean.name = "照护套餐";
-        serviceBean.describe = "服务进度50%";
+        serviceBean.describe = "服务进度0%";
         serviceBean.iconRes = R.mipmap.service_package;
 
         CareServiceBean serviceBean2 = new CareServiceBean();
@@ -69,7 +81,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
         CareServiceBean serviceBean4 = new CareServiceBean();
         serviceBean4.type = CareServiceBean.TYPE_GUARDIAN;
         serviceBean4.name = "监护人";
-        serviceBean4.describe = "已有3名";
+        serviceBean4.describe = "已有0名";
         serviceBean4.iconRes = R.mipmap.service_guradian;
 
         itemList.add(serviceBean);
@@ -82,6 +94,53 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
 
+        unCareOldManDialog = new NormalTipsDialog(getActivity());
+        unCareOldManDialog.setTips(getResources().getString(R.string.un_care_old_man_dialog_tips));
+        unCareOldManDialog.setCancel(getResources().getString(R.string.cancel), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 取消
+                unCareOldManDialog.dismiss();
+            }
+        });
+        unCareOldManDialog.setSure(getResources().getString(R.string.go_care), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 去关注
+                unCareOldManDialog.dismiss();
+                UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
+                    @Override
+                    public void call(LoginBean loginBean) {
+                        if(TextUtils.equals("yes",loginBean.getComplete())){
+                            // 已经完善了个人资料信息
+                            // 跳转到添加搜索老人界面
+                            AddNewCareActivity.startActivity(getActivity());
+                        }else {
+                            // 还没有完善个人资料信息
+                            // 弹出个人完善个人资料的提示框
+                            completeInfoDialog.show();
+                        }
+                    }
+                });
+            }
+        });
+
+        completeInfoDialog = new NormalTipsDialog(getActivity());
+        completeInfoDialog.setTips(getResources().getString(R.string.complete_info_dialog_tips));
+        completeInfoDialog.setCancel(getResources().getString(R.string.cancel), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeInfoDialog.dismiss();
+            }
+        });
+        completeInfoDialog.setSure(getResources().getString(R.string.complete_now), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 立即完善
+                TrueInfoActivity.startActivity(getActivity());
+            }
+        });
+
         showCenterView();
     }
 
@@ -92,8 +151,8 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
             case CareServiceBean.TYPE_SERVICE_PACKAGE:
                 // 照护套餐
                 if (curSelectedBean == null) {
-                    // TODO 弹出去关注老人的提示框
-                    ToastUtils.showToast("弹出去关注老人的提示框");
+                    // 弹出去关注老人的提示框
+                    unCareOldManDialog.show();
                 } else {
                     CarePackageActivity.startActivity(getActivity(), curSelectedBean.getID_number());
                 }
@@ -101,8 +160,8 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
             case CareServiceBean.TYPE_PHYSIOLOGY_INFO:
                 // 生理数据
                 if (curSelectedBean == null) {
-                    // TODO 弹出去关注老人的提示框
-                    ToastUtils.showToast("弹出去关注老人的提示框");
+                    // 弹出去关注老人的提示框
+                    unCareOldManDialog.show();
                 } else {
                     PhysiologyDataActivity.startActivity(getActivity(), curSelectedBean.getID_number());
                 }
@@ -110,8 +169,8 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
             case CareServiceBean.TYPE_OUTSIDE_MONITOR:
                 // 远程监控
                 if (curSelectedBean == null) {
-                    // TODO 弹出去关注老人的提示框
-                    ToastUtils.showToast("弹出去关注老人的提示框");
+                    // 弹出去关注老人的提示框
+                    unCareOldManDialog.show();
                 } else {
                     RemoteServiceActivity.startActivity(getActivity(),curSelectedBean.getID_number());
                 }
@@ -119,8 +178,8 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
             case CareServiceBean.TYPE_GUARDIAN:
                 // 监护人
                 if (curSelectedBean == null) {
-                    // TODO 弹出去关注老人的提示框
-                    ToastUtils.showToast("弹出去关注老人的提示框");
+                    // 弹出去关注老人的提示框
+                    unCareOldManDialog.show();
                 } else {
                     GuardianActivity.startActivity(getActivity(), curSelectedBean.getID_number());
                 }

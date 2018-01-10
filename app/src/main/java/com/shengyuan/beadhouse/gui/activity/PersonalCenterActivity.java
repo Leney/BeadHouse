@@ -150,8 +150,8 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
         switch (requestCode) {
             case TrueInfoActivity.REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
-                    // 完善用户信息成功
-                    // 再次去获取当前用户的信息
+                   // 完善用户信息成功
+                   // 再次去获取当前用户的信息
                     getPersonalInfo();
                 }
                 break;
