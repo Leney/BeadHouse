@@ -199,8 +199,8 @@ public class RemoteServiceActivity extends BaseActivity {
                             int position = (int) v.getTag(R.id.item_remote_icon);
                             mapView.setVisibility(View.GONE);
                             webPlayer.setVisibility(View.VISIBLE);
-//                            webPlayer.setUp(bean.getM3u8_url(),false,"");
-                            webPlayer.setUp("http://221.228.226.23/11/t/j/v/b/tjvbwspwhqdmgouolposcsfafpedmb/sh.yinyuetai.com/691201536EE4912BF7E4F1E2C67B8119.mp4", false, "");
+                            webPlayer.setUp(bean.getM3u8_url(),false,"");
+//                            webPlayer.setUp("http://221.228.226.23/11/t/j/v/b/tjvbwspwhqdmgouolposcsfafpedmb/sh.yinyuetai.com/691201536EE4912BF7E4F1E2C67B8119.mp4", false, "");
                             webPlayer.startPlay();
                             viewPointLay.getChildAt(selectPosition).setBackgroundResource(R.drawable.shape_gray_stoken_bg2);
                             view2.setBackgroundResource(R.drawable.shape_green_stoken_bg);
