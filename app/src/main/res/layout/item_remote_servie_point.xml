@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_remote_view"
+    android:orientation="vertical"
+    android:padding="@dimen/space_2">
+
+    <ImageView
+        android:id="@+id/item_remote_icon"
+        android:layout_width="@dimen/space_80"
+        android:layout_height="@dimen/space_80" />
+</LinearLayout>

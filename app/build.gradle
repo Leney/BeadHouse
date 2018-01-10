@@ -74,5 +74,8 @@ dependencies {
     compile 'pub.devrel:easypermissions:1.0.1'
     // 鲁班压缩
     compile 'top.zibin:Luban:1.1.2'
+    // 视频播放器
+    compile 'com.shuyu:gsyVideoPlayer-java:2.1.3'
+    compile 'com.shuyu:gsyVideoPlayer-armv7a:2.1.3'
     compile files('libs/BaiduLBS_Android.jar')
 }

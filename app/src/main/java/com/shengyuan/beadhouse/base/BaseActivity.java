@@ -22,10 +22,7 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected RetrofitClient retrofitClient;
-    //    protected SQLBriteProvider sqlBriteProvider;
     protected CompositeSubscription compositeSubscription = null;
-//    // TODO 临时写死默认的token
-//    protected String token = "7yts73rm1510121415981";
 
     protected RelativeLayout loadingLay;
     protected RelativeLayout errorLay;

@@ -147,6 +147,13 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         careServiceViewFragment.setCurSelectedBean(curSelectedBean);
     }
 
+
+    @Override
+    protected void tryAgain() {
+        super.tryAgain();
+        getCareOldManList();
+    }
+
     /**
      * 获取关注老人列表
      */

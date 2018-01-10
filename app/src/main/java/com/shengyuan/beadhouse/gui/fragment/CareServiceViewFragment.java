@@ -109,7 +109,12 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                 break;
             case CareServiceBean.TYPE_OUTSIDE_MONITOR:
                 // 远程监控
-                RemoteServiceActivity.startActivity(getActivity());
+                if (curSelectedBean == null) {
+                    // TODO 弹出去关注老人的提示框
+                    ToastUtils.showToast("弹出去关注老人的提示框");
+                } else {
+                    RemoteServiceActivity.startActivity(getActivity(),curSelectedBean.getID_number());
+                }
                 break;
             case CareServiceBean.TYPE_GUARDIAN:
                 // 监护人

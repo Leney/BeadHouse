@@ -5,6 +5,7 @@ import com.shengyuan.beadhouse.model.CouponBean;
 import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
+import com.shengyuan.beadhouse.model.RemoteServiceBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.ScheduleBean;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
@@ -224,4 +225,12 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/exchange_coupon/")
     Observable<HttpResult> exchangeCouponByCode(@Field("number") String code);
+
+    /**
+     * 获取远程看护信息
+     *
+     * @return
+     */
+    @GET("/api/nurse")
+    Observable<HttpResult<List<RemoteServiceBean>>> getNurse(@Query("ID_number") String cardId);
 }

@@ -8,6 +8,7 @@ import com.shengyuan.beadhouse.model.CouponBean;
 import com.shengyuan.beadhouse.model.GuardianBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
+import com.shengyuan.beadhouse.model.RemoteServiceBean;
 import com.shengyuan.beadhouse.model.RoomInfoBean2;
 import com.shengyuan.beadhouse.model.ScheduleBean;
 import com.shengyuan.beadhouse.model.SearchOldManResultBean;
@@ -297,4 +298,16 @@ public class RetrofitClient {
     public Subscription exchangeCouponByCode(String code,ResponseResultListener subscriber) {
         return this.apiService.exchangeCouponByCode(code).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
+
+    /**
+     * 获取远程看护信息
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getNurse(String cardId,ResponseResultListener<List<RemoteServiceBean>> subscriber) {
+        return this.apiService.getNurse(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+
 }
