@@ -106,9 +106,7 @@ public class UserDBManager {
         try {
             ContentValues values = TransformHelper.getLoginBeanContentValues(bean);
             db.update(
-                    DBColumns.TABLE_USER_INFO, values
-                    , DBColumns.COLUMNS_USER_ACCOUNT + "=?"
-                    , new String[]{bean.getUser().getUsername()});
+                    DBColumns.TABLE_USER_INFO, values, null, null);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

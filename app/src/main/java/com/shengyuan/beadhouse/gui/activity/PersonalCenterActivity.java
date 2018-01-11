@@ -129,7 +129,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.personal_modify_binding_phone_lay:
                 // 更改绑定手机部分
-                BindPhoneActivity.startActivity(PersonalCenterActivity.this);
+                BindPhoneActivity.startActivityForResult(PersonalCenterActivity.this);
                 break;
             case R.id.personal_modify_pwd_lay:
                 // 更改密码部分
@@ -148,6 +148,7 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
+            case BindPhoneActivity.REQUEST_CODE:
             case TrueInfoActivity.REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK) {
                    // 完善用户信息成功

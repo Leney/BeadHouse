@@ -233,4 +233,13 @@ public interface ApiService {
      */
     @GET("/api/nurse")
     Observable<HttpResult<List<RemoteServiceBean>>> getNurse(@Query("ID_number") String cardId);
+
+    /**
+     * 修改手机号码
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/api/change-username/")
+    Observable<HttpResult> modifyPhone(@FieldMap Map<String, Object> params);
 }

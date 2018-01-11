@@ -310,4 +310,13 @@ public class RetrofitClient {
     }
 
 
+    /**
+     * 修改手机号码
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription modifyPhone(Map<String, Object> params, ResponseResultListener subscriber) {
+        return this.apiService.modifyPhone(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
 }
