@@ -190,12 +190,12 @@ public class RemoteServiceActivity extends BaseActivity {
                     View view2 = View.inflate(RemoteServiceActivity.this, R.layout.item_remote_servie_point, null);
                     ImageView imageView2 = view2.findViewById(R.id.item_remote_icon);
                     GlideLoader.loadNetWorkResource(RemoteServiceActivity.this, beanList.get(i).getPic_path(), imageView2, false);
-                    imageView2.setTag(beanList.get(i));
+                    imageView2.setTag(R.id.remote_service_view_lay,beanList.get(i));
                     imageView2.setTag(R.id.item_remote_icon, i);
                     imageView2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            RemoteServiceBean bean = (RemoteServiceBean) v.getTag();
+                            RemoteServiceBean bean = (RemoteServiceBean) v.getTag(R.id.remote_service_view_lay);
                             int position = (int) v.getTag(R.id.item_remote_icon);
                             mapView.setVisibility(View.GONE);
                             webPlayer.setVisibility(View.VISIBLE);
