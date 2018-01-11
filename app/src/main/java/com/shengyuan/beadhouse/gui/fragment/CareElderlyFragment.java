@@ -76,7 +76,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
         fragmentList = new ArrayList<>();
         tabTitleList = new ArrayList<>();
 
-        if (list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             // 没有关注的老人
             careServiceViewFragment = CareServiceViewFragment.newInstance(null);
         } else {

@@ -31,3 +31,7 @@
 -keep class com.baidu.** {*;}
 -keep class vi.com.** {*;}
 -dontwarn com.baidu.**
+
+# 腾讯bug管理系统
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.baidu.mapapi.SDKInitializer;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * Created by dell on 2017/11/2.
@@ -28,6 +29,9 @@ public class BHApplication extends Application {
 
         // 初始化日志
         Logger.addLogAdapter(new AndroidLogAdapter());
+
+        // 初始化腾讯bug管理系统
+        CrashReport.initCrashReport(getApplicationContext(), "955ea023a9", true);
 //        Logger.addLogAdapter(new AndroidLogAdapter(){
 //            @Override
 //            public boolean isLoggable(int priority, String tag) {
