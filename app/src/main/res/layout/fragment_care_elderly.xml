@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_16"
-            android:text="李大帅 88岁"
+            android:text="您还未关注老人"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16"
             app:layout_constraintLeft_toLeftOf="parent"

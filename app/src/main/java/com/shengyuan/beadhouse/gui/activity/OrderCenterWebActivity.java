@@ -12,8 +12,10 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
+import com.shengyuan.beadhouse.retrofit.HttpConstance;
 
 /**
  * 订单中心网页加载Activity
@@ -25,7 +27,7 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
     private String url;
     private ProgressBar bar;
 
-    private TextView oldPayMoney,realPayMoney,discountTips,payBtn;
+    private TextView oldPayMoney, realPayMoney, discountTips, payBtn;
 
     @Override
     protected int getLayoutId() {
@@ -36,15 +38,16 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
     protected void initView() {
         url = getIntent().getStringExtra("url");
         String title = getIntent().getStringExtra("title");
-        if(TextUtils.isEmpty(title)){
-            title =getResources().getString(R.string.web_page);
+        if (TextUtils.isEmpty(title)) {
+            title = getResources().getString(R.string.web_page);
         }
         baseTitle.setTitleName(title);
         baseTitle.setRightImgRes(R.mipmap.order_record_btn);
         baseTitle.setRightImgClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebActivity.startActivity(OrderCenterWebActivity.this,"http://www.baidu.com",getResources().getString(R.string.order_records));
+//                WebActivity.startActivity(OrderCenterWebActivity.this,"http://www.baidu.com",getResources().getString(R.string.order_records));
+                WebActivity.startActivity(OrderCenterWebActivity.this, HttpConstance.BASE_URL + "/api/order-record?token=" + BHApplication.getInstance().getToken(), getResources().getString(R.string.order_records));
             }
         });
 
@@ -69,8 +72,8 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
         } else {
             ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         }
-        if(!url.startsWith("http://")){
-            url = "http://"+url;
+        if (!url.startsWith("http://")) {
+            url = "http://" + url;
         }
         webView.loadUrl(url);
         webView.setWebChromeClient(new WebChromeClient() {
@@ -114,9 +117,9 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        if(webView != null && webView.canGoBack()){
+        if (webView != null && webView.canGoBack()) {
             webView.goBack();// 返回前一个页面
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -125,7 +128,7 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
     public void finish() {
         try {
             // 反射方法 暂停webView
-            webView.getClass().getMethod("onPause").invoke(webView,(Object[]) null);
+            webView.getClass().getMethod("onPause").invoke(webView, (Object[]) null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -152,7 +155,7 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.order_center_pay_btn:
                 // 支付按钮
                 break;

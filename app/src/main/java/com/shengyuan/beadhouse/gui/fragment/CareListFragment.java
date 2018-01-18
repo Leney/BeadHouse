@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -139,6 +140,10 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
                 if (length <= 1) {
                     // 没有关注的老人
                     list.add(0, focusListBean);
+                    if (listener != null ){
+                        listener.onSelected(focusListBean);
+                    }
+                    adapter.setCurSelectedPosition(0);
                 } else {
                     // 有关注都老人
                     // 添加到倒数第二个位置，因为倒数第一个位置是"添加"item
@@ -151,7 +156,12 @@ public class CareListFragment extends BaseFragment implements AdapterView.OnItem
                     public void call(LoginBean loginBean) {
                         // 将关注人数加1并保存到数据库
                         loginBean.setFocus_count(loginBean.getFocus_count() + 1);
-                        UserAccountManager.getInstance().update(loginBean, null);
+                        UserAccountManager.getInstance().update(loginBean, new Action1<Object>() {
+                            @Override
+                            public void call(Object o) {
+                                Log.i("llj","更新成功！");
+                            }
+                        });
                     }
                 });
             }
