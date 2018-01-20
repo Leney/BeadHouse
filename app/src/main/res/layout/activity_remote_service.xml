@@ -25,4 +25,43 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"/>
     </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
+        android:paddingTop="@dimen/space_20"
+        android:paddingBottom="@dimen/space_20"
+        android:background="#99000000"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14"
+            android:text="@string/old_man_heart_rate"/>
+        <TextView
+            android:id="@+id/remote_heart_remote_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14"
+            android:text="0次/分"/>
+
+        <TextView
+            android:id="@+id/remote_contacts_old_man_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_10"
+            android:paddingBottom="@dimen/space_10"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14"
+            android:paddingLeft="@dimen/space_30"
+            android:paddingRight="@dimen/space_30"
+            android:background="@drawable/shape_circle_corner_green_bg"
+            android:text="@string/contacts_old_man"/>
+    </LinearLayout>
 </FrameLayout>

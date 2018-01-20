@@ -3,6 +3,7 @@ package com.shengyuan.beadhouse.retrofit;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.CouponBean;
 import com.shengyuan.beadhouse.model.GuardianBean;
+import com.shengyuan.beadhouse.model.LocationAndHeartRateBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RemoteServiceBean;
@@ -242,4 +243,12 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/change-username/")
     Observable<HttpResult> modifyPhone(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取手环位置信息和心率信息
+     *
+     * @return
+     */
+    @GET("/api/bracelet")
+    Observable<HttpResult<LocationAndHeartRateBean>> getLocationAndHeartRateInfo(@Query("ID_number") String cardId);
 }

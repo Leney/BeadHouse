@@ -6,6 +6,7 @@ import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
 import com.shengyuan.beadhouse.model.CouponBean;
 import com.shengyuan.beadhouse.model.GuardianBean;
+import com.shengyuan.beadhouse.model.LocationAndHeartRateBean;
 import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.PhysicBean;
 import com.shengyuan.beadhouse.model.RemoteServiceBean;
@@ -309,7 +310,6 @@ public class RetrofitClient {
         return this.apiService.getNurse(cardId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 
-
     /**
      * 修改手机号码
      *
@@ -318,5 +318,15 @@ public class RetrofitClient {
      */
     public Subscription modifyPhone(Map<String, Object> params, ResponseResultListener subscriber) {
         return this.apiService.modifyPhone(params).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
+    }
+
+    /**
+     * 修改手机号码
+     *
+     * @param subscriber
+     * @return
+     */
+    public Subscription getLocationAndHeartRateInfo(String careId, ResponseResultListener<LocationAndHeartRateBean> subscriber) {
+        return this.apiService.getLocationAndHeartRateInfo(careId).compose(SubscribeUtils.createTransformer()).subscribe(toSubscriber(subscriber));
     }
 }

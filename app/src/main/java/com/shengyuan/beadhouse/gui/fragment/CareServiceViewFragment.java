@@ -172,7 +172,7 @@ public class CareServiceViewFragment extends BaseFragment implements AdapterView
                     // 弹出去关注老人的提示框
                     unCareOldManDialog.show();
                 } else {
-                    RemoteServiceActivity.startActivity(getActivity(),curSelectedBean.getID_number());
+                    RemoteServiceActivity.startActivity(getActivity(),curSelectedBean);
                 }
                 break;
             case CareServiceBean.TYPE_GUARDIAN:

@@ -34,7 +34,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
     /**
      * 拨打电话权限
      */
-    private final String[] callPhonePermission = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+    private final String[] callPhonePermission = {Manifest.permission.CALL_PHONE};
 
     @Override
     protected int getLayoutId() {

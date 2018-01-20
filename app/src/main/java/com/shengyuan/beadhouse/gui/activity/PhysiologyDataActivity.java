@@ -136,6 +136,7 @@ public class PhysiologyDataActivity extends BaseActivity {
         }
 
         if(length <= 0) return;
+        if(bean.getPhysics().get(0).getCore().isEmpty()) bean.getPhysics().get(0).setCore("0");
         int totalFraction = Integer.parseInt(bean.getPhysics().get(0).getCore());
         fraction.setText(totalFraction + "");
         if (totalFraction < 60) {
