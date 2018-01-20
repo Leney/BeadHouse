@@ -10,7 +10,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.alipay.sdk.app.H5PayCallback;
 import com.alipay.sdk.app.PayTask;
@@ -30,7 +29,7 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
     private String url;
     private ProgressBar bar;
 
-    private TextView oldPayMoney, realPayMoney, discountTips, payBtn;
+//    private TextView oldPayMoney, realPayMoney, discountTips, payBtn;
 
     @Override
     protected int getLayoutId() {
@@ -56,11 +55,11 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
 
         bar = (ProgressBar) findViewById(R.id.order_center_progress);
         webView = (WebView) findViewById(R.id.order_center_web_view);
-        oldPayMoney = (TextView) findViewById(R.id.order_center_need_pay_money_old);
-        realPayMoney = (TextView) findViewById(R.id.order_center_need_pay_money_real);
-        discountTips = (TextView) findViewById(R.id.order_center_discount_tips);
-        payBtn = (TextView) findViewById(R.id.order_center_pay_btn);
-        payBtn.setOnClickListener(this);
+//        oldPayMoney = (TextView) findViewById(R.id.order_center_need_pay_money_old);
+//        realPayMoney = (TextView) findViewById(R.id.order_center_need_pay_money_real);
+//        discountTips = (TextView) findViewById(R.id.order_center_discount_tips);
+//        payBtn = (TextView) findViewById(R.id.order_center_pay_btn);
+//        payBtn.setOnClickListener(this);
 
         WebSettings ws = webView.getSettings();
         ws.setDefaultTextEncodingName("uft-8");
@@ -229,10 +228,10 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.order_center_pay_btn:
-                // 支付按钮
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.order_center_pay_btn:
+//                // 支付按钮
+//                break;
+//        }
     }
 }
