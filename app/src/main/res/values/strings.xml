@@ -127,6 +127,7 @@
     <string name="complete_now">立即完善</string>
     <string name="old_man_heart_rate">老人心率:  </string>
     <string name="contacts_old_man">联系老人</string>
+    <string name="modify_bind_success">修改绑定手机成功</string>
 
 
     <string-array name="relationships">

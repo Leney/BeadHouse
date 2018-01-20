@@ -1,6 +1,5 @@
 package com.shengyuan.beadhouse.gui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
@@ -16,9 +15,9 @@ import com.shengyuan.beadhouse.base.BaseActivity;
 import com.shengyuan.beadhouse.control.UserAccountManager;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CountDownTextView;
-import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
+import com.shengyuan.beadhouse.util.ActivityUtils;
 import com.shengyuan.beadhouse.util.ToastUtils;
 
 import java.util.HashMap;
@@ -33,7 +32,7 @@ import rx.functions.Action1;
  */
 
 public class BindPhoneActivity extends BaseActivity implements View.OnClickListener, CountDownTextView.OnCountDownDoneListener {
-    public static final int REQUEST_CODE = 1002;
+//    public static final int REQUEST_CODE = 1002;
     private EditText phoneInput;
     private EditText codeInput;
     private CountDownTextView countDownTextView;
@@ -141,23 +140,25 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void success(Object o) {
                 waitingDialog.dismiss();
-                UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
-                    @Override
-                    public void call(LoginBean loginBean) {
-                        // 修改本地帐号信息，并保存
-                        loginBean.getUser().setUsername(phone);
-                        UserAccountManager.getInstance().update(loginBean, new Action1<Object>() {
-                            @Override
-                            public void call(Object o) {
-                                ToastUtils.showToast(getResources().getString(R.string.modify_phone_success));
-                                // 发送账户信息改变的广播
-                                sendBroadcast(new Intent(Constance.ACTION_MODIFY_USER_INFO));
-                                setResult(Activity.RESULT_OK);
-                                finish();
-                            }
-                        });
-                    }
-                });
+                ToastUtils.showToast(getResources().getString(R.string.modify_bind_success));
+                clearDate();
+//                UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
+//                    @Override
+//                    public void call(LoginBean loginBean) {
+//                        // 修改本地帐号信息，并保存
+//                        loginBean.getUser().setUsername(phone);
+//                        UserAccountManager.getInstance().update(loginBean, new Action1<Object>() {
+//                            @Override
+//                            public void call(Object o) {
+//                                ToastUtils.showToast(getResources().getString(R.string.modify_phone_success));
+//                                // 发送账户信息改变的广播
+//                                sendBroadcast(new Intent(Constance.ACTION_MODIFY_USER_INFO));
+//                                setResult(Activity.RESULT_OK);
+//                                finish();
+//                            }
+//                        });
+//                    }
+//                });
             }
 
             @Override
@@ -167,6 +168,22 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
             }
         });
         compositeSubscription.add(subscription);
+    }
+
+    /**
+     * 退出登录之后的相关操作
+     */
+    private void clearDate() {
+        // 清除本地用户数据
+        UserAccountManager.getInstance().clear(new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                // 销毁之前的界面
+                ActivityUtils.finishAllActivity();
+                // 启动登录界面
+                LoginActivity.startActivity(BindPhoneActivity.this);
+            }
+        });
     }
 
     @Override
@@ -184,7 +201,7 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
         context.startActivity(new Intent(context,BindPhoneActivity.class));
     }
 
-    public static void startActivityForResult(Activity activity){
-        activity.startActivityForResult(new Intent(activity,BindPhoneActivity.class),REQUEST_CODE);
-    }
+//    public static void startActivityForResult(Activity activity){
+//        activity.startActivityForResult(new Intent(activity,BindPhoneActivity.class),REQUEST_CODE);
+//    }
 }
