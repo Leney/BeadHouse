@@ -17,7 +17,6 @@
 
     <!-- 腾讯bug管理所需权限-->
     <uses-permission android:name="android.permission.READ_LOGS" />
-
     <application
         android:name=".BHApplication"
         android:allowBackup="true"
@@ -198,6 +197,21 @@
             android:name=".gui.activity.RemoteServiceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+
+        <!-- 支付宝支付所需页面-->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
 
     </application>
 

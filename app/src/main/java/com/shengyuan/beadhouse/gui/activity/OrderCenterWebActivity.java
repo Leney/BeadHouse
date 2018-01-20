@@ -12,6 +12,9 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.alipay.sdk.app.H5PayCallback;
+import com.alipay.sdk.app.PayTask;
+import com.alipay.sdk.util.H5PayResultModel;
 import com.shengyuan.beadhouse.BHApplication;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseActivity;
@@ -75,7 +78,7 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
         if (!url.startsWith("http://")) {
             url = "http://" + url;
         }
-        webView.loadUrl(url);
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -91,12 +94,43 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
                 super.onProgressChanged(view, newProgress);
             }
         });
-        showCenterView();
+
 
 //        webView.setWebViewClient(new WebViewClient() {
 //            @Override
 //            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//                webView.loadUrl(url);
+//                if (!(url.startsWith("http") || url.startsWith("https"))) {
+//                    return true;
+//                }
+//
+//                /**
+//                 * 推荐采用的新的二合一接口(payInterceptorWithUrl),只需调用一次
+//                 */
+//                final PayTask task = new PayTask(OrderCenterWebActivity.this);
+//                boolean isIntercepted = task.payInterceptorWithUrl(url, true, new H5PayCallback() {
+//                    @Override
+//                    public void onPayResult(final H5PayResultModel result) {
+//                        // 支付结果返回
+//                        final String url = result.getReturnUrl();
+//                        if (!TextUtils.isEmpty(url)) {
+//                            OrderCenterWebActivity.this.runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    view.loadUrl(url);
+//                                }
+//                            });
+//                        }
+//                    }
+//                });
+//
+//                Log.i("llj","是否拦截成功！isIntercepted----->>"+isIntercepted);
+//                /**
+//                 * 判断是否成功拦截
+//                 * 若成功拦截，则无需继续加载该URL；否则继续加载
+//                 */
+//                if (!isIntercepted) {
+//                    view.loadUrl(url);
+//                }
 //                return true;
 //            }
 //
@@ -106,7 +140,47 @@ public class OrderCenterWebActivity extends BaseActivity implements View.OnClick
 //                super.onReceivedError(view, request, error);
 //            }
 //        });
-        webView.setWebViewClient(new WebViewClient());
+//        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl(url);
+        showCenterView();
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(final WebView view, String url) {
+            if (!(url.startsWith("http") || url.startsWith("https"))) {
+                return true;
+            }
+
+            /**
+             * 推荐采用的新的二合一接口(payInterceptorWithUrl),只需调用一次
+             */
+            final PayTask task = new PayTask(OrderCenterWebActivity.this);
+            boolean isIntercepted = task.payInterceptorWithUrl(url, true, new H5PayCallback() {
+                @Override
+                public void onPayResult(final H5PayResultModel result) {
+                    final String url=result.getReturnUrl();
+                    if(!TextUtils.isEmpty(url)){
+                        OrderCenterWebActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.loadUrl(url);
+                            }
+                        });
+                    }
+                }
+            });
+
+            /**
+             * 判断是否成功拦截
+             * 若成功拦截，则无需继续加载该URL；否则继续加载
+             */
+            if(!isIntercepted)
+                view.loadUrl(url);
+            return true;
+        }
     }
 
     @Override

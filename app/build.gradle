@@ -80,4 +80,5 @@ dependencies {
     //腾讯Bug管理库
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/alipaySdk-20170922.jar')
 }
