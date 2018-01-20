@@ -25,8 +25,6 @@ public abstract class BaseFragment extends Fragment {
     protected CompositeSubscription compositeSubscription;
     protected RetrofitClient retrofitClient;
 //    protected SQLBriteProvider sqlBriteProvider;
-    // TODO 临时写死默认的token
-    protected String token = "7yts73rm1510121415981";
 
     protected RelativeLayout loadingLay;
     protected RelativeLayout errorLay;

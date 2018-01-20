@@ -14,6 +14,8 @@ import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * 照护套餐界面
  * Created by dell on 2017/11/19.
@@ -45,7 +47,7 @@ public class CarePackageActivity extends BaseActivity {
      * @param cardId
      */
     private void getServicePackageList(String cardId) {
-        retrofitClient.getServicePagekageList(cardId, new ResponseResultListener<List<ServicePackageBean>>() {
+        Subscription subscription = retrofitClient.getServicePagekageList(cardId, new ResponseResultListener<List<ServicePackageBean>>() {
             @Override
             public void success(List<ServicePackageBean> servicePackageBeen) {
                 list.addAll(servicePackageBeen);
@@ -63,6 +65,7 @@ public class CarePackageActivity extends BaseActivity {
 
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     @Override

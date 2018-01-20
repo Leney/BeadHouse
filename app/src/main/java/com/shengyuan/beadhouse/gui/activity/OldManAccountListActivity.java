@@ -17,6 +17,8 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 
 /**
  * 老人账户列表
@@ -66,7 +68,7 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
      * 获取关注老人列表
      */
     private void getCareOldManList() {
-        retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
+        Subscription subscription = retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
             @Override
             public void success(CareOldManListBean bean) {
                 list.addAll(bean.getFocus_list());
@@ -80,6 +82,7 @@ public class OldManAccountListActivity extends BaseActivity implements AdapterVi
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     public static void startActivity(Context context) {

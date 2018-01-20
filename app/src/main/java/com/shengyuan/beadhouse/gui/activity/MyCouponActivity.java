@@ -20,6 +20,8 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * 我的优惠券界面
  * Created by dell on 2017/11/20.
@@ -80,7 +82,7 @@ public class MyCouponActivity extends BaseActivity implements View.OnClickListen
      * 获取我的优惠券列表
      */
     private void getMyCouponList(){
-        retrofitClient.getMyCouponList(new ResponseResultListener<List<CouponBean>>() {
+        Subscription subscription = retrofitClient.getMyCouponList(new ResponseResultListener<List<CouponBean>>() {
             @Override
             public void success(List<CouponBean> beanList) {
                 list.clear();
@@ -93,6 +95,7 @@ public class MyCouponActivity extends BaseActivity implements View.OnClickListen
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     /**
@@ -108,7 +111,7 @@ public class MyCouponActivity extends BaseActivity implements View.OnClickListen
             waitingDialog = new WaitingDialog(MyCouponActivity.this);
         }
         waitingDialog.show();
-        retrofitClient.exchangeCouponByCode(code, new ResponseResultListener() {
+        Subscription subscription = retrofitClient.exchangeCouponByCode(code, new ResponseResultListener() {
             @Override
             public void success(Object o) {
                 waitingDialog.dismiss();
@@ -123,6 +126,7 @@ public class MyCouponActivity extends BaseActivity implements View.OnClickListen
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     public static void startActivity(Context context){

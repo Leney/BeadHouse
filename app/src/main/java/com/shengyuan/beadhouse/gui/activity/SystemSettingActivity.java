@@ -19,6 +19,7 @@ import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import com.shengyuan.beadhouse.util.ActivityUtils;
 import com.shengyuan.beadhouse.util.ToastUtils;
 
+import rx.Subscription;
 import rx.functions.Action1;
 
 /**
@@ -107,7 +108,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
         }
         waitingDialog.show();
         // 登出
-        retrofitClient.loginOut(new ResponseResultListener() {
+        Subscription subscription = retrofitClient.loginOut(new ResponseResultListener() {
             @Override
             public void success(Object o) {
                 waitingDialog.dismiss();
@@ -120,6 +121,7 @@ public class SystemSettingActivity extends BaseActivity implements View.OnClickL
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     /**

@@ -21,6 +21,8 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * 关爱老人Fragment
  * Created by dell on 2017/11/5.
@@ -158,7 +160,7 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
      * 获取关注老人列表
      */
     private void getCareOldManList() {
-        retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
+        Subscription subscription = retrofitClient.getCareOldManList(new ResponseResultListener<CareOldManListBean>() {
             @Override
             public void success(CareOldManListBean bean) {
                 init(bean.getFocus_list());
@@ -170,5 +172,6 @@ public class CareElderlyFragment extends BaseFragment implements CareListFragmen
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 }

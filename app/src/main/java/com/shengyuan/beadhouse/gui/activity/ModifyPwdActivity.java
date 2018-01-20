@@ -19,6 +19,7 @@ import com.shengyuan.beadhouse.util.ToastUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Subscription;
 import rx.functions.Action1;
 
 /**
@@ -84,7 +85,7 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
         Map<String, Object> params = new HashMap<>();
         params.put("old_password", oldPwd);
         params.put("new_password", newPwd);
-        retrofitClient.modifyPassword(params, new ResponseResultListener() {
+        Subscription subscription = retrofitClient.modifyPassword(params, new ResponseResultListener() {
             @Override
             public void success(Object o) {
                 waitingDialog.dismiss();
@@ -104,6 +105,7 @@ public class ModifyPwdActivity extends BaseActivity implements View.OnClickListe
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     public static void startActivity(Context context, String account) {

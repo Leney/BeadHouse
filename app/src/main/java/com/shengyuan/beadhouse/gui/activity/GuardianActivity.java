@@ -14,6 +14,8 @@ import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * 监护人
  * Created by dell on 2017/11/18.
@@ -48,7 +50,7 @@ public class GuardianActivity extends BaseActivity {
      * 获取监护人列表
      */
     private void getGuardianList(String cardId) {
-        retrofitClient.getGuardianForOldMan(cardId, new ResponseResultListener<List<GuardianBean>>() {
+        Subscription subscription = retrofitClient.getGuardianForOldMan(cardId, new ResponseResultListener<List<GuardianBean>>() {
             @Override
             public void success(List<GuardianBean> list) {
                 guardianBeanList.addAll(list);
@@ -61,6 +63,7 @@ public class GuardianActivity extends BaseActivity {
                 showErrorView();
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     @Override

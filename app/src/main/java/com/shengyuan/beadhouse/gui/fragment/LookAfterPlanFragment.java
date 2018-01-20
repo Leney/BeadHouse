@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * 照护计划Fragment
  * Created by dell on 2017/11/5.
@@ -249,7 +251,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
             waitingDialog = new WaitingDialog(getActivity());
         }
         if (isShowDialog) waitingDialog.show();
-        retrofitClient.getCarePlanByDate(cardId, date, new ResponseResultListener<List<ScheduleBean>>() {
+        Subscription subscription = retrofitClient.getCarePlanByDate(cardId, date, new ResponseResultListener<List<ScheduleBean>>() {
             @Override
             public void success(List<ScheduleBean> list) {
 //                List<ScheduleBean> list = new ArrayList<>();
@@ -275,6 +277,7 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
                 ToastUtils.showToast(e.getErrorMsg());
             }
         });
+        compositeSubscription.add(subscription);
     }
 
     /**
