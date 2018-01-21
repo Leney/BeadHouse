@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="@dimen/space_84"
                 android:layout_height="@dimen/space_84"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@mipmap/app_icon"/>
 
             <TextView
                 android:id="@+id/about_us_version"
