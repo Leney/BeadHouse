@@ -3,6 +3,7 @@ package com.shengyuan.beadhouse.gui.fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,12 +17,17 @@ import com.ldf.calendar.view.Calendar;
 import com.ldf.calendar.view.MonthPager;
 import com.shengyuan.beadhouse.R;
 import com.shengyuan.beadhouse.base.BaseFragment;
+import com.shengyuan.beadhouse.control.UserAccountManager;
 import com.shengyuan.beadhouse.glide.GlideLoader;
+import com.shengyuan.beadhouse.gui.activity.AddNewCareActivity;
 import com.shengyuan.beadhouse.gui.activity.OldManDetailActivity;
+import com.shengyuan.beadhouse.gui.activity.TrueInfoActivity;
 import com.shengyuan.beadhouse.gui.adapter.ScheduleAdapter;
+import com.shengyuan.beadhouse.gui.dialog.NormalTipsDialog;
 import com.shengyuan.beadhouse.gui.dialog.WaitingDialog;
 import com.shengyuan.beadhouse.gui.view.CustomDayView;
 import com.shengyuan.beadhouse.model.CareOldManListBean;
+import com.shengyuan.beadhouse.model.LoginBean;
 import com.shengyuan.beadhouse.model.ScheduleBean;
 import com.shengyuan.beadhouse.retrofit.CommonException;
 import com.shengyuan.beadhouse.retrofit.ResponseResultListener;
@@ -32,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import rx.Subscription;
+import rx.functions.Action1;
 
 /**
  * 照护计划Fragment
@@ -80,6 +87,12 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
     public CareOldManListBean.FocusListBean curSelectedBean;
 
     private WaitingDialog waitingDialog = null;
+
+    /** 未关注老人的提示dialog*/
+    private NormalTipsDialog unCareOldManDialog;
+
+    /** 完善个人资料的提示框*/
+    private NormalTipsDialog completeInfoDialog;
 
     public static LookAfterPlanFragment newInstance(CareOldManListBean.FocusListBean focusListBean) {
         LookAfterPlanFragment instance = new LookAfterPlanFragment();
@@ -138,6 +151,58 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
             GlideLoader.loadNetWorkResource(getActivity(),curSelectedBean.getPhoto(),icon,true);
         }
         showCenterView();
+
+        initDialog();
+    }
+
+    private void initDialog(){
+        unCareOldManDialog = new NormalTipsDialog(getActivity());
+        unCareOldManDialog.setTips(getResources().getString(R.string.un_care_old_man_dialog_tips));
+        unCareOldManDialog.setCancel(getResources().getString(R.string.cancel), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 取消
+                unCareOldManDialog.dismiss();
+            }
+        });
+        unCareOldManDialog.setSure(getResources().getString(R.string.go_care), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 去关注
+                unCareOldManDialog.dismiss();
+                UserAccountManager.getInstance().queryCurLoginAccount(new Action1<LoginBean>() {
+                    @Override
+                    public void call(LoginBean loginBean) {
+                        if(TextUtils.equals("yes",loginBean.getComplete())){
+                            // 已经完善了个人资料信息
+                            // 跳转到添加搜索老人界面
+                            AddNewCareActivity.startActivity(getActivity());
+                        }else {
+                            // 还没有完善个人资料信息
+                            // 弹出个人完善个人资料的提示框
+                            completeInfoDialog.show();
+                        }
+                    }
+                });
+            }
+        });
+
+
+        completeInfoDialog = new NormalTipsDialog(getActivity());
+        completeInfoDialog.setTips(getResources().getString(R.string.complete_info_dialog_tips));
+        completeInfoDialog.setCancel(getResources().getString(R.string.cancel), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeInfoDialog.dismiss();
+            }
+        });
+        completeInfoDialog.setSure(getResources().getString(R.string.complete_now), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 立即完善
+                TrueInfoActivity.startActivity(getActivity());
+            }
+        });
 
     }
 
@@ -347,8 +412,8 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
             case R.id.look_after_fragment_user_icon:
                 // 头像
                 if (curSelectedBean == null) {
-                    // TODO 弹窗先关注老人
-                    ToastUtils.showToast("你还没关注老人");
+                    // 弹窗先关注老人
+                    unCareOldManDialog.show();
                     return;
                 }
                 OldManDetailActivity.startActivity(getActivity(), curSelectedBean);
