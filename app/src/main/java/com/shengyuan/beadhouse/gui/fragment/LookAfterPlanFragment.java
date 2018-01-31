@@ -260,7 +260,6 @@ public class LookAfterPlanFragment extends BaseFragment implements View.OnClickL
         initMonthPager();
     }
 
-
     /**
      * 初始化标记数据，HashMap的形式，可自定义
      *

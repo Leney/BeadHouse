@@ -138,9 +138,14 @@ public class PersonalCenterActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.personal_care_old_man_lay:
                 // 关注老人部分
+                OldManAccountListActivity.startActivity(PersonalCenterActivity.this);
                 break;
             case R.id.personal_invite_control_man_lay:
                 // 邀请监控人部分
+                Intent textIntent = new Intent(Intent.ACTION_SEND);
+                textIntent.setType("text/plain");
+                textIntent.putExtra(Intent.EXTRA_TEXT, "邀请监控人文本描述");
+                startActivity(Intent.createChooser(textIntent, "邀请监控人"));
                 break;
         }
     }
